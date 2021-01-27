@@ -10,6 +10,7 @@ export class CompareCountryComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
 }
