@@ -13,7 +13,7 @@ import { FormPublishingComponent } from './form-publishing/form-publishing.compo
   declarations: [
     AppComponent,
     FormCountryComponent,
-    CompareCountryComponent
+    CompareCountryComponent,
     FormPublishingComponent
   ],
   imports: [
