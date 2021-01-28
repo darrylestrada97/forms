@@ -1,1 +1,29 @@
-<p>form-publishing works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publishing</title>
+</head>
+<body>
+    <h2>Search for a publication</h2>
+    <form #publishingForm = "ngForm" action="">
+        <label>Journal *</label>
+        <select [(ngModel)] = "model" required>
+            <option>Journal...</option>
+            <option *ngFor="let journal of Journals" [value] = "journal.id"> 
+                {{ journal.name }}
+            </option>
+        </select>
+        <label>Key words (*) </label>
+        <input placeholder="Separated by coma..." formControlName = "keywords" />
+        <label>Investigation field (*) </label>
+        <input placeholder="Separated by coma..."/>
+        <label>Autor (*) </label>
+        <input type="text" placeholder="Name or Surname..." />
+        <p>Just one of the fields with (*) is mandatory</p>
+        <button type="submit">Submit</button>
+    </form>
+
+</body>
+</html>
