@@ -1,0 +1,47 @@
+
+export class Search{
+
+    
+
+    /*constructor($id: number, $field: String, $keyWords: [], $price: String, $distribution: String) {
+		this.id = $id;
+		this.field = $field;
+		this.keyWords = $keyWords;
+		this.price = $price;
+		this.distribution = $distribution;
+    }*/
+
+    constructor(
+        public id: number,
+        public field: String,
+        public name: String,
+        public price: String,
+        public distribution: String,
+        public keyWords?: [],
+      ){	}
+    
+    
+    public get $id(): number{
+        return this.id;
+    }
+
+    public get $field(): String{
+        return this.field;
+    }
+
+    public get $name(): String{
+        return this.name;
+    }
+    public get $keyWords(): []{
+        return this.keyWords;
+    }
+
+    public get $price(): String{
+        return this.price;
+    }
+
+    public get $distribution(): String{
+        return this.distribution;
+    }
+
+}
