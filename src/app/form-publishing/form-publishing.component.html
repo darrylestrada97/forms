@@ -7,23 +7,24 @@
 </head>
 <body>
     <h2>Search for a publication</h2>
-    <form #publishingForm = "ngForm" action="">
+    <form #userForm="ngForm" action="" (ngSubmit) = "onSubmit()"> 
         <label>Journal *</label>
-        <select [(ngModel)] = "model" required>
-            <option>Journal...</option>
-            <option *ngFor="let journal of Journals" [value] = "journal.id"> 
-                {{ journal.name }}
+        <select required ngModel name="journal"
+         name="name">
+            <option *ngFor="let journal of Journals"> 
+                {{ journal }}
             </option>
         </select>
         <label>Key words (*) </label>
-        <input placeholder="Separated by coma..." />
+        <input placeholder="Separated by coma..." ngModel name="keywords" />
         <label>Investigation field (*) </label>
-        <input placeholder="Separated by coma..."/>
+        <input placeholder="Separated by coma..." ngModel name="field"/>
         <label>Autor (*) </label>
-        <input type="text" placeholder="Name or Surname..." />
+        <input type="text" placeholder="Name or Surname..." ngModel name="name" />
         <p>Just one of the fields with (*) is mandatory</p>
-        <button type="submit">Submit</button>
+        <button type="submit" (click) = "newSearch(userForm.value)">Submit</button>
     </form>
+
 
 </body>
 </html>
