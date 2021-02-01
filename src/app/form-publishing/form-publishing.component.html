@@ -7,16 +7,27 @@
 </head>
 <body>
     <h2>Search for a publication</h2>
-    <form #userForm="ngForm" action="" (ngSubmit) = "onSubmit()"> 
+    <form #userForm="ngForm" action="" (submit) = "onSubmit()"> 
         <label>Journal *</label>
-        <select required ngModel name="journal"
-         name="name">
-            <option *ngFor="let journal of Journals"> 
-                {{ journal }}
+        <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id">
+            <option *ngFor="let journal of Journals" [value]="journal.id"> 
+                {{ journal.name }}
             </option>
         </select>
+        <div *ngIf="journal.touched && objSearch.$id > 4 || objSearch.$id < 0">
+            <p style="color:red">Incorrect Journal</p>
+        </div>
         <label>Key words (*) </label>
-        <input placeholder="Separated by coma..." ngModel name="keywords" />
+        <input placeholder="Separated by coma..." required name="keywords" #keywords = "ngModel" [(ngModel)]="objSearch.$keyWords" pattern=^\w+(?:(?:,\s\w+)+|(?:\s\w+)+)$ />
+
+        <div *ngIf="keywords.touched && keywords.dirty && keywords.errors?.required">
+            <p style="color:red">Key words are mandatory</p>
+        </div> 
+
+        <div *ngIf="keywords.touched && keywords.dirty && keywords.errors?.pattern">
+            <p style="color:red">Incorrect field. Introduce words separated by comma</p>
+        </div> 
+
         <label>Investigation field (*) </label>
         <input placeholder="Separated by coma..." ngModel name="field"/>
         <label>Autor (*) </label>

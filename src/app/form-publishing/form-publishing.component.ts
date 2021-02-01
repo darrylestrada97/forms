@@ -10,24 +10,34 @@ export class FormPublishingComponent implements OnInit {
 
   objSearch: Search;
 
-  Journals = ['Nature','Science','Astronomical Journal','Astrophysical Journal','Canadian Journal of Chemistry'];
+  //Journals = ['Nature','Science','Astronomical Journal','Astrophysical Journal','Canadian Journal of Chemistry'];
+
+  Journals = [
+    {id: 0, name: 'Nature'},
+    {id: 1, name: 'Science'},
+    {id: 2, name: 'Astronomical Journal'},
+    {id: 3, name: 'Astrophysical Journal'},
+    {id: 4, name: 'Canadian Journal of Chemistry'}
+  ]
+
+
   JournalsObj = [];  
 
   ngOnInit(): void {
-
+    this.objSearch = new Search(0,"","","","");
   }
 
   submitted = false;
-  asd: String;
+
   onSubmit(){
     this.submitted = true;
+    console.log(this.objSearch);
   }
 
   newSearch( value: any){
 
     for (let index = 0; index < this.Journals.length; index++) {
       var Journal = this.Journals[index];
-      this.JournalsObj.push(new Search(0,"","","",""))
     }
 
   }

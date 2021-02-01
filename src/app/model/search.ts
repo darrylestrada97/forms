@@ -44,4 +44,26 @@ export class Search{
         return this.distribution;
     }
 
+    public set $id(value: number){
+        this.id = value;
+    }
+
+    public set $name(value: String) {
+		this.name = value;
+    }
+    
+    public set $field(value: String) {
+		this.field = value;
+    }
+    public set $price(value: String) {
+		this.price = value;
+    }
+    public set $distribution(value: String) {
+		this.distribution = value;
+    }
+    public set $keyWords(value: []) {
+		this.keyWords = value;
+    }
+    
+
 }
