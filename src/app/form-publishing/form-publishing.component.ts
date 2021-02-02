@@ -20,8 +20,11 @@ export class FormPublishingComponent implements OnInit {
     {id: 4, name: 'Canadian Journal of Chemistry'}
   ]
 
+  fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
+
 
   JournalsObj = [];  
+  idGenerator: number;
 
   ngOnInit(): void {
     this.objSearch = new Search(0,"","","","");
@@ -31,6 +34,7 @@ export class FormPublishingComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
+    this.objSearch.$id = this.idGenerator;
     console.log(this.objSearch);
   }
 

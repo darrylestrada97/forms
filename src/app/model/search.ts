@@ -1,8 +1,6 @@
 
 export class Search{
 
-    
-
     /*constructor($id: number, $field: String, $keyWords: [], $price: String, $distribution: String) {
 		this.id = $id;
 		this.field = $field;
@@ -14,7 +12,7 @@ export class Search{
     constructor(
         public id: number,
         public field: String,
-        public name: String,
+        public author: String,
         public price: String,
         public distribution: String,
         public keyWords?: [],
@@ -29,8 +27,8 @@ export class Search{
         return this.field;
     }
 
-    public get $name(): String{
-        return this.name;
+    public get $author(): String{
+        return this.author;
     }
     public get $keyWords(): []{
         return this.keyWords;
@@ -48,8 +46,8 @@ export class Search{
         this.id = value;
     }
 
-    public set $name(value: String) {
-		this.name = value;
+    public set $author(value: String) {
+		this.author = value;
     }
     
     public set $field(value: String) {

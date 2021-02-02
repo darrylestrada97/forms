@@ -1,15 +1,48 @@
 form{
+    background-color: lightpink;
     display: flex;
     flex-direction: column;
+}
+
+form div{
+    width: 50%;
+}
+
+form > div input, form > div select{
+    height: 40px;
+    margin-left: 40px;
+    width: 320px;
 }
 
 form > * {
     width: 300px;
     margin: 5px 0 5px 0;
-    padding: 5px 5px 5px 5px;
+    padding: 10px 5px 10px 5px;
 }
 
 form p{
     font-size: 12px;
 }
 
+form input, form select{
+    outline: none;
+    border: none;
+    background-color: lightgrey;
+    border-radius: 4px;
+}
+
+.wrong{
+    background-color: #dc3232 !important;
+}
+
+.correct{
+    background-color: #85dcb8 !important;
+}
+
+.base{
+    background-color: lightgrey !important;
+}
+
+.low-letter{
+    font-size: 12px;
+}

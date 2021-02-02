@@ -8,32 +8,56 @@
 <body>
     <h2>Search for a publication</h2>
     <form #userForm="ngForm" action="" (submit) = "onSubmit()"> 
+        <div>
         <label>Journal *</label>
-        <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id">
+        <select required name="journal" #journal = "ngModel" [(ngModel)]=""
+        [ngClass]="{'correct' : journal.dirty && (journal.model >= 0 && journal.model <= 4),
+                    'wrong' :  journal.dirty && journal.errors?.required}" >
             <option *ngFor="let journal of Journals" [value]="journal.id"> 
                 {{ journal.name }}
             </option>
         </select>
-        <div *ngIf="journal.touched && objSearch.$id > 4 || objSearch.$id < 0">
-            <p style="color:red">Incorrect Journal</p>
         </div>
+        <!-- <div *ngIf="journal.touched && objSearch.$id > 4 || objSearch.$id < 0">
+            <p style="color:red">Incorrect Journal</p>
+        </div> -->
+        <div>
         <label>Key words (*) </label>
-        <input placeholder="Separated by coma..." required name="keywords" #keywords = "ngModel" [(ngModel)]="objSearch.$keyWords" pattern=^\w+(?:(?:,\s\w+)+|(?:\s\w+)+)$ />
+        <input placeholder="Separated by coma..." 
+        required name="keywords" #keywords = "ngModel" 
+        [(ngModel)]="objSearch.$keyWords" 
+        pattern="^(([A-Z, a-z])*[0-9]*)*[^\,\s]$" 
+        
+        [ngClass]="{'wrong' : keywords.errors?.pattern,
+                    'correct' : keywords.dirty && !keywords.errors?.pattern,
+                    'base' : keywords.dirty && keywords.errors?.required }"
 
-        <div *ngIf="keywords.touched && keywords.dirty && keywords.errors?.required">
-            <p style="color:red">Key words are mandatory</p>
-        </div> 
-
-        <div *ngIf="keywords.touched && keywords.dirty && keywords.errors?.pattern">
-            <p style="color:red">Incorrect field. Introduce words separated by comma</p>
-        </div> 
-
+        />
+        </div>
+        <div>
         <label>Investigation field (*) </label>
-        <input placeholder="Separated by coma..." ngModel name="field"/>
+        <input placeholder="Field here..." 
+        required name="field" #field = "ngModel"  
+        [(ngModel)]="objSearch.$field" 
+
+        [ngClass] = "{'wrong' : field.dirty && fields.indexOf(field.model) != 0,
+                        'correct' : field.dirty && fields.indexOf(field.model) !== -1}"
+
+        />
+        </div>
+        <div class="low-letter">
+        <label>Available fields (Just one of them): [{{ fields }}]</label>
+        </div>
+        <div>
         <label>Autor (*) </label>
-        <input type="text" placeholder="Name or Surname..." ngModel name="name" />
-        <p>Just one of the fields with (*) is mandatory</p>
-        <button type="submit" (click) = "newSearch(userForm.value)">Submit</button>
+        <input placeholder="Name or Surname..."
+        required name="author" #author = "ngModel" 
+        [(ngModel)]="objSearch.$author" type="text" />
+        </div>
+        <div class="low-letter">
+        <p>(*)Mandatory</p>
+        </div>
+        <button type="submit" >Submit</button>
     </form>
 
 
