@@ -11,7 +11,7 @@
                   <fieldset>
                         <legend>Data</legend>
                         <p>
-                              <label>Select Contry *</label>
+                              <label>Select Contry *</label><br>
                               <select name="contry">
                                     <option *ngFor="let pais of paises" > 
                                           {{ pais.name }}
@@ -19,10 +19,10 @@
                                 </select>
                         </p>
                         <p>
-                            <label>Selecciona la fecha a comprobar:</label>
+                            <label>Selecciona la fecha a comprobar:</label><br>
                             <input id="date" type="date">
                         <p>
-                              <label>Introduce la cepa: *</label>
+                              <label>Introduce la cepa: *</label><br>
                               <select name="sequence_type">
                                     <option *ngFor="let cepa of cepas" > 
                                           {{ cepa.name }}
