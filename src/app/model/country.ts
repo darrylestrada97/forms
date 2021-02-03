@@ -3,12 +3,12 @@ export class Country{
   constructor(
     id: number, 
     name: String, 
-    locating: String, 
+    location: String, 
     region: String
 ) {
     this.id = id
     this.name = name
-    this.locating = locating
+    this.location = location
     this.region = region
   }
 
@@ -28,12 +28,12 @@ public set name(name: String) {
     this.name = name;
 }
 
-public get locating(): String {
-    return this.locating;
+public get location(): String {
+    return this.location;
 }
 
-public set locating(locating: String) {
-    this.locating = locating;
+public set location(location: String) {
+    this.location = location;
 }
 
 public get region(): String {

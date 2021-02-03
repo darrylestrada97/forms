@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms'
+
 
 @Component({
   selector: 'app-compare-country',
@@ -7,10 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompareCountryComponent implements OnInit {
 
+
+  private buildForm(){
+    this.form = new FormGroup(
+
+    )
+  }
   constructor() { }
 
   ngOnInit(): void {
     
   }
+
+
 
 }
