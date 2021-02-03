@@ -12,18 +12,22 @@ import { CompareCountryComponent } from './compare-country/compare-country.compo
 import { FormPublishingComponent } from './form-publishing/form-publishing.component';
 import { FormImprovementsComponent } from './form-improvements/form-improvements.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HomeComponent } from './home/home.component';
 
 
-const appRoutes: Routes = [
-  //The next path is equivalent to http://localhost:4200/form-country
-  { path: 'form-country' , component: FormCountryComponent},
-  { path: 'form-compare-country' , component: CompareCountryComponent},
-  { path: 'form-publishing' , component: FormPublishingComponent},
-  //The next path is equivalent to http://localhost:4200
-  { path: '' , component: AppComponent, pathMatch: 'full'},
-  //** is equivalent to different than before */
-  { path: '**' , component: PageNotFoundComponent}
-];
+
+
+
+// const appRoutes: Routes = [
+//   //The next path is equivalent to http://localhost:4200/form-country
+//   { path: 'form-country' , component: FormCountryComponent},
+//   { path: 'form-compare-country' , component: CompareCountryComponent},
+//   { path: 'form-publishing' , component: FormPublishingComponent},
+//   //The next path is equivalent to http://localhost:4200
+//   { path: '' , component: AppComponent, pathMatch: 'full'},
+//   //** is equivalent to different than before */
+//   { path: '**' , component: PageNotFoundComponent}
+// ];
 
 
 @NgModule({
@@ -33,14 +37,24 @@ const appRoutes: Routes = [
     CompareCountryComponent,
     FormPublishingComponent,
     FormImprovementsComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule, 
+    RouterModule.forRoot([
+      { path: 'form-country' , component: FormCountryComponent},
+         { path: 'form-compare-country' , component: CompareCountryComponent},
+        { path: 'form-publishing' , component: FormPublishingComponent},
+        { path: '', component: HomeComponent},
+        //The next path is equivalent to http://localhost:4200
+        
+         //** is equivalent to different than before */
+         { path: '**' , component: PageNotFoundComponent}
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent]
