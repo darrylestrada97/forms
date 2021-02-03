@@ -11,9 +11,7 @@ export class CompareCountryComponent implements OnInit {
 
 
   private buildForm(){
-    this.form = new FormGroup(
-
-    )
+  
   }
   constructor() { }
 
