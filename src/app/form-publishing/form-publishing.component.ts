@@ -26,7 +26,7 @@ export class FormPublishingComponent implements OnInit {
   JournalsObj = [];  
 
   ngOnInit(): void {
-    this.objSearch = new Search(0,"","","","");
+    this.objSearch = new Search(0,"","","","","");
   }
 
   submitted = false;
@@ -36,12 +36,5 @@ export class FormPublishingComponent implements OnInit {
     
     console.log(this.objSearch);
   }
-
-  newSearch( value: any){
-
-    for (let index = 0; index < this.Journals.length; index++) {
-      var Journal = this.Journals[index];
-    }
-
-  }
+  
 }

@@ -12,6 +12,7 @@ export class Search{
     constructor(
         public id: number,
         public field: String,
+        public nameJournal: String,
         public author: String,
         public price: String,
         public distribution: String,
@@ -27,9 +28,14 @@ export class Search{
         return this.field;
     }
 
-    public get $author(): String{
-        return this.author;
+    public get $nameJournal(): String{
+        return this.nameJournal;
     }
+
+    public get $author(): String{
+      return this.nameJournal;
+    }
+
     public get $keyWords(): []{
         return this.keyWords;
     }
@@ -46,8 +52,12 @@ export class Search{
         this.id = value;
     }
 
+    public set $nameJournal(value: String) {
+		this.nameJournal = value;
+    }
+
     public set $author(value: String) {
-		this.author = value;
+    this.author = value;
     }
     
     public set $field(value: String) {
