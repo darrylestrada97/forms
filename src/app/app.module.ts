@@ -15,12 +15,12 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 
 const appRoutes: Routes = [
-  //The next path is equivalent to http://localhost:4200/new-reservation
+  //The next path is equivalent to http://localhost:4200/form-country
   { path: 'form-country' , component: FormCountryComponent},
   { path: 'form-compare-country' , component: CompareCountryComponent},
   { path: 'form-publishing' , component: FormPublishingComponent},
   //The next path is equivalent to http://localhost:4200
-  { path: '' , component: AppComponent},
+  { path: '' , component: AppComponent, pathMatch: 'full'},
   //** is equivalent to different than before */
   { path: '**' , component: PageNotFoundComponent}
 ];
@@ -40,7 +40,7 @@ const appRoutes: Routes = [
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
-    RouterModule
+    RouterModule, 
   ],
   providers: [],
   bootstrap: [AppComponent]
