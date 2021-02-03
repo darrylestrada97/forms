@@ -9,13 +9,15 @@ import { AppComponent } from './app.component';
 import { FormCountryComponent } from './form-country/form-country.component';
 import { CompareCountryComponent } from './compare-country/compare-country.component';
 import { FormPublishingComponent } from './form-publishing/form-publishing.component';
+import { FormImprovementsComponent } from './form-improvements/form-improvements.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FormCountryComponent,
     CompareCountryComponent,
-    FormPublishingComponent
+    FormPublishingComponent,
+    FormImprovementsComponent
   ],
   imports: [
     BrowserModule,
