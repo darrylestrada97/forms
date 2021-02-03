@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Journal } from '../model/publishing';
+import { Search } from '../model/search';
 
 @Component({
   selector: 'app-form-publishing',
@@ -8,22 +8,40 @@ import { Journal } from '../model/publishing';
 })
 export class FormPublishingComponent implements OnInit {
 
-  objJournal: Journal;
+  objSearch: Search;
 
-  model;
+  //Journals = ['Nature','Science','Astronomical Journal','Astrophysical Journal','Canadian Journal of Chemistry'];
 
   Journals = [
-    {id: '1', name: 'Nature'},
-    {id: '2', name: 'Science'},
-    {id: '3', name: 'Astronomical Journal'},
-    {id: '4', name: 'Astrophysical Journal'},
-    {id: '5', name: 'Canadian Journal of Chemistry'}
-  ];
+    {id: 0, name: 'Nature'},
+    {id: 1, name: 'Science'},
+    {id: 2, name: 'Astronomical Journal'},
+    {id: 3, name: 'Astrophysical Journal'},
+    {id: 4, name: 'Canadian Journal of Chemistry'}
+  ]
 
-  constructor() { }
+  fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
+
+
+  JournalsObj = [];  
 
   ngOnInit(): void {
-    this.objJournal = new Journal(0,"","","","");
+    this.objSearch = new Search(0,"","","","");
   }
 
+  submitted = false;
+
+  onSubmit(){
+    this.submitted = true;
+    
+    console.log(this.objSearch);
+  }
+
+  newSearch( value: any){
+
+    for (let index = 0; index < this.Journals.length; index++) {
+      var Journal = this.Journals[index];
+    }
+
+  }
 }

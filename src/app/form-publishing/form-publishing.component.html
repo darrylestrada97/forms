@@ -15,15 +15,49 @@
                 {{ journal.name }}
             </option>
         </select>
+        </div>
+        <!-- <div *ngIf="journal.touched && objSearch.$id > 4 || objSearch.$id < 0">
+            <p style="color:red">Incorrect Journal</p>
+        </div> -->
+        <div>
         <label>Key words (*) </label>
-        <input placeholder="Separated by coma..." formControlName = "keywords" />
+        <input placeholder="Separated by coma..." 
+        required name="keywords" #keywords = "ngModel" 
+        [(ngModel)]="objSearch.$keyWords" 
+        pattern="^(([A-Z, a-z])*[0-9]*)*[^\,\s]$" 
+        
+        [ngClass]="{'wrong' : keywords.errors?.pattern,
+                    'correct' : keywords.dirty && !keywords.errors?.pattern,
+                    'base' : keywords.dirty && keywords.errors?.required }"
+
+        />
+        </div>
+        <div>
         <label>Investigation field (*) </label>
-        <input placeholder="Separated by coma..."/>
+        <input placeholder="Field here..." 
+        required name="field" #field = "ngModel"  
+        [(ngModel)]="objSearch.$field" 
+
+        [ngClass] = "{'wrong' : field.dirty && fields.indexOf(field.model) != 0,
+                        'correct' : field.dirty && fields.indexOf(field.model) !== -1}"
+
+        />
+        </div>
+        <div class="low-letter">
+        <label>Available fields (Just one of them): </label>
+        </div>
+        <!-- <div>
         <label>Autor (*) </label>
-        <input type="text" placeholder="Name or Surname..." />
-        <p>Just one of the fields with (*) is mandatory</p>
-        <button type="submit">Submit</button>
+        <input placeholder="Name or Surname..."
+        required name="author" #author = "ngModel" 
+         type="text" />
+        </div> -->
+        <div class="low-letter">
+        <p>(*)Mandatory</p>
+        </div>
+        <button type="submit" >Submit</button>
     </form>
+
 
 </body>
 </html>
