@@ -7,9 +7,9 @@
 </head>
 <body>
     <h2>Search for a publication</h2>
-    <form #publishingForm = "ngForm" action="">
+    <form action="">
         <label>Journal *</label>
-        <select [(ngModel)] = "model" required>
+        <select required>
             <option>Journal...</option>
             <option *ngFor="let journal of Journals" [value] = "journal.id"> 
                 {{ journal.name }}
