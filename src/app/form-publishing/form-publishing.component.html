@@ -9,24 +9,16 @@
     <h2>Search for a publication</h2>
     <form action="">
         <label>Journal *</label>
-<<<<<<< HEAD
         <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id"
         [ngClass]="{'correct' : journal.dirty && (journal.model >= 0 && journal.model <= 4),
                     'wrong' :  journal.dirty && journal.errors?.required}" >
             <option *ngFor="let journal of Journals" [value]="journal.id"> 
-=======
-        <select required>
-            <option>Journal...</option>
-            <option *ngFor="let journal of Journals" [value] = "journal.id"> 
->>>>>>> bde9db35ce67c93fd75612401e8fa30680f05565
                 {{ journal.name }}
             </option>
         </select>
-        </div>
         <!-- <div *ngIf="journal.touched && objSearch.$id > 4 || objSearch.$id < 0">
             <p style="color:red">Incorrect Journal</p>
         </div> -->
-        <div>
         <label>Key words (*) </label>
         <input placeholder="Separated by coma..." 
         required name="keywords" #keywords = "ngModel" 
@@ -38,8 +30,6 @@
                     'base' : keywords.dirty && keywords.errors?.required }"
 
         />
-        </div>
-        <div>
         <label>Investigation field (*) </label>
         <input placeholder="Field here..." 
         required name="field" #field = "ngModel"  
@@ -49,16 +39,13 @@
                         'correct' : field.dirty && fields.indexOf(field.model) !== -1}"
 
         />
-        </div>
         <div class="low-letter">
         <label>Available fields (Just one of them): {{ fields }} </label>
         </div>
-        <div>
         <label>Autor (*) </label>
         <input placeholder="Name or Surname..."
         required name="author" #author = "ngModel" [(ngModel)]="objSearch.$author"
          type="text" />
-        </div>
         <div class="low-letter">
         <p>(*)Mandatory</p>
         </div>
