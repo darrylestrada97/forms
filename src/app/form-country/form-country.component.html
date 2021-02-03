@@ -252,14 +252,12 @@
                         <p>
                             <label>Selecciona la fecha a comprobar:</label>
                             <input id="date" type="date">
-                        </p>
                         <p>
                               <label>Introduce la cepa: *</label>
                               <select name="sequence_type">
-                                    <option value="" selected="L">Cepa L</option>
-                                    <option value="S">Cepa S</option>
-                                    <option value="V_G">Cepas V y G</option>
-                                    <option value="GR_GH">Cepas GR Y GH</option>
+                                    <option *ngFor="let cepa of cepas" > 
+                                          {{ cepa.name }}
+                                          </option>
                               </select>
                         </p>                                     
                   </fieldset>

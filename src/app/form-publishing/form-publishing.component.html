@@ -7,13 +7,18 @@
 </head>
 <body>
     <h2>Search for a publication</h2>
-    <form #userForm="ngForm" action="" (submit) = "onSubmit()"> 
-        <div>
+    <form action="">
         <label>Journal *</label>
+<<<<<<< HEAD
         <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id"
         [ngClass]="{'correct' : journal.dirty && (journal.model >= 0 && journal.model <= 4),
                     'wrong' :  journal.dirty && journal.errors?.required}" >
             <option *ngFor="let journal of Journals" [value]="journal.id"> 
+=======
+        <select required>
+            <option>Journal...</option>
+            <option *ngFor="let journal of Journals" [value] = "journal.id"> 
+>>>>>>> bde9db35ce67c93fd75612401e8fa30680f05565
                 {{ journal.name }}
             </option>
         </select>
