@@ -10,7 +10,7 @@
     <form #userForm="ngForm" action="" (submit) = "onSubmit()"> 
         <div>
         <label>Journal *</label>
-        <select required name="journal" #journal = "ngModel" [(ngModel)]=""
+        <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id"
         [ngClass]="{'correct' : journal.dirty && (journal.model >= 0 && journal.model <= 4),
                     'wrong' :  journal.dirty && journal.errors?.required}" >
             <option *ngFor="let journal of Journals" [value]="journal.id"> 
@@ -46,14 +46,14 @@
         />
         </div>
         <div class="low-letter">
-        <label>Available fields (Just one of them): </label>
+        <label>Available fields (Just one of them): {{ fields }} </label>
         </div>
-        <!-- <div>
+        <div>
         <label>Autor (*) </label>
         <input placeholder="Name or Surname..."
-        required name="author" #author = "ngModel" 
+        required name="author" #author = "ngModel" [(ngModel)]="objSearch.$author"
          type="text" />
-        </div> -->
+        </div>
         <div class="low-letter">
         <p>(*)Mandatory</p>
         </div>
