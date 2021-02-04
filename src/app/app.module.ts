@@ -18,6 +18,8 @@ import { HomeComponent } from './home/home.component';
 
 
 
+
+
 // const appRoutes: Routes = [
 //   //The next path is equivalent to http://localhost:4200/form-country
 //   { path: 'form-country' , component: FormCountryComponent},
@@ -49,6 +51,7 @@ import { HomeComponent } from './home/home.component';
         { path: 'form-country' , component: FormCountryComponent},
         { path: 'form-compare-country' , component: CompareCountryComponent},
         { path: 'form-publishing' , component: FormPublishingComponent},
+        { path: 'form-improvements' , component: FormImprovementsComponent},
         { path: '', component: HomeComponent},
         //The next path is equivalent to http://localhost:4200
         
