@@ -3,7 +3,6 @@
   flex-direction: row;
   justify-content: space-around;
   align-content: center;
-  font-family: 'Roboto', sans-serif;
   font-size: 30px;
 }
 .flip-card {
@@ -36,15 +35,50 @@
 }
 
 .flip-card-front {
-  background-color: #85DCBB;
+  background-color: #32b6af;
   color: black;
-  border-radius: 15px;
-  box-shadow: 0 2px 2px 0 rgba(83, 83, 83, 0.2);
+  /*box-shadow: 0 2px 2px 0 rgba(83, 83, 83, 0.2);*/
 }
 
 .flip-card-back {
-  background-color: #2980b9;
-  color: white;
+  background-color: rgb(224, 224, 224);
+  color: rgb(0, 0, 0);
+  font-size: 20px;
   transform: rotateY(180deg);
   
+}
+
+.effect
+{
+  position: relative;
+}
+.effect:before, .effect:after
+{
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 25px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 25px 20px rgb(100, 100, 100);
+  -moz-box-shadow: 0 25px 20px rgb(100, 100, 100);;
+  box-shadow: 0 25px 20px rgb(100, 100, 100);;
+  -webkit-transform: rotate(-8deg);
+  -moz-transform: rotate(-8deg);
+  -o-transform: rotate(-8deg);
+  -ms-transform: rotate(-8deg);
+  transform: rotate(-8deg);
+}
+.effect:after
+{
+  -webkit-transform: rotate(8deg);
+  -moz-transform: rotate(8deg);
+  -o-transform: rotate(8deg);
+  -ms-transform: rotate(8deg);
+  transform: rotate(8deg);
+  right: 10px;
+  left: auto;
 }

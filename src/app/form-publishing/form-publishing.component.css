@@ -3,17 +3,25 @@ form{
     flex-direction: column;
 }
 
-form div{
-    width: 50%;
+h2{
+    font-size: 50px;
 }
 
-form > div input, form > div select{
-    height: 40px;
-    margin-left: 40px;
-    width: 320px;
+.publication {
+    display: flex;
+    flex-direction: column;
+    background-color: #32b6af;
+    border-radius: 10px;
+    padding: 50px;
 }
 
-form > * {
+.publication > * {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+label,select,input,button {
     width: 300px;
     margin: 5px 0 5px 0;
     padding: 10px 5px 10px 5px;
@@ -26,8 +34,13 @@ form p{
 form input, form select{
     outline: none;
     border: none;
-    background-color: lightgrey;
+    background-color: white;
     border-radius: 4px;
+    color: black;
+}
+
+form input::placeholder{
+    color: rgb(80, 80, 80);
 }
 
 .wrong{

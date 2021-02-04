@@ -13,6 +13,7 @@ import { FormPublishingComponent } from './form-publishing/form-publishing.compo
 import { FormImprovementsComponent } from './form-improvements/form-improvements.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
+import { MenuComponent } from './menu/menu.component';
 
 
 
@@ -38,7 +39,8 @@ import { HomeComponent } from './home/home.component';
     FormPublishingComponent,
     FormImprovementsComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
