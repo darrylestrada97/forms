@@ -1,8 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Improvements</title>
+</head>
 <div class="container">
     <nav>
         <a routerLink="/form-country">Form Country</a> --
         <a routerLink="/form-compare-country">Compare Countries</a>--
         <a routerLink="/form-publishing">Publishing</a>
     </nav><br>
-    
+
 </div>
+
+<body>
+    <h2>Improvements</h2>
+    <form action="">
+        <label>Name *</label>
+        <input required name="name" #name="ngModel" [(ngModel)]="improvObj.name" type="text" />
+
+
+
+        <label>Location (*) </label>
+        <input placeholder="Location..." required name="location" #location="ngModel" [(ngModel)]="improvObj.location"
+            type="text" />
+
+
+            <label class="container"> Evaluation of the page </label>
+                <input type="checkbox" [(ngModel)]="theCheckbox"  data-md-icheck (change)="toggleVisibility($event)"/>
+                    Checkbox is <span *ngIf="marked">checked</span><span *ngIf="!marked">unchecked</span>
+                
+                  <span class="checkmark"></span>
+               
+                  
+                  <div>And <b>ngModel</b> also works, it's value is <b>{{theCheckbox}}</b></div>
+                  
+
+
+
+        <button type="submit">Submit</button>
+    </form>
+
+
+</body>
+
+</html>
