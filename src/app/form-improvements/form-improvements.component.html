@@ -1,6 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!--<!DOCTYPE html>-->
+<!--<html>--> 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,32 +11,42 @@
     <nav>
         <a routerLink="/form-country">Form Country</a> --
         <a routerLink="/form-compare-country">Compare Countries</a>--
+<<<<<<< HEAD
         <a routerLink="/form-publishing">Publishing</a>
     </nav><br> 
+=======
+        <a routerLink="/form-publishing">Publishing</a> --
+        <a routerLink="/form-improvements">improvements</a>
+        
+    </nav><br>
+
+</div>
+>>>>>>> afd667eb2b711b5cbc9840de1420356147b9925b
 
 </div> -->
 <app-menu></app-menu>
 <body>
-    <h2>Improvements</h2>
+    <h2>Improvements</h2><br>
     <form action="">
         <label>Name *</label>
-        <input required name="name" #name="ngModel" [(ngModel)]="improvObj.name" type="text" />
+        <input required name="name" #name="ngModel" [(ngModel)]="improvObj.name" type="text" /><br>
 
 
 
-        <label>Location (*) </label>
+        <label>Location (*) </label><br>
         <input placeholder="Location..." required name="location" #location="ngModel" [(ngModel)]="improvObj.location"
-            type="text" />
+            type="text" /><br>
 
 
-            <label class="container"> Evaluation of the page </label>
+            <label > Evaluation of the page </label><br>
                 <input type="checkbox" [(ngModel)]="theCheckbox"  data-md-icheck (change)="toggleVisibility($event)"/>
                     Checkbox is <span *ngIf="marked">checked</span><span *ngIf="!marked">unchecked</span>
                 
                   <span class="checkmark"></span>
                
                   
-                  <div>And <b>ngModel</b> also works, it's value is <b>{{theCheckbox}}</b></div>
+                  <div>And <b>ngModel</b> also works, it's value is {{theCheckbox}}</div>
+                  <br>
                   
 
 
