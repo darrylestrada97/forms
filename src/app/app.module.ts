@@ -46,8 +46,8 @@ import { HomeComponent } from './home/home.component';
     ReactiveFormsModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: 'form-country' , component: FormCountryComponent},
-         { path: 'form-compare-country' , component: CompareCountryComponent},
+        { path: 'form-country' , component: FormCountryComponent},
+        { path: 'form-compare-country' , component: CompareCountryComponent},
         { path: 'form-publishing' , component: FormPublishingComponent},
         { path: '', component: HomeComponent},
         //The next path is equivalent to http://localhost:4200
