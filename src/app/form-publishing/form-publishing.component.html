@@ -14,9 +14,9 @@
 </div> -->
 <app-menu></app-menu>
 <body>
-    <div class="publication effect">
+    <div class="publication">
         <h2>Search for a publication</h2>
-        <form action="">
+        <form action="" >
             <label>Journal *</label>
             <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id"
             [ngClass]="{'correct' : journal.dirty && (journal.model >= 0 && journal.model <= 4),
@@ -32,13 +32,15 @@
             <input placeholder="Separated by coma..." 
             required name="keywords" #keywords = "ngModel" 
             [(ngModel)]="objSearch.$keyWords" 
-            pattern="^(([A-Z, a-z])*[0-9]*)*[^\,\s]$" 
+            (change)="onChange($event)"
             
-            [ngClass]="{'wrong' : keywords.errors?.pattern,
-                        'correct' : keywords.dirty && !keywords.errors?.pattern,
-                        'base' : keywords.dirty && keywords.errors?.required }"
+            
 
             />
+
+            <!-- [ngClass]="{'wrong' : keywords.errors?.pattern,
+                        'correct' : keywords.dirty && !keywords.errors?.pattern,
+                        'base' : keywords.dirty && keywords.errors?.required }"-->
             <label>Investigation field (*) </label>
             <input placeholder="Field here..." 
             required name="field" #field = "ngModel"  

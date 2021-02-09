@@ -1,9 +1,10 @@
 .div-container{
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
   align-content: center;
   font-size: 30px;
+  
 }
 .flip-card {
   background-color: transparent;
