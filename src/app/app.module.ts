@@ -13,6 +13,9 @@ import { FormPublishingComponent } from './form-publishing/form-publishing.compo
 import { FormImprovementsComponent } from './form-improvements/form-improvements.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
+import { MenuComponent } from './menu/menu.component';
+
+
 
 
 
@@ -38,7 +41,8 @@ import { HomeComponent } from './home/home.component';
     FormPublishingComponent,
     FormImprovementsComponent,
     PageNotFoundComponent,
-    HomeComponent
+    HomeComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -49,6 +53,7 @@ import { HomeComponent } from './home/home.component';
         { path: 'form-country' , component: FormCountryComponent},
         { path: 'form-compare-country' , component: CompareCountryComponent},
         { path: 'form-publishing' , component: FormPublishingComponent},
+        { path: 'form-improvements' , component: FormImprovementsComponent},
         { path: '', component: HomeComponent},
         //The next path is equivalent to http://localhost:4200
         

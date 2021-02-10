@@ -22,7 +22,6 @@ export class FormPublishingComponent implements OnInit {
 
   fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
 
-
   JournalsObj = [];  
 
   ngOnInit(): void {
@@ -30,11 +29,30 @@ export class FormPublishingComponent implements OnInit {
   }
 
   submitted = false;
+  
 
   onSubmit(){
     this.submitted = true;
     
     console.log(this.objSearch);
   }
+
+  textInput: String;
+  status: boolean = false;
+
+  changeInput($event){
+    this.textInput = $event.srcElement.value;
+    var inputArr = this.textInput.split(" ").filter(function(entry) { 
+                                                      return entry.trim() != ''; 
+                                                    });
+                                                    
+    let aux = inputArr.map(function(entry){
+      return entry.split("").map(function(x){
+        return !/^[^a-zA-Z0-9]*$/.test(x)? true : false
+      })  
+    })
+    return this.status = aux.toString().split(",").includes("false")? true : false
+  }
+
   
 }

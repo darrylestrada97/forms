@@ -1,41 +1,65 @@
-form{
+/* form{
     display: flex;
     flex-direction: column;
 }
 
-form div{
-    width: 50%;
+h2{
+    font-size: 50px;
 }
 
-form > div input, form > div select{
-    height: 40px;
-    margin-left: 40px;
-    width: 320px;
+.publication {
+    display: flex;
+    flex-direction: column;
+    background-color: #659DBD;
+    border-radius: 10px;
+    padding: 50px;
+    box-shadow: 0px 5px 4px 2px rgba(0, 0, 0, 0.5);
 }
 
-form > * {
+.publication > * {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+label,select,input,button {
     width: 300px;
     margin: 5px 0 5px 0;
     padding: 10px 5px 10px 5px;
 }
 
+
 form p{
     font-size: 12px;
 }
 
+form > div{
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
+
 form input, form select{
     outline: none;
     border: none;
-    background-color: lightgrey;
+    background-color: white;
     border-radius: 4px;
+    color: black;
+}
+
+form input::placeholder{
+    color: rgb(80, 80, 80);
 }
 
 .wrong{
     background-color: #dc3232 !important;
+    border: 2px solid #611212 !important;
 }
 
 .correct{
     background-color: #85dcb8 !important;
+    border: 2px solid #396e58 !important;
 }
 
 .base{
@@ -44,4 +68,84 @@ form input, form select{
 
 .low-letter{
     font-size: 12px;
+    width: 300px;
+    margin: 5px 0 5px 0;
+    padding: 0 5px 0 5px;
+}*/
+
+.publication{
+    background-color: #FFFAF0;
+    border-radius: 9px;
+    box-shadow: 0px 5px 4px 2px rgba(0, 0, 0, 0.5);
+}
+
+.publication h2 {
+    text-align: center;
+    font-size: 50px;
+    padding: 15px 25px 15px 25px;
+}
+
+form{
+    margin: auto;
+   
+}
+
+form > div{
+    height: 100px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+}
+
+form > div input, select, label, p{
+    width: 80%;
+    padding: 0;
+    outline: none;
+    border: none;
+    /*background-color: #9cdbe4;*/
+    margin: auto;
+}
+
+.low-letter{
+    width: 80%;
+    padding: 0;
+    margin:auto;
+    font-size: 10px;
+}
+
+form > div input, select{
+    border-bottom: 4px solid #989898;
+    height: 40px;
+    background-color: #FFFAF0;
+}
+
+form > div input::placeholder{
+    color: #989898;
+}
+
+button{
+    padding: 10px;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    background-color: #9cdbe4;
+    color: black;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+}
+
+.wrong{
+    background-color: #dc3232 !important;
+    border: 2px solid #611212 !important;
+}
+
+.correct{
+    background-color: #85dcb8 !important;
+    border: 2px solid #396e58 !important;
+}
+
+.base{
+    background-color: lightgrey !important;
 }

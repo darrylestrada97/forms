@@ -11,12 +11,15 @@ export class FormImprovementsComponent implements OnInit {
 
   improvObj: Improvements;
 
-  name = 'Angular 6';
+
   marked = false;
   theCheckbox = false;
 
   constructor() { }
 
+  toggleVisibility(e){
+    this.marked= e.target.checked;
+  }
 
   ngOnInit(): void {
     this.improvObj = new Improvements(0,"","",0,"");
@@ -29,8 +32,5 @@ export class FormImprovementsComponent implements OnInit {
     
     console.log(this.improvObj);
   }
-  toggleVisibility(e){
-    this.marked= e.target.checked;
-  }
-  
 }
+
