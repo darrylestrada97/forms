@@ -38,23 +38,20 @@ export class FormPublishingComponent implements OnInit {
   }
 
   textInput: String;
+  status: boolean = false;
 
-
-  onChange($event){
+  changeInput($event){
     this.textInput = $event.srcElement.value;
-    var tempArray = []
     var inputArr = this.textInput.split(" ").filter(function(entry) { 
                                                       return entry.trim() != ''; 
                                                     });
-
-    console.log(inputArr.map(function(entry){
-      return entry.trim().split("")
-    }).filter(function(entry){
-      entry.map(function(entry){
-        tempArray.push(entry.match(/[a-zA-Z]+$/)? entry : null)
-        return tempArray
-      })
-    }))
+                                                    
+    let aux = inputArr.map(function(entry){
+      return entry.split("").map(function(x){
+        return !/^[^a-zA-Z0-9]*$/.test(x)? true : false
+      })  
+    })
+    return this.status = aux.toString().split(",").includes("false")? true : false
   }
 
   

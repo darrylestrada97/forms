@@ -16,51 +16,70 @@
 <body>
     <div class="publication">
         <h2>Search for a publication</h2>
-        <form action="" >
-            <label>Journal *</label>
-            <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id"
-            [ngClass]="{'correct' : journal.dirty && (journal.model >= 0 && journal.model <= 4),
-                        'wrong' :  journal.dirty && journal.errors?.required}" >
-                <option *ngFor="let journal of Journals" [value]="journal.id"> 
-                    {{ journal.name }}
-                </option>
-            </select>
+        <form #loginForm="ngForm" action="" >
+            <div>
+                <label>Journal (*)</label>
+                <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id"
+                [ngClass]="{'correct' : journal.dirty && (journal.model >= 0 && journal.model <= 4),
+                            'wrong' :  journal.dirty && journal.errors?.required}" >
+                    <option *ngFor="let journal of Journals" [value]="journal.id"> 
+                        {{ journal.name }}
+                    </option>
+                </select>
+            </div>
             <!-- <div *ngIf="journal.touched && objSearch.$id > 4 || objSearch.$id < 0">
                 <p style="color:red">Incorrect Journal</p>
             </div> -->
-            <label>Key words (*) </label>
-            <input placeholder="Separated by coma..." 
-            required name="keywords" #keywords = "ngModel" 
-            [(ngModel)]="objSearch.$keyWords" 
-            (change)="onChange($event)"
+            <div>
+                <label class="notice">Key words (*) </label>
+                <input placeholder="Separated by coma..." 
+                required name="keywords" #keywords = "ngModel" 
+                [(ngModel)]="objSearch.$keyWords" 
+                (change)="changeInput($event)"
+                [ngClass]="{'correct' : keywords.dirty && status == false,
+                            'wrong' : keywords.dirty && status == true }"
+                />
+                <div class="low-letter">
+                    <label>Entry words separated by space</label>
+                </div>
+            </div>
             
-            
-
-            />
-
             <!-- [ngClass]="{'wrong' : keywords.errors?.pattern,
                         'correct' : keywords.dirty && !keywords.errors?.pattern,
                         'base' : keywords.dirty && keywords.errors?.required }"-->
-            <label>Investigation field (*) </label>
-            <input placeholder="Field here..." 
-            required name="field" #field = "ngModel"  
-            [(ngModel)]="objSearch.$field" 
+            <div>
+                <label class="notice">Investigation field (*) </label>
+                <input placeholder="Field here..." 
+                required name="field" #field = "ngModel"  
+                [(ngModel)]="objSearch.$field" 
 
-            [ngClass] = "{'wrong' : field.dirty && fields.indexOf(field.model) != 0,
-                            'correct' : field.dirty && fields.indexOf(field.model) !== -1}"
+                [ngClass] = "{'wrong' : field.dirty && fields.indexOf(field.model) != 0,
+                                'correct' : field.dirty && fields.indexOf(field.model) !== -1}"
 
-            />
-            <div class="low-letter">
-            <label>Available fields (Just one of them): {{ fields }} </label>
+                />
+                <div class="low-letter">
+                    <label>Available fields (Just one of them): {{ fields }} </label>
+                </div>
             </div>
-            <label>Autor (*) </label>
-            <input placeholder="Name or Surname..."
-            required name="author" #author = "ngModel" [(ngModel)]="objSearch.$author"
-            type="text" />
-            <div class="low-letter">
-            <p>(*)Mandatory</p>
+            
+            <div>
+                <label class="notice" >Autor (*) </label>
+                <input placeholder="Name or Surname..."
+                required name="author" #author = "ngModel" 
+                [(ngModel)]="objSearch.$author"
+                pattern="\b[a-zA-Z0-9_]+\b"
+                [ngClass]="{'wrong' : author.errors?.pattern,
+                        'correct' : author.dirty && !author.errors?.pattern,
+                        'base' : author.dirty && author.errors?.required }"
+
+                type="text" />
             </div>
-            <button type="submit" >Submit</button>
+            <div class="low-letter">
+                <p>(*)Mandatory</p>
+            </div>
+            <div>
+                <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+            </div>
         </form>
     </div>
 
