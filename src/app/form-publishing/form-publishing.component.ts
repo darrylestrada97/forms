@@ -25,7 +25,7 @@ export class FormPublishingComponent implements OnInit {
   JournalsObj = [];  
 
   ngOnInit(): void {
-    this.objSearch = new Search(0,"","","","","");
+    this.objSearch = new Search(0,"","","","");
   }
 
   submitted = false;

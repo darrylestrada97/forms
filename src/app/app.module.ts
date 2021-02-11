@@ -14,6 +14,7 @@ import { FormImprovementsComponent } from './form-improvements/form-improvements
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
+import { JournalsComponent } from './journals/journals.component';
 
 
 
@@ -42,7 +43,8 @@ import { MenuComponent } from './menu/menu.component';
     FormImprovementsComponent,
     PageNotFoundComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    JournalsComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +56,7 @@ import { MenuComponent } from './menu/menu.component';
         { path: 'form-compare-country' , component: CompareCountryComponent},
         { path: 'form-publishing' , component: FormPublishingComponent},
         { path: 'form-improvements' , component: FormImprovementsComponent},
+        { path: 'journal-search', component: JournalsComponent},
         { path: '', component: HomeComponent},
         //The next path is equivalent to http://localhost:4200
         
