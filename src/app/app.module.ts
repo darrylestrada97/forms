@@ -15,11 +15,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { JournalsComponent } from './journals/journals.component';
-
-
-
-
-
+import { CheckInputArrayDirective } from './directives/check-input-array.directive';
 
 
 // const appRoutes: Routes = [
@@ -44,7 +40,8 @@ import { JournalsComponent } from './journals/journals.component';
     PageNotFoundComponent,
     HomeComponent,
     MenuComponent,
-    JournalsComponent
+    JournalsComponent,
+    CheckInputArrayDirective
   ],
   imports: [
     BrowserModule,

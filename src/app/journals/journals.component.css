@@ -43,7 +43,7 @@ form > div input:not([type=radio]), select, label, p{
 form > div input[type=text], select{
     border-bottom: 4px solid #989898;
     height: 40px;
-    background-color: #FFFAF0;
+    background-color: #e6e2dc;
 }
 
 form > div input::placeholder{

@@ -19,8 +19,13 @@
         <form #loginForm="ngForm" action="" >
             <div>
                 <label class="notice">Name (*) </label>
-                <input placeholder="Journal name..." type="text" />
+                <input placeholder="Journal name..." name="journalName" #journalName = ""
+                type="text" appCheckInputArray 
+                [ngClass]="{'correct' : journalName.dirty,
+                            'wrong' : !journalName.dirty }"
+                />
             </div>
+
             <div>
                 <label class="notice">Publication country (*) </label>
                 <select>
@@ -43,10 +48,10 @@
                 <div class="radios">
                     <input type="radio" name="trans" value="Yes" (change)="onItemChange($event)"><label>Yes</label>
                     <input type="radio" name="trans" value="No" (change)="onItemChange($event)"><label>No</label>
-                </div>
+                </div><br>
             </div>
             <div *ngIf="status">
-                <label class="notice"> (*) </label>
+                <label class="notice"> To which language?</label>
                 <select>
                     <option *ngFor="let language of Languages" [value]="language.id"> 
                         {{ language.name }}
