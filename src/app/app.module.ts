@@ -5,6 +5,11 @@ import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 
+import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
+
+import {HttpClientModule} from '@angular/common/http';
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormCountryComponent } from './form-country/form-country.component';
@@ -14,6 +19,7 @@ import { FormImprovementsComponent } from './form-improvements/form-improvements
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
@@ -49,6 +55,8 @@ import { MenuComponent } from './menu/menu.component';
     AppRoutingModule,
     ReactiveFormsModule,
     FormsModule,
+    MatSelectCountryModule.forRoot('de'), // you can use en | de | it | es | fr --> MatSelectCountrySupportedLanguages
+             HttpClientModule,
     RouterModule.forRoot([
         { path: 'form-country' , component: FormCountryComponent},
         { path: 'form-compare-country' , component: CompareCountryComponent},
@@ -60,6 +68,7 @@ import { MenuComponent } from './menu/menu.component';
          //** is equivalent to different than before */
          { path: '**' , component: PageNotFoundComponent}
     ]),
+    BrowserAnimationsModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

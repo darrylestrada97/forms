@@ -4,12 +4,14 @@
         <a routerLink="/form-compare-country">Compare Countries</a>
         <a routerLink="/form-publishing">Publishing</a>
     </nav><br>
-<<<<<<< HEAD
 </div>
 
 <p>compare-country works! yeah</p>
-=======
 </div> -->
 <app-menu></app-menu>
 <p>compare-country works!</p>
->>>>>>> ef0f1c18dfd4bf087458395f52f012415c41fd8b
+<mat-select-country appearance="outline" 
+                    label="Country"
+                    [formControl]="countryFormControl"
+                    (onCountrySelected)="onCountrySelected($event)">
+</mat-select-country>
