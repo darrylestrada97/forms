@@ -251,7 +251,7 @@ export class JournalsComponent implements OnInit {
     {id: 3, name: 'German'},
     {id: 4, name: 'French'}
   ]
-
+  prop:String = ""
   status: boolean
 
   onItemChange($event){

@@ -20,11 +20,12 @@
             <div>
                 <label class="notice">Name (*) </label>
                 <input placeholder="Journal name..." name="journalName" #journalName = ""
-                type="text" appCheckInputArray 
-                [ngClass]="{'correct' : journalName.dirty,
-                            'wrong' : !journalName.dirty }"
+                type="text" [(ngModel)]="prop" appCheckInputArray
                 />
             </div>
+
+            <div *ngIf="journalName.errors?.isNotCorrect">
+    Check input minimum length</div>
 
             <div>
                 <label class="notice">Publication country (*) </label>
@@ -67,7 +68,7 @@
                 <p>(*)Mandatory</p>
             </div>
             <div>
-                <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+                <button type="submit">Submit</button>
             </div>
             
         </form>

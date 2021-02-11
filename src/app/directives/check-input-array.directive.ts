@@ -1,6 +1,5 @@
 import { Directive } from '@angular/core';
-import { AbstractControlDirective, NG_VALIDATORS, Validator } from '@angular/forms';
-
+import { NG_VALIDATORS, Validator, AbstractControl } from '@angular/forms';
 @Directive({
   selector: '[appCheckInputArray]',
   providers: [{
@@ -10,15 +9,12 @@ import { AbstractControlDirective, NG_VALIDATORS, Validator } from '@angular/for
   }]
 })
 export class CheckInputArrayDirective {
-
+  
   constructor() { }
-
-  status: boolean = false
-
-  validate(formToValidate: AbstractControlDirective){
-    let validInput = false;
+  validate(formFieldToValidate: AbstractControl) {
     
-    return validInput? this.status = true : { 'isNotCorrect': true }
+    let ret = formFieldToValidate.value && formFieldToValidate.value.length > 10?  true : false
+    return ret
   }
 
 }
