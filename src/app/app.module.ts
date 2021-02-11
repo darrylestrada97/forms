@@ -19,12 +19,17 @@ import { FormImprovementsComponent } from './form-improvements/form-improvements
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
+<<<<<<< HEAD
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 
 
 
+=======
+import { JournalsComponent } from './journals/journals.component';
+import { CheckInputArrayDirective } from './directives/check-input-array.directive';
+>>>>>>> 40179c90724ea3ddd440b2e98448a608d63d4b79
 
 
 // const appRoutes: Routes = [
@@ -48,7 +53,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormImprovementsComponent,
     PageNotFoundComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    JournalsComponent,
+    CheckInputArrayDirective
   ],
   imports: [
     BrowserModule,
@@ -62,6 +69,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
         { path: 'form-compare-country' , component: CompareCountryComponent},
         { path: 'form-publishing' , component: FormPublishingComponent},
         { path: 'form-improvements' , component: FormImprovementsComponent},
+        { path: 'journal-search', component: JournalsComponent},
         { path: '', component: HomeComponent},
         //The next path is equivalent to http://localhost:4200
         

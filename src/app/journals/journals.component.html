@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publishing</title>
+</head>
+<!-- <div class="container">
+    <nav>
+        <a routerLink="/form-country">Form Country</a> --
+        <a routerLink="/form-compare-country">Compare Countries</a>--
+        <a routerLink="/form-publishing">Publishing</a>
+    </nav><br>
+</div> -->
+<app-menu></app-menu>
+<body>
+    <div class="publication">
+        <h2>Search for a journal</h2>
+        <form #loginForm="ngForm" action="" >
+            <div>
+                <label class="notice">Name (*) </label>
+                <input placeholder="Journal name..." name="journalName" #journalName = ""
+                type="text" appCheckInputArray 
+                [ngClass]="{'correct' : journalName.dirty,
+                            'wrong' : !journalName.dirty }"
+                />
+            </div>
+
+            <div>
+                <label class="notice">Publication country (*) </label>
+                <select>
+                    <option *ngFor="let country of Countries" [value]="country.id"> 
+                        {{ country.name }}
+                    </option>
+                </select>
+            </div>
+            <div>
+                <label class="notice">Lenguage required (*) </label>
+                <select>
+                    <option *ngFor="let language of Languages" [value]="language.id"> 
+                        {{ language.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Translated (*)</label><br>
+                <div class="radios">
+                    <input type="radio" name="trans" value="Yes" (change)="onItemChange($event)"><label>Yes</label>
+                    <input type="radio" name="trans" value="No" (change)="onItemChange($event)"><label>No</label>
+                </div><br>
+            </div>
+            <div *ngIf="status">
+                <label class="notice"> To which language?</label>
+                <select>
+                    <option *ngFor="let language of Languages" [value]="language.id"> 
+                        {{ language.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label class="notice" >Field (*) </label>
+                <input placeholder="Name or Surname..." type="text" />
+            </div>
+            <div class="low-letter">
+                <p>(*)Mandatory</p>
+            </div>
+            <div>
+                <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+            </div>
+            
+        </form>
+    </div>
+
+</body>
+</html>

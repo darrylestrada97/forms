@@ -25,7 +25,7 @@ export class FormPublishingComponent implements OnInit {
   JournalsObj = [];  
 
   ngOnInit(): void {
-    this.objSearch = new Search(0,"","","","","");
+    this.objSearch = new Search(0,"","","","");
   }
 
   submitted = false;
@@ -44,8 +44,7 @@ export class FormPublishingComponent implements OnInit {
     this.textInput = $event.srcElement.value;
     var inputArr = this.textInput.split(" ").filter(function(entry) { 
                                                       return entry.trim() != ''; 
-                                                    });
-                                                    
+                                                    });                               
     let aux = inputArr.map(function(entry){
       return entry.split("").map(function(x){
         return !/^[^a-zA-Z0-9]*$/.test(x)? true : false
