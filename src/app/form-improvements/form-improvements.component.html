@@ -36,11 +36,7 @@
             </div>
 
 
-            <div>
-                
-            <label > Evaluation of the page </label><br>
 
-            </div>
             <div>
                 <label>Recomended this page?</label><br>
                 <div >
@@ -48,7 +44,36 @@
                     <input type="radio"name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="No" (change)="onItemChange($event)"><label>No</label>
                 </div><br>
             </div>
-           
+            <div>
+                
+                <label > Evaluation of the page </label><br>
+    
+                <div>
+
+                          <mat-checkbox 
+                                        [checked]="allComplete"
+                                        [color]="task.color"
+                                        [indeterminate]="someComplete()"
+                                        (change)="setAll($event.checked)"
+                                        >
+                            {{task.name}}
+                            
+                          </mat-checkbox>
+
+                          <ul>
+                            <li *ngFor="let subtask of task.subtasks">
+                              <mat-checkbox ame="chek"
+                                            [(ngModel)]="subtask.completed"
+                                            [color]="subtask.color"
+                                            (ngModelChange)="updateAllComplete()"
+                                            required>
+                                {{subtask.name}}
+                              </mat-checkbox>
+                            </li>
+                          </ul>
+<br>
+                </div>
+                </div>
             <div>
                 <button type="submit">Submit</button>
             </div>
