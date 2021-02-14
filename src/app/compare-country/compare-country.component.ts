@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, NgForm } from '@angular/forms';
 import { Country } from '@angular-material-extensions/select-country';
+import { compareCountries } from '../model/compareCountries';
+import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -12,11 +14,13 @@ import { Country } from '@angular-material-extensions/select-country';
 
 
 export class CompareCountryComponent implements OnInit {
+  datePickerConfig: Partial<BsDatepickerConfig>;
 
-
+  objCompareCountries: compareCountries;
   title = 'select-county';
   firstCountry = "";
   secondCountry ="";
+  searchDate="";
 
 
   variants = [
@@ -41,31 +45,28 @@ export class CompareCountryComponent implements OnInit {
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
   }
   sendForm(){
-    console.log(this.firstCountry +" "+ this.secondCountry);
+    this.objCompareCountries.$firstCountry = this.firstCountry;
+    this.objCompareCountries.$secondCountry = this.secondCountry;
+    console.log(this.objCompareCountries);
+
   }
 
   private buildForm() {
-
   }
   constructor(private formBuilder: FormBuilder) {
-
+    this.datePickerConfig = Object.assign({
+      containerClass: 'theme-dark-blue',
+      showWeekNumbers: true,
+      minDate: new Date(2020,0,21),
+      maxDate: new Date()
+    });
   }
-
   ngOnInit(): void {
-
-
+    this.objCompareCountries = new compareCountries("","","","","");
     this.countryFormGroup = this.formBuilder.group({
       country: []
     });
-
-    this.countryFormGroup.get('country').valueChanges
-      .subscribe(country => console
-        .log( country));
-
-    this.countryFormControl.valueChanges.subscribe(country =>
-       console.log(country));
   }
-
   onCountrySelected($event: Country) {
     this.firstCountry = $event.name;
   }
