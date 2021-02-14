@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators, NgForm } from '@angular/forms';
 import { Country } from '@angular-material-extensions/select-country';
-import { Angulartics2GoogleAnalytics } from 'angulartics2/ga';
+
 
 
 @Component({
@@ -15,9 +15,34 @@ export class CompareCountryComponent implements OnInit {
 
 
   title = 'select-county';
+  firstCountry = "";
+  secondCountry ="";
+
+
+  variants = [
+    {id: 1, name: 'Chinese'},
+    {id: 2, name: 'British'},
+    {id: 3, name: 'African'},
+    {id: 4, name: 'Brazilian'}
+  ]
+
+  typeOfCases = [
+    {id:1, type: 'active'},
+    {id:2, type: 'death'},
+    {id:3, type: 'survive'}
+  ]
 
   countryFormControl = new FormControl();
   countryFormGroup: FormGroup;
+  status: boolean;
+
+
+  onItemChange($event){
+    $event.srcElement.value == "Yes"? this.status = true : this.status = false
+  }
+  sendForm(){
+    console.log(this.firstCountry +" "+ this.secondCountry);
+  }
 
   private buildForm() {
 
@@ -33,20 +58,19 @@ export class CompareCountryComponent implements OnInit {
       country: []
     });
 
-    // this.countryFormGroup.get('country').valueChanges
-    //   .subscribe(country => console
-    //     .log( country));
+    this.countryFormGroup.get('country').valueChanges
+      .subscribe(country => console
+        .log( country));
 
-    // this.countryFormControl.valueChanges.subscribe(country =>
-    //    console.log(country));
+    this.countryFormControl.valueChanges.subscribe(country =>
+       console.log(country));
   }
-
 
   onCountrySelected($event: Country) {
-    console.log($event);
+    this.firstCountry = $event.name;
   }
   onCountrySelected2($event: Country) {
-    console.log($event);
+    this.secondCountry = $event.name;
   }
 }
 

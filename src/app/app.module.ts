@@ -4,12 +4,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
 import { MatSelectCountryModule } from '@angular-material-extensions/select-country';
-
-import {HttpClientModule} from '@angular/common/http';
-
-
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormCountryComponent } from './form-country/form-country.component';
@@ -20,6 +17,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 
 
@@ -27,6 +25,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { JournalsComponent } from './journals/journals.component';
 import { CheckInputArrayDirective } from './directives/check-input-array.directive';
+
 
 
 // const appRoutes: Routes = [
@@ -52,14 +51,16 @@ import { CheckInputArrayDirective } from './directives/check-input-array.directi
     HomeComponent,
     MenuComponent,
     JournalsComponent,
-    CheckInputArrayDirective
+    CheckInputArrayDirective,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
+    BsDatepickerModule.forRoot(),
     FormsModule,
-    MatSelectCountryModule.forRoot('de'), // you can use en | de | it | es | fr --> MatSelectCountrySupportedLanguages
+    MatSelectCountryModule.forRoot('en'), // you can use en | de | it | es | fr --> MatSelectCountrySupportedLanguages
              HttpClientModule,
     RouterModule.forRoot([
         { path: 'form-country' , component: FormCountryComponent},
