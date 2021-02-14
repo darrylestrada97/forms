@@ -17,8 +17,11 @@ export class CompareCountryComponent implements OnInit {
   datePickerConfig: Partial<BsDatepickerConfig>;
 
   objCompareCountries: compareCountries;
+  
   title = 'select-county';
   firstCountry = "";
+  contry;
+  country2;
   secondCountry ="";
   searchDate="";
 

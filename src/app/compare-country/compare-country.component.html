@@ -12,21 +12,26 @@
 
 <div class ="publication">
     <h2>Compare country by date and strain</h2>
-    <form #compareCountryForm="ngForm" (ngSubmit)="sendForm()" >
-
+    <form #compareCountryForm="ngForm" (ngSubmit)="sendForm()" appCompareCountries >
         <label class="notice" for="firstCountry">Select first country</label>
         <mat-select-country appearance="outline" 
                     label="Country"
-                    [formControl]="countryFormControl"
+                    name="firstCountry"
+                    #firstCountry ="ngModel" 
+                    [(ngModel)]= "contry"
                     (onCountrySelected)="onCountrySelected($event)"
-                    required>
+                    required
+                    >
         </mat-select-country>
         <label class="notice" fro="secondCountry" >Select second country</label>
         <mat-select-country appearance="outline" 
                     label="Country"
-                    [formControl]="countryFormControl"
+                    name="secondCountry"
+                    #firstCountry ="ngModel" 
+                    [(ngModel)]= "contry2"
                     (onCountrySelected)="onCountrySelected2($event)"
-                    required>
+                    required
+                    >
         </mat-select-country>
 
         <div>
