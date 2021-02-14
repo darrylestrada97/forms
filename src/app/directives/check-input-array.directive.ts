@@ -12,8 +12,9 @@ export class CheckInputArrayDirective {
   
   constructor() { }
   validate(formFieldToValidate: AbstractControl) {
-    
-    let ret = formFieldToValidate.value && formFieldToValidate.value.length > 10?  true : false
+
+    let ret = formFieldToValidate.value && (formFieldToValidate.value.length > 30 || formFieldToValidate.value.split(" ").length > 4)?  {'isNotCorrect' : true} : null
+
     return ret
   }
 

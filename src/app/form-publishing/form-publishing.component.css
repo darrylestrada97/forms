@@ -90,6 +90,10 @@ form{
    
 }
 
+form div > p {
+    color:red;
+}
+
 form > div{
     height: 100px;
     margin: auto;
