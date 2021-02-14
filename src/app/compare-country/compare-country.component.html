@@ -10,8 +10,16 @@
 </div> -->
 <app-menu></app-menu>
 <p>compare-country works!</p>
+<div>
 <mat-select-country appearance="outline" 
                     label="Country"
                     [formControl]="countryFormControl"
                     (onCountrySelected)="onCountrySelected($event)">
 </mat-select-country>
+<mat-select-country appearance="outline" 
+                    label="Country"
+                    [formControl]="countryFormControl"
+                    (onCountrySelected)="onCountrySelected2($event)">
+</mat-select-country>
+
+</div>
