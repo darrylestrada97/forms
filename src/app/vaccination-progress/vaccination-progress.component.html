@@ -4,7 +4,7 @@
   <h2>Vaccine progress around the world</h2>
   <form #compareCountryForm="ngForm" (ngSubmit)="sendForm()">
     <div>
-      <label>All countries or a specific country</label><br />
+      <label>All countries or a specific country. (If not selected, all countries will be shown.)</label><br />
       <div class="radios">
         <input
           type="radio"
@@ -28,7 +28,7 @@
             label="Country"
             name="firstCountry"
             #firstCountry="ngModel"
-            [(ngModel)]="country"
+            [(ngModel)] = "vacinnesProgress$country"
             (onCountrySelected)="onCountrySelected($event)"
             required
           >
@@ -46,8 +46,10 @@
                             [checked]="allComplete"
                             [color]="task.color"
                             [indeterminate]="someComplete()"
-                            (change)="setAll($event.checked)">
+                            (change)="setAll($event.checked)"
+                            >
                 {{task.name}}
+                
               </mat-checkbox>
             </span>
             <span class="example-list-section">
@@ -56,7 +58,8 @@
                   <mat-checkbox [(ngModel)]="subtask.completed"
                                 [color]="subtask.color"
                                 (ngModelChange)="updateAllComplete()"
-                                name="vaccines">
+                                name="vaccines"
+                                required>
                     {{subtask.name}}
                   </mat-checkbox>
                 </li>

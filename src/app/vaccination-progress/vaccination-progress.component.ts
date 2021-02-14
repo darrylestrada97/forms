@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, NgForm } from '@angular/forms';
 import { Country } from '@angular-material-extensions/select-country';
 import {ThemePalette} from '@angular/material/core';
+import { searchVaccine } from '../model/searchVaccine';
 
 
 export interface Task {
@@ -12,12 +13,18 @@ export interface Task {
 }
 
 
+
+
 @Component({
   selector: 'app-vaccination-progress',
   templateUrl: './vaccination-progress.component.html',
   styleUrls: ['./vaccination-progress.component.css']
 })
 export class VaccinationProgressComponent implements OnInit {
+
+  vacinnesProgress: searchVaccine;
+
+  
 
   task: Task = {
     name: 'Indeterminate',
@@ -50,14 +57,14 @@ export class VaccinationProgressComponent implements OnInit {
     if (this.task.subtasks == null) {
       return;
     }
-    console.log(this.task);
+    
     this.task.subtasks.forEach(t => t.completed = completed);
   }
 
   
 
   status: boolean = true;
-  country ="";
+  
   Phyzer = false;
   
   title = 'select-county';
@@ -73,12 +80,16 @@ export class VaccinationProgressComponent implements OnInit {
     
 
   }
-  sendForm(){
 
-    let vaccines = this.task.subtasks;
-   console.log(vaccines);
-   console.log(this.firstCountry);
-   console.log(this.country);
+
+  
+  sendForm(){
+    let vaccine = this.task.subtasks;
+    // console.log(this.firstCountry);
+    // console.log(vaccine);
+    this.vacinnesProgress.country = this.firstCountry;
+    this.vacinnesProgress.vaccine = vaccine;
+    console.log(this.vacinnesProgress);
   }
 
   private buildForm() {
@@ -87,7 +98,7 @@ export class VaccinationProgressComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    
+    this.vacinnesProgress = new searchVaccine("","");
     this.countryFormGroup = this.formBuilder.group({
       country: []
     });

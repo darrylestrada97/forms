@@ -1,10 +1,9 @@
-export class searchVaccine{
+export class searchVaccine {
 
 
     constructor(
         public country: String,
-        public vaccine: String,
-        
+        public vaccine,
       ){	}
     
     
@@ -14,7 +13,7 @@ export class searchVaccine{
         return this.country;
     }
 
-    public get $vaccine(): String{
+    public get $vaccine(){
         return this.vaccine;
     }
 
@@ -23,7 +22,7 @@ export class searchVaccine{
     this.country = value;
     }
     
-    public set $vaccine(value: String) {
+    public set $vaccine(value) {
 		this.vaccine = value;
     }
 }
