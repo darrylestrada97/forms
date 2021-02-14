@@ -32,5 +32,10 @@ export class FormImprovementsComponent implements OnInit {
     
     console.log(this.improvObj);
   }
+
+  status:boolean;
+  onItemChange($event){
+    $event.srcElement.value == "Yes"? this.status = true : this.status = false
+  }
 }
 

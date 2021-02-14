@@ -1,10 +1,11 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <!--<!DOCTYPE html>-->
-<!--<html>--> 
-	<head>
-      </head>
-      <!-- <div class="container">
+<!--<html>-->
+
+<head>
+</head>
+<!-- <div class="container">
             <nav>
                 <a routerLink="/form-country">Form Country</a> --
                 <a routerLink="/form-compare-country">Compare Countries</a>--
@@ -13,37 +14,45 @@
             </nav><br>
             
         </div> -->
-      <app-menu></app-menu>
-      <body>
+<app-menu></app-menu>
+
+<body>
+
+      <div class="publication">
             <form action="" method="post">
                   <h1>Contry view data</h1>
+                  <div>
+                        <label>Select Contry *</label><br>
+                        <select name="contry">
+                              <option *ngFor="let pais of paises">
+                                    {{ pais.name }}
+                              </option>
+                        </select>
+                  </div>
+                  <div>
+                        <label>Selecciona la fecha a comprobar:</label><br>
+                        <input id="date" type="date">
+                  </div>
 
 
-                        <legend>Data</legend>
-                        <p>
-                              <label>Select Contry *</label><br>
-                              <select name="contry">
-                                    <option *ngFor="let pais of paises" > 
-                                          {{ pais.name }}
-                                          </option>
-                                </select>
-                        </p>
-                        <p>
-                            <label>Selecciona la fecha a comprobar:</label><br>
-                            <input id="date" type="date">
-                        <p>
-                              <label>Introduce la cepa: *</label><br>
-                              <select name="sequence_type">
-                                    <option *ngFor="let cepa of cepas" > 
-                                          {{ cepa.name }}
-                                          </option>
-                              </select>
-                        </p>                                     
+                  <div>
+
+                        <label>Introduce la cepa: *</label><br>
+                        <select name="sequence_type">
+                              <option *ngFor="let cepa of cepas">
+                                    {{ cepa.name }}
+                              </option>
+                        </select>
+                  </div>
 
 
-                  <p>
+                  <div>
                         <input type="submit" name="form_submit" value="INSERT data" />
-                  </p>
-            </form>	
-      </body>
+                  </div>
+
+            </form>
+      </div>
+      
+</body>
+
 </html>
