@@ -9,9 +9,56 @@
 <p>compare-country works! yeah</p>
 </div> -->
 <app-menu></app-menu>
-<p>compare-country works!</p>
-<mat-select-country appearance="outline" 
+
+<div class ="publication">
+    <h2>Compare country by date and strain</h2>
+    <form #compareCountryForm="ngForm" (ngSubmit)="sendForm()" >
+
+        <label class="notice" for="firstCountry">Select first country</label>
+        <mat-select-country appearance="outline" 
                     label="Country"
                     [formControl]="countryFormControl"
-                    (onCountrySelected)="onCountrySelected($event)">
-</mat-select-country>
+                    (onCountrySelected)="onCountrySelected($event)"
+                    required>
+        </mat-select-country>
+        <label class="notice" fro="secondCountry" >Select second country</label>
+        <mat-select-country appearance="outline" 
+                    label="Country"
+                    [formControl]="countryFormControl"
+                    (onCountrySelected)="onCountrySelected2($event)"
+                    required>
+        </mat-select-country>
+
+        <div>
+            <label class="notice">Select strain (*) </label>
+            <select required name="strain" #strain ="ngModel" [(ngModel)]="objCompareCountries.$strain" >
+                <option *ngFor="let strain of variants" [value]="strain.id"> 
+                    {{strain.name}}
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <label class="notice">Select type of cases (*) </label>
+            <select required name="type" #searchType ="ngModel" [(ngModel)]="objCompareCountries.$searchType">
+                <option *ngFor="let type of typeOfCases" [value]="type.id"> 
+                    {{type.type }}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="searchDate">Dates</label>
+            <input id="searchDate" name="searchDate" [(ngModel)]="objCompareCountries.$date"
+                    type="text" bsDaterangepicker [bsConfig]="datePickerConfig" class="form-control" required/>
+          </div>
+        <div class="low-letter">
+            <p>(*)Mandatory</p>
+        </div>
+      
+        <div>
+            <button type="submit" [disabled] = "!compareCountryForm.valid" >Submit</button>
+        </div>
+    </form>
+
+</div>
