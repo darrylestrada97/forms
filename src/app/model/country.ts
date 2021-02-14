@@ -1,47 +1,42 @@
 export class Country{
 
   constructor(
-    id: number, 
-    name: String, 
-    location: String, 
-    region: String
-) {
-    this.id = id
-    this.name = name
-    this.location = location
-    this.region = region
-  }
+    public id: number, 
+    public name: String, 
+    public location: String, 
+    public region: String
+) { }
 
-  public get id(): number {
+  public get $id(): number {
     return this.id;
 }
 
-public set id(id: number) {
-    this.id = id;
+public set $id(value: number) {
+    this.id = value;
 }
 
-public get name(): String {
+public get $name(): String {
     return this.name;
 }
 
-public set name(name: String) {
-    this.name = name;
+public set $name(value: String) {
+    this.name = value;
 }
 
-public get location(): String {
+public get $location(): String {
     return this.location;
 }
 
-public set location(location: String) {
-    this.location = location;
+public set $location(value: String) {
+    this.location = value;
 }
 
-public get region(): String {
+public get $region(): String {
     return this.region;
 }
 
-public set region(region: String) {
-    this.region = region;
+public set $region(value: String) {
+    this.region = value;
 }
   
     

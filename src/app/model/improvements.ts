@@ -1,56 +1,50 @@
 export class Improvements{
 
     constructor(
-      id: number, 
-      name: String, 
-      location: String, 
-      evaluation: number,
-      recomendation: String
-  ) {
-      this.id = id
-      this.name = name
-      this.location = location
-      this.evaluation = evaluation
-      this.recomendation = recomendation
-    }
+      public id: number, 
+      public name: String, 
+      public location: String, 
+      public evaluation: number,
+      public recomendation: String
+  ) {}
   
-    public get id(): number {
+    public get $id(): number {
       return this.id;
   }
   
-  public set id(id: number) {
-      this.id = id;
+  public set $id(value: number) {
+      this.id = value;
   }
   
-  public get name(): String {
+  public get $name(): String {
       return this.name;
   }
   
-  public set name(name: String) {
-      this.name = name;
+  public set $name(value: String) {
+      this.name = value;
   }
   
-  public get location(): String {
+  public get $location(): String {
       return this.location;
   }
   
-  public set location(location: String) {
-      this.location = location;
+  public set $location(value: String) {
+      this.location = value;
   }
   
-  public get evaluation(): number {
+  public get $evaluation(): number {
       return this.evaluation;
   }
   
-  public set evaluation(evaluation: number) {
-      this.evaluation = evaluation;
+  public set $evaluation(value: number) {
+      this.evaluation = value;
   }
-  public get recomendation(): String {
+  public get $recomendation(): String {
     return this.recomendation;
 }
 
-public set recomendation(recomendation: String) {
-    this.recomendation = recomendation;
+public set $recomendation(value: String) {
+    this.recomendation = value;
 }
     
       
