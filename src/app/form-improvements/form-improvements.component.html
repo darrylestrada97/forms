@@ -21,18 +21,23 @@
 </div> -->
 <app-menu></app-menu>
 <body>
-    <h2>Improvements</h2><br>
-    <form action="">
-        <label>Name *</label>
+    
+    <div class="publication">
+        <h2>Improvements</h2>
+        <form action="">
+            <div>
+                <label>Name *</label>
         <input required name="name" #name="ngModel" [(ngModel)]="improvObj.name" type="text" /><br>
+            </div>
+            <div>
+                <label>Location (*) </label><br>
+                <input placeholder="Location..." required name="location" #location="ngModel" [(ngModel)]="improvObj.location"
+                    type="text" /><br>
+            </div>
 
 
-
-        <label>Location (*) </label><br>
-        <input placeholder="Location..." required name="location" #location="ngModel" [(ngModel)]="improvObj.location"
-            type="text" /><br>
-
-
+            <div>
+                
             <label > Evaluation of the page </label><br>
                 <input type="checkbox" [(ngModel)]="theCheckbox"  data-md-icheck (change)="toggleVisibility($event)"/>
                     Checkbox is <span *ngIf="marked">checked</span><span *ngIf="!marked">unchecked</span>
@@ -41,13 +46,22 @@
                
                   
                   <div>And <b>ngModel</b> also works, it's value is {{theCheckbox}}</div>
-                  <br>
-                  
-
-
-
-        <button type="submit">Submit</button>
-    </form>
+                  <br>       
+            </div>
+            <div>
+                <label>Recomended this page?</label><br>
+                <div >
+                    <input type="radio" name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="Yes" (change)="onItemChange($event)"><label>Yes</label>
+                    <input type="radio"name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="No" (change)="onItemChange($event)"><label>No</label>
+                </div><br>
+            </div>
+           
+            <div>
+                <button type="submit">Submit</button>
+            </div>
+            
+        </form>
+    </div>
 
 
 </body>

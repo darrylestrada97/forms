@@ -1,0 +1,24 @@
+.publication{
+    background-color: #FFFAF0;
+    border-radius: 9px;
+    box-shadow: 0px 5px 4px 2px rgba(0, 0, 0, 0.5);
+}
+
+.publication h2 {
+    text-align: center;
+    font-size: 50px;
+    padding: 15px 25px 15px 25px;
+}
+
+form{
+    margin: auto;
+}
+
+form > div{
+    height: 100px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+}
