@@ -26,3 +26,4 @@ export class searchVaccine{
     public set $vaccine(value: String) {
 		this.vaccine = value;
     }
+}
