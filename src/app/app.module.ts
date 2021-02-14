@@ -25,6 +25,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { JournalsComponent } from './journals/journals.component';
 import { CheckInputArrayDirective } from './directives/check-input-array.directive';
+import { CompareCountriesDirective } from './directives/compare-countries.directive';
 
 
 
@@ -52,6 +53,7 @@ import { CheckInputArrayDirective } from './directives/check-input-array.directi
     MenuComponent,
     JournalsComponent,
     CheckInputArrayDirective,
+    CompareCountriesDirective,
     
   ],
   imports: [
