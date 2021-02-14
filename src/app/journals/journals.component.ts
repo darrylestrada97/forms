@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JournalSearch } from '../model/journal';
 
+
 @Component({
   selector: 'app-journals',
   templateUrl: './journals.component.html',
@@ -264,7 +265,7 @@ export class JournalsComponent implements OnInit {
   journalName:String =""
   prop:string = ""
   country:String = ""
-  status: boolean =false;
+  status: boolean = false;
   statusName: boolean = false
 
   onItemChange($event){
@@ -281,14 +282,29 @@ export class JournalsComponent implements OnInit {
 
   changeJournal($event){
     let text = $event.srcElement.value
+    this.statusName = false
+    
+    for (let index = 0; index < this.Journals.length; index++) {
+      
+      if(text == this.Journals[index].name){
+        this.statusName = true
+        break
+      }else{
+        this.statusName = false
+      }
+    }
+    return this.statusName
+  }
+
+  onSubmit(){
 
     this.Journals.forEach(element => {
-      if(text == element.name){
-        this.statusName = true
+      if(element.id == this.objJournal.$id){
+        this.objJournal.$price=element.price;
       }
     });
-    console.log(this.statusName)
-    return this.statusName
+
+    console.log(this.objJournal);
   }
 
 }

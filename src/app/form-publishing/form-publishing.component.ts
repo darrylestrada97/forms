@@ -29,9 +29,12 @@ export class FormPublishingComponent implements OnInit {
   }
 
   submitted = false;
+  sumId = 0;
   
   onSubmit(){
     
+    this.objSearch.$id = this.sumId
+
     this.Journals.forEach(element => {
       if(element.id == this.objSearch.$id){
         this.objSearch.$price=element.price;
@@ -40,6 +43,7 @@ export class FormPublishingComponent implements OnInit {
     });
     
     console.log(this.objSearch);
+    this.sumId += 1
   }
 
   textInput: String;

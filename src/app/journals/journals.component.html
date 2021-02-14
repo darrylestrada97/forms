@@ -16,10 +16,10 @@
 <body>
     <div class="publication">
         <h2>Search for a journal</h2>
-        <form #loginForm="ngForm" action="" >
+        <form #loginForm="ngForm" action="" (ngSubmit) = "onSubmit()">
             <div>
                 <label class="notice">Name (*) </label>
-                <input placeholder="Journal name..." name="journalName" #journalName = "ngModel"
+                <input required placeholder="Journal name..." name="journalName" #journalName = "ngModel"
                 type="text" [(ngModel)]="objJournal.$nameJournal"
                 (keyup) = "changeJournal($event)"
                 [ngClass]="{ 'correct' :journalName.dirty && statusName == true,
@@ -34,7 +34,7 @@
                 [ngClass]="{'correct' : country.dirty,
                             'wrong' :  country.dirty && country.errors?.required}" >
                 
-                    <option *ngFor="let country of Countries" [value]="country.id"> 
+                    <option *ngFor="let country of Countries" [value]="country.name"> 
                         {{ country.name }}
                     </option>
                 </select>
@@ -44,7 +44,7 @@
                 <select required name="language" #language = "ngModel" [(ngModel)]="objJournal.$language"
                 [ngClass]="{'correct' : language.dirty,
                             'wrong' :  language.dirty && language.errors?.required}" >
-                    <option *ngFor="let language of Languages" [value]="language.id"> 
+                    <option *ngFor="let language of Languages" [value]="language.name"> 
                         {{ language.name }}
                     </option>
                 </select>
@@ -60,29 +60,35 @@
             <div *ngIf="status">
                 <label class="notice"> To which language?</label>
                 <select required name="translation" #translation = "ngModel" [(ngModel)]="objJournal.$translation"
-                [ngClass]="{'correct' : language.dirty,
-                            'wrong' :  language.dirty && language.value != translation.model}" 
+                [ngClass]="{'correct' : translation.dirty && objJournal.$translation != objJournal.$language,
+                            'wrong' :  translation.dirty && objJournal.$translation == objJournal.$language }" 
                 >
-                    <option *ngFor="let language of Languages" [value]="language.id"> 
+                    <option *ngFor="let language of Languages" [value]="language.name"> 
                         {{ language.name }}
                     </option>
                 </select>
+                <p *ngIf="translation.dirty && objJournal.$translation == objJournal.$language">
+                    Cannot translate to the same language!
+                </p>
             </div>
-
+            
             <div>
                 <label class="notice" >Field (*) </label>
-                <input placeholder="Name or Surname..." type="text" />
+                <input required placeholder="Name or Surname..."  
+                name="field" #field = "ngModel" [(ngModel)]="objJournal.$field" type="text" appCheckInputArray 
+                [ngClass]="{'correct' : field.dirty && !field.errors?.isNotCorrect,
+                            'wrong' :  field.dirty &&  field.errors?.isNotCorrect}" 
+                />
 
-
-                <p *ngIf="journalName.errors?.isNotCorrect">
-                    Journal name too long
+                <p *ngIf="field.errors?.isNotCorrect">
+                    Investigation field too long
                 </p>
             </div>
             <div class="low-letter">
                 <p>(*)Mandatory</p>
             </div>
             <div>
-                <button type="submit">Submit</button>
+                <button type="submit" [disabled] = "!loginForm.valid" >Submit</button>
             </div>
             
         </form>

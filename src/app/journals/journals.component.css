@@ -15,7 +15,7 @@ form{
    
 }
 
-form div > p {
+form div > p, p {
     color:red;
 }
 
