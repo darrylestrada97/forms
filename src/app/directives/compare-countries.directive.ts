@@ -16,7 +16,7 @@ export class CompareCountriesDirective {
 
   validate(formFieldToValidate: AbstractControl): { [key: string]: any } {
     let validInput: boolean = false;
-    
+     
     if (formFieldToValidate && formFieldToValidate.value) {
       if((formFieldToValidate.value.firstCountry != formFieldToValidate.value.secondCountry) && (formFieldToValidate.value.searchDate[0] !== formFieldToValidate.value.searchDate[1])){
         validInput = true;
