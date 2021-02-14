@@ -18,6 +18,7 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 
@@ -26,6 +27,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { JournalsComponent } from './journals/journals.component';
 import { CheckInputArrayDirective } from './directives/check-input-array.directive';
 import { CompareCountriesDirective } from './directives/compare-countries.directive';
+import { VaccinationProgressComponent } from './vaccination-progress/vaccination-progress.component';
 
 
 
@@ -54,6 +56,7 @@ import { CompareCountriesDirective } from './directives/compare-countries.direct
     JournalsComponent,
     CheckInputArrayDirective,
     CompareCountriesDirective,
+    VaccinationProgressComponent,
     
   ],
   imports: [
@@ -62,6 +65,7 @@ import { CompareCountriesDirective } from './directives/compare-countries.direct
     ReactiveFormsModule,
     BsDatepickerModule.forRoot(),
     FormsModule,
+    MatCheckboxModule,
     MatSelectCountryModule.forRoot('en'), // you can use en | de | it | es | fr --> MatSelectCountrySupportedLanguages
              HttpClientModule,
     RouterModule.forRoot([
@@ -70,6 +74,7 @@ import { CompareCountriesDirective } from './directives/compare-countries.direct
         { path: 'form-publishing' , component: FormPublishingComponent},
         { path: 'form-improvements' , component: FormImprovementsComponent},
         { path: 'journal-search', component: JournalsComponent},
+        { path: 'vaccination-progress', component: VaccinationProgressComponent },
         { path: '', component: HomeComponent},
         //The next path is equivalent to http://localhost:4200
         

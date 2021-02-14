@@ -20,7 +20,7 @@ export class CompareCountryComponent implements OnInit {
   
   title = 'select-county';
   firstCountry = "";
-  contry;
+  country;
   country2;
   secondCountry ="";
   searchDate="";

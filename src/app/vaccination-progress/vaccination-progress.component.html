@@ -1,0 +1,84 @@
+<!--
+    This form was made by @Darryl
+    It asks for a country in case the user wants to know an specific country and the type of vaccine the user is interested. 
+-->
+
+<app-menu></app-menu>
+
+<div class="publication">
+  <h2>Vaccine progress around the world</h2>
+  <form #compareCountryForm="ngForm" (ngSubmit)="sendForm()">
+    <div>
+      <label>All countries or a specific country. (If not selected, all countries will be shown.)</label><br />
+      <div class="radios">
+        <input
+          type="radio"
+          name="search"
+          value="All"
+          (change)="onItemChange($event)"
+        /><label>All countries</label>
+        <input
+          type="radio"
+          name="search"
+          value="one"
+          (change)="onItemChange($event)"
+        /><label>specific</label>
+      </div>
+      <br />
+      <div *ngIf="!status">
+        <div class="row">
+          <label class="notice" for="firstCountry">Select country (*)</label>
+          <mat-select-country
+            appearance="outline"
+            label="Country"
+            name="firstCountry"
+            #firstCountry="ngModel"
+            [(ngModel)] = "vacinnesProgress$country"
+            (onCountrySelected)="onCountrySelected($event)"
+            required
+          >
+          </mat-select-country>
+        </div>
+      </div>
+    </div>
+    <div>Select vaccine type</div>
+    <br>
+    <div>
+
+        <section >
+            <span >
+              <mat-checkbox 
+                            [checked]="allComplete"
+                            [color]="task.color"
+                            [indeterminate]="someComplete()"
+                            (change)="setAll($event.checked)"
+                            >
+                {{task.name}}
+                
+              </mat-checkbox>
+            </span>
+            <span class="example-list-section">
+              <ul>
+                <li *ngFor="let subtask of task.subtasks">
+                  <mat-checkbox [(ngModel)]="subtask.completed"
+                                [color]="subtask.color"
+                                (ngModelChange)="updateAllComplete()"
+                                name="vaccines"
+                                required>
+                    {{subtask.name}}
+                  </mat-checkbox>
+                </li>
+              </ul>
+            </span>
+          </section>
+
+    </div>
+   <br>
+    <div>
+        <button type="submit" [disabled]="!compareCountryForm.valid">
+          Submit
+        </button>
+      </div>
+    
+  </form>
+</div>
