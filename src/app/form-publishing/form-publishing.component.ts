@@ -13,11 +13,11 @@ export class FormPublishingComponent implements OnInit {
   //Journals = ['Nature','Science','Astronomical Journal','Astrophysical Journal','Canadian Journal of Chemistry'];
 
   Journals = [
-    {id: 0, name: 'Nature'},
-    {id: 1, name: 'Science'},
-    {id: 2, name: 'Astronomical Journal'},
-    {id: 3, name: 'Astrophysical Journal'},
-    {id: 4, name: 'Canadian Journal of Chemistry'}
+    {id: 0, name: 'Nature', price: "12.50", distribution: "online"},
+    {id: 1, name: 'Science', price: "13.25", distribution: "paper"},
+    {id: 2, name: 'Astronomical Journal', price: "29.99", distribution: "online"},
+    {id: 3, name: 'Astrophysical Journal', price: "24.20", distribution: "paper"},
+    {id: 4, name: 'Canadian Journal of Chemistry', price: "18.75", distribution: "online"}
   ]
 
   fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
@@ -30,27 +30,47 @@ export class FormPublishingComponent implements OnInit {
 
   submitted = false;
   
-
   onSubmit(){
-    this.submitted = true;
+    
+    this.Journals.forEach(element => {
+      if(element.id == this.objSearch.$id){
+        this.objSearch.$price=element.price;
+        this.objSearch.$distribution=element.distribution;
+      }
+    });
     
     console.log(this.objSearch);
   }
 
   textInput: String;
   status: boolean = false;
+  statusAuthor: boolean = false;
 
   changeInput($event){
-    this.textInput = $event.srcElement.value;
-    var inputArr = this.textInput.split(" ").filter(function(entry) { 
-                                                      return entry.trim() != ''; 
-                                                    });                               
-    let aux = inputArr.map(function(entry){
-      return entry.split("").map(function(x){
-        return !/^[^a-zA-Z0-9]*$/.test(x)? true : false
-      })  
-    })
-    return this.status = aux.toString().split(",").includes("false")? true : false
+
+      this.textInput = $event.srcElement.value;
+      var inputArr = this.textInput.split(" ").filter(function(entry) { 
+                                                        return entry.trim() != ''; 
+                                                      });                               
+      let aux = inputArr.map(function(entry){
+        return entry.split("").map(function(x){
+          return !/^[^a-zA-Z0-9]*$/.test(x)? true : false
+        })  
+      })
+      this.status = aux.toString().split(",").includes("false")? true : false
+
+    return this.status
+
+  }
+
+  changeInputAuthor($event){
+
+      this.textInput = $event.srcElement.value;
+      var inputArr = this.textInput.split(" ").filter(function(entry) { 
+                                                        return entry.trim() != ''; 
+                                                      });                               
+      this.statusAuthor = inputArr.length<=3? false : true
+    
   }
 
   

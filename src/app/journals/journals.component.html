@@ -19,17 +19,21 @@
         <form #loginForm="ngForm" action="" >
             <div>
                 <label class="notice">Name (*) </label>
-                <input placeholder="Journal name..." name="journalName" #journalName = ""
-                type="text" [(ngModel)]="prop" appCheckInputArray
+                <input placeholder="Journal name..." name="journalName" #journalName = "ngModel"
+                type="text" [(ngModel)]="objJournal.$nameJournal"
+                (keyup) = "changeJournal($event)"
+                [ngClass]="{ 'correct' :journalName.dirty && statusName == true,
+                            'wrong' :journalName.dirty && statusName == false }"
                 />
             </div>
 
-            <div *ngIf="journalName.errors?.isNotCorrect">
-    Check input minimum length</div>
-
+            
             <div>
                 <label class="notice">Publication country (*) </label>
-                <select>
+                <select required name="country" #country = "ngModel" [(ngModel)]="objJournal.$country"
+                [ngClass]="{'correct' : country.dirty,
+                            'wrong' :  country.dirty && country.errors?.required}" >
+                
                     <option *ngFor="let country of Countries" [value]="country.id"> 
                         {{ country.name }}
                     </option>
@@ -37,7 +41,9 @@
             </div>
             <div>
                 <label class="notice">Lenguage required (*) </label>
-                <select>
+                <select required name="language" #language = "ngModel" [(ngModel)]="objJournal.$language"
+                [ngClass]="{'correct' : language.dirty,
+                            'wrong' :  language.dirty && language.errors?.required}" >
                     <option *ngFor="let language of Languages" [value]="language.id"> 
                         {{ language.name }}
                     </option>
@@ -53,7 +59,10 @@
             </div>
             <div *ngIf="status">
                 <label class="notice"> To which language?</label>
-                <select>
+                <select required name="translation" #translation = "ngModel" [(ngModel)]="objJournal.$translation"
+                [ngClass]="{'correct' : language.dirty,
+                            'wrong' :  language.dirty && language.value != translation.model}" 
+                >
                     <option *ngFor="let language of Languages" [value]="language.id"> 
                         {{ language.name }}
                     </option>
@@ -63,6 +72,11 @@
             <div>
                 <label class="notice" >Field (*) </label>
                 <input placeholder="Name or Surname..." type="text" />
+
+
+                <p *ngIf="journalName.errors?.isNotCorrect">
+                    Journal name too long
+                </p>
             </div>
             <div class="low-letter">
                 <p>(*)Mandatory</p>

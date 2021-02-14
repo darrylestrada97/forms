@@ -13,6 +13,7 @@ export class JournalSearch{
         public id: number,
         public country: String,
         public nameJournal: String,
+        public price: String,
         public language: String,
         public translation: boolean,
         public field: String
@@ -29,6 +30,10 @@ export class JournalSearch{
     public get $nameJournal(): String{
         return this.nameJournal;
     }
+
+    public get $price(): String{
+      return this.price;
+  }
 
     public get $language(): String{
       return this.language;
@@ -53,6 +58,10 @@ export class JournalSearch{
     public set $nameJournal(value: String) {
 		this.nameJournal = value;
     }
+
+    public set $price(value: String) {
+      this.price = value;
+      }
 
     public set $language(value: String) {
 		this.language = value;

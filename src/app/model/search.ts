@@ -55,7 +55,7 @@ export class Search{
 		this.field = value;
     }
     public set $price(value: String) {
-		this.price = value;
+		  this.price = value;
     }
     public set $distribution(value: String) {
 		this.distribution = value;

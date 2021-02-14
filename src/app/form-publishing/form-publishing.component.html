@@ -16,7 +16,7 @@
 <body>
     <div class="publication">
         <h2>Search for a publication</h2>
-        <form #loginForm="ngForm" action="" >
+        <form #loginForm="ngForm" action="" (ngSubmit)="onSubmit()" >
             <div>
                 <label>Journal (*)</label>
                 <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id"
@@ -32,17 +32,18 @@
             </div> -->
             <div>
                 <label class="notice">Key words (*) </label>
-                <input placeholder="Separated by coma..." 
+                <input id="kw" placeholder="Separated by coma..." 
                 required name="keywords" #keywords = "ngModel" 
                 [(ngModel)]="objSearch.$keyWords" 
                 (change)="changeInput($event)"
                 [ngClass]="{'correct' : keywords.dirty && status == false,
                             'wrong' : keywords.dirty && status == true }"
                 />
-                <div class="low-letter">
-                    <label>Entry words separated by space</label>
-                </div>
+                <p *ngIf="keywords.dirty && status == true">
+                    Entry words separated by space
+                </p>
             </div>
+
             
             <!-- [ngClass]="{'wrong' : keywords.errors?.pattern,
                         'correct' : keywords.dirty && !keywords.errors?.pattern,
@@ -64,21 +65,26 @@
             
             <div>
                 <label class="notice" >Autor (*) </label>
-                <input placeholder="Name or Surname..."
+                <input id="author" placeholder="Name or Surname..."
                 required name="author" #author = "ngModel" 
                 [(ngModel)]="objSearch.$author"
-                pattern="\b[a-zA-Z0-9_]+\b"
-                [ngClass]="{'wrong' : author.errors?.pattern,
-                        'correct' : author.dirty && !author.errors?.pattern,
-                        'base' : author.dirty && author.errors?.required }"
+                (change)="changeInputAuthor($event)"
+
+                [ngClass]="{'correct' : author.dirty && statusAuthor == false,
+                            'wrong' : author.dirty && statusAuthor == true }"
 
                 type="text" />
+
+                <p *ngIf="author.dirty && statusAuthor == true">
+                    Author name too long
+                </p>
             </div>
+
             <div class="low-letter">
                 <p>(*)Mandatory</p>
             </div>
             <div>
-                <button type="submit" [disabled]="!loginForm.valid">Submit</button>
+                <button type="submit" [disabled] = "!loginForm.valid" >Submit</button>
             </div>
         </form>
     </div>

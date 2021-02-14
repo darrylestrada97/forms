@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { JournalSearch } from '../model/journal';
 
 @Component({
   selector: 'app-journals',
@@ -251,14 +252,43 @@ export class JournalsComponent implements OnInit {
     {id: 3, name: 'German'},
     {id: 4, name: 'French'}
   ]
-  prop:String = ""
-  status: boolean
+
+  Journals = [
+    {id: 0, name: 'Nature', price: "12.50", distribution: "online"},
+    {id: 1, name: 'Science', price: "13.25", distribution: "paper"},
+    {id: 2, name: 'Astronomical Journal', price: "29.99", distribution: "online"},
+    {id: 3, name: 'Astrophysical Journal', price: "24.20", distribution: "paper"},
+    {id: 4, name: 'Canadian Journal of Chemistry', price: "18.75", distribution: "online"}
+  ]
+
+  journalName:String =""
+  prop:string = ""
+  country:String = ""
+  status: boolean =false;
+  statusName: boolean = false
 
   onItemChange($event){
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
   }
 
+  objJournal: JournalSearch;
+
   ngOnInit(): void {
+
+    this.objJournal = new JournalSearch(0,"","","","",false,"");
+
+  }
+
+  changeJournal($event){
+    let text = $event.srcElement.value
+
+    this.Journals.forEach(element => {
+      if(text == element.name){
+        this.statusName = true
+      }
+    });
+    console.log(this.statusName)
+    return this.statusName
   }
 
 }
