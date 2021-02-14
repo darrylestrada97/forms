@@ -57,7 +57,7 @@
 
                 <ul>
                     <li *ngFor="let subtask of task.subtasks">
-                        <mat-checkbox ame="chek" [(ngModel)]="subtask.completed" [color]="subtask.color"
+                        <mat-checkbox name="chek" [(ngModel)]="subtask.completed" [color]="subtask.color"
                             (ngModelChange)="updateAllComplete()" required>
                             {{subtask.name}}
                         </mat-checkbox>
