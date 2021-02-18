@@ -5,13 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Publishing</title>
 </head>
-<!-- <div class="container">
-    <nav>
-        <a routerLink="/form-country">Form Country</a> --
-        <a routerLink="/form-compare-country">Compare Countries</a>--
-        <a routerLink="/form-publishing">Publishing</a>
-    </nav><br>
-</div> -->
 <app-menu></app-menu>
 <body>
     <div class="publication">
@@ -27,35 +20,29 @@
                     </option>
                 </select>
             </div>
-            <!-- <div *ngIf="journal.touched && objSearch.$id > 4 || objSearch.$id < 0">
-                <p style="color:red">Incorrect Journal</p>
-            </div> -->
+
             <div>
                 <label class="notice">Key words (*) </label>
                 <input id="kw" placeholder="Separated by coma..." 
                 required name="keywords" #keywords = "ngModel" 
                 [(ngModel)]="objSearch.$keyWords" 
                 (change)="changeInput($event)"
-                [ngClass]="{'correct' : keywords.dirty && status == false,
-                            'wrong' : keywords.dirty && status == true }"
+                [ngClass]="{'correct' : keywords.dirty && statusArray == false,
+                            'wrong' : keywords.dirty && statusArray == true }"
                 />
-                <p *ngIf="keywords.dirty && status == true">
+                <p *ngIf="keywords.dirty && statusArray == true">
                     Entry words separated by space
                 </p>
             </div>
 
-            
-            <!-- [ngClass]="{'wrong' : keywords.errors?.pattern,
-                        'correct' : keywords.dirty && !keywords.errors?.pattern,
-                        'base' : keywords.dirty && keywords.errors?.required }"-->
             <div>
                 <label class="notice">Investigation field (*) </label>
                 <input placeholder="Field here..." 
                 required name="field" #field = "ngModel"  
-                [(ngModel)]="objSearch.$field" 
-
-                [ngClass] = "{'wrong' : field.dirty && fields.indexOf(field.model) != 0,
-                                'correct' : field.dirty && fields.indexOf(field.model) !== -1}"
+                [(ngModel)]="objSearch.$field"
+                (change)="changeInputInvestigation($event)"
+                [ngClass] = "{ 'wrong' : field.dirty && fields.indexOf(field.model) != 0,
+                               'correct' : field.dirty && fields.indexOf(field.model) !== -1 }"
 
                 />
                 <div class="low-letter">
@@ -68,14 +55,13 @@
                 <input id="author" placeholder="Name or Surname..."
                 required name="author" #author = "ngModel" 
                 [(ngModel)]="objSearch.$author"
-                (change)="changeInputAuthor($event)"
-
-                [ngClass]="{'correct' : author.dirty && statusAuthor == false,
-                            'wrong' : author.dirty && statusAuthor == true }"
+                appCheckInputArray
+                [ngClass]="{ 'correct' : author.dirty && !author.errors?.isNotCorrect,
+                             'wrong' : author.dirty && author.errors?.isNotCorrect }"
 
                 type="text" />
 
-                <p *ngIf="author.dirty && statusAuthor == true">
+                <p *ngIf="author.dirty && author.errors?.isNotCorrect">
                     Author name too long
                 </p>
             </div>
@@ -84,7 +70,7 @@
                 <p>(*)Mandatory</p>
             </div>
             <div>
-                <button type="submit" [disabled] = "!loginForm.valid" >Submit</button>
+                <button type="submit" [disabled] = "!loginForm.valid || !globalStatus" >Submit</button>
             </div>
         </form>
     </div>

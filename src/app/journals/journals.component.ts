@@ -267,6 +267,7 @@ export class JournalsComponent implements OnInit {
   country:String = ""
   status: boolean = false;
   statusName: boolean = false
+  globalStatus: boolean = false
 
   onItemChange($event){
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
@@ -276,7 +277,7 @@ export class JournalsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.objJournal = new JournalSearch(0,"","","","",false,"");
+    this.objJournal = new JournalSearch(0,"","","","","","");
 
   }
 
@@ -293,7 +294,14 @@ export class JournalsComponent implements OnInit {
         this.statusName = false
       }
     }
+
+    this.globalStatus = this.statusName? true : false
+
     return this.statusName
+  }
+
+  changeInputLanguage($event){
+    this.globalStatus = this.objJournal.$translation == this.objJournal.$language ? false : true
   }
 
   onSubmit(){

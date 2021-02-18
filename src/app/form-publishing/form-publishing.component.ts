@@ -29,11 +29,8 @@ export class FormPublishingComponent implements OnInit {
   }
 
   submitted = false;
-  sumId = 0;
   
   onSubmit(){
-    
-    this.objSearch.$id = this.sumId
 
     this.Journals.forEach(element => {
       if(element.id == this.objSearch.$id){
@@ -41,15 +38,14 @@ export class FormPublishingComponent implements OnInit {
         this.objSearch.$distribution=element.distribution;
       }
     });
-    
+  
     console.log(this.objSearch);
-    this.sumId += 1
   }
 
   textInput: String;
-  status: boolean = false;
+  statusArray: boolean = false;
   statusAuthor: boolean = false;
-
+  globalStatus: boolean = false;
   changeInput($event){
 
       this.textInput = $event.srcElement.value;
@@ -61,21 +57,21 @@ export class FormPublishingComponent implements OnInit {
           return !/^[^a-zA-Z0-9]*$/.test(x)? true : false
         })  
       })
-      this.status = aux.toString().split(",").includes("false")? true : false
+      this.statusArray = aux.toString().split(",").includes("false")? true : false
 
-    return this.status
+      this.globalStatus = this.statusArray? false : true
+
+      console.log(this.globalStatus)
+
+    return this.statusArray
 
   }
 
-  changeInputAuthor($event){
-
-      this.textInput = $event.srcElement.value;
-      var inputArr = this.textInput.split(" ").filter(function(entry) { 
-                                                        return entry.trim() != ''; 
-                                                      });                               
-      this.statusAuthor = inputArr.length<=3? false : true
-    
+  changeInputInvestigation($event){
+    this.globalStatus = this.fields.indexOf($event.srcElement.value) != 0 ? false : true
+    console.log(this.globalStatus)
   }
+
 
   
 }
