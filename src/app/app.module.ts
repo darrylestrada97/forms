@@ -28,6 +28,7 @@ import { JournalsComponent } from './journals/journals.component';
 import { CheckInputArrayDirective } from './directives/check-input-array.directive';
 import { CompareCountriesDirective } from './directives/compare-countries.directive';
 import { VaccinationProgressComponent } from './vaccination-progress/vaccination-progress.component';
+import { ImprovementsDirective } from './directives/improvements.directive';
 
 
 
@@ -57,6 +58,7 @@ import { VaccinationProgressComponent } from './vaccination-progress/vaccination
     CheckInputArrayDirective,
     CompareCountriesDirective,
     VaccinationProgressComponent,
+    ImprovementsDirective,
     
   ],
   imports: [
