@@ -26,26 +26,24 @@
 
     <div class="publication">
         <h2>Improvements</h2>
-        <form action="">
+        <form #improvements="ngForm" (ngSubmit)="onSubmit()" appImprovements>
             <div>
-                <label>Name *</label>
-                <input required name="name" #name="ngModel" [(ngModel)]="improvObj.name" type="text" /><br>
-            </div>
-            <div>
-                <label>location that you think is necessary to include:</label><br>
+                <label>location that you think is necessary to include:</label>
                 <input placeholder="Location..." required name="location" #location="ngModel"
-                    [(ngModel)]="improvObj.location" type="text" /><br>
+                    [(ngModel)]="improvObj.$location" type="text" />
             </div>
 
             <div>
-                <label>Recomended this page?</label><br>
-                <div>
-                    <input type="radio" name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="Yes" (change)="onItemChange($event)"><label>Yes</label>
-                    <input type="radio"name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="No" (change)="onItemChange($event)"><label>No</label>
-                </div><br>
+                <label>Recomended this page?</label>
+                <div class="radiob">
+                    <input type="radio" name="val" #val="ngModel" [(ngModel)]="improvObj.$evaluation" value="Yes"
+                        (change)="onItemChange($event)"><label>Yes</label>
+                    <input type="radio" name="val" #val="ngModel" [(ngModel)]="improvObj.$evaluation" value="No"
+                        (change)="onItemChange($event)"><label>No</label>
+                </div>
             </div>
-            <div>
-                <label> Evaluation of the page </label><br>
+            <div class="chek">
+                <label> Evaluation of the page </label>
                 <mat-checkbox [checked]="allComplete" [color]="task.color" [indeterminate]="someComplete()"
                     (change)="setAll($event.checked)">
                     {{task.name}}
@@ -60,7 +58,12 @@
                         </mat-checkbox>
                     </li>
                 </ul>
-                <br>
+            </div>
+            <div>
+                <label>additional comments:</label>
+                <textarea required name="comments" #name="ngModel" [(ngModel)]="improvObj.$comments" type="text">
+
+                    </textarea>
             </div>
             <div>
                 <button type="submit">Submit</button>

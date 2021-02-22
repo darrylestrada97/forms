@@ -2,7 +2,7 @@ export class Improvements{
 
     constructor(
       public id: number, 
-      public name: String, 
+      public comments: String, 
       public location: String, 
       public evaluation: number,
       public recomendation: String
@@ -16,12 +16,12 @@ export class Improvements{
       this.id = value;
   }
   
-  public get $name(): String {
-      return this.name;
+  public get $comments(): String {
+      return this.comments;
   }
   
-  public set $name(value: String) {
-      this.name = value;
+  public set $comments(value: String) {
+      this.comments = value;
   }
   
   public get $location(): String {

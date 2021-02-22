@@ -20,26 +20,25 @@
 
       <div class="publication">
             <h2>Contry view data</h2>
-            <form action="" method="post">
-                  
+            <form #formcountry="ngForm" (ngSubmit)="onSubmit()" appformcountry>
+
                   <div>
                         <label>Select Contry *</label><br>
-                        <select name="contry">
+                        <select name="contry" #name="ngModel" [(ngModel)]="CountryObj.$contry" type="text">
                               <option *ngFor="let pais of paises">
                                     {{ pais.name }}
                               </option>
                         </select>
                   </div>
                   <div>
-                        <label>Selecciona la fecha a comprobar:</label><br>
-                        <input id="date" type="date" required>
+                        <label>Select date:</label><br>
+                        <input type="date" #name="ngModel" [(ngModel)]="CountryObj.$date" required>
                   </div>
 
 
                   <div>
-
                         <label>Introduce la cepa: *</label><br>
-                        <select name="sequence_type">
+                        <select name="sequence_type" #name="ngModel" [(ngModel)]="CountryObj.$cepa" type="text">
                               <option *ngFor="let cepa of cepas">
                                     {{ cepa.name }}
                               </option>
@@ -48,12 +47,12 @@
 
 
                   <div>
-                        <button type="submit" name="form_submit" value="INSERT data">Submit</button>
+                        <button type="submit">Submit</button>
                   </div>
 
             </form>
       </div>
-      
+
 </body>
 
 </html>

@@ -2,9 +2,9 @@ export class Country{
 
   constructor(
     public id: number, 
-    public name: String, 
-    public location: String, 
-    public region: String
+    public contry: String, 
+    public date: String, 
+    public cepa: String
 ) { }
 
   public get $id(): number {
@@ -15,28 +15,28 @@ public set $id(value: number) {
     this.id = value;
 }
 
-public get $name(): String {
-    return this.name;
+public get $contry(): String {
+    return this.contry;
 }
 
-public set $name(value: String) {
-    this.name = value;
+public set $contry(value: String) {
+    this.contry = value;
 }
 
-public get $location(): String {
-    return this.location;
+public get $date(): String {
+    return this.date;
 }
 
-public set $location(value: String) {
-    this.location = value;
+public set $date(value: String) {
+    this.date = value;
 }
 
-public get $region(): String {
-    return this.region;
+public get $cepa(): String {
+    return this.cepa;
 }
 
-public set $region(value: String) {
-    this.region = value;
+public set $cepa(value: String) {
+    this.cepa = value;
 }
   
     

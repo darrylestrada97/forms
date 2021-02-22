@@ -1,5 +1,6 @@
 
 import { Component, OnInit } from '@angular/core';
+import { Country } from '../model/country';
 
 @Component({
   selector: 'app-form-country',
@@ -8,6 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormCountryComponent implements OnInit {
 
+  
   cepas = [
     { id: 'L', name: 'L' },
     { id: 'S', name: 'S' },
@@ -256,9 +258,17 @@ export class FormCountryComponent implements OnInit {
     { id: 'ZW', name: 'Zimbabue' }
   ];
 
+  CountryObj: Country;
   constructor() { }
 
   ngOnInit(): void {
-  }
 
+    this.CountryObj = new Country(0,"","","");
+  }
+  submitted = false;
+
+  onSubmit(){
+    this.submitted = true;
+    console.log(this.CountryObj);
+  }
 }

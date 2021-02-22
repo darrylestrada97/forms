@@ -12,7 +12,8 @@
 
 .radiob{
   height: 100px;
-  display: flex;
+
+  display: block;
 }
 
 form{
@@ -26,6 +27,9 @@ form > div{
     flex-direction: column;
     justify-content: center;
     width: 80%;
+    
+	padding: 10px;
+	margin: 30px 20px;
 }
 .example-section {
     margin: 12px 0;

@@ -28,6 +28,23 @@ export class FormImprovementsComponent implements OnInit {
     ]
   };
 
+
+  improvObj: Improvements;
+
+  constructor() { }
+
+
+  ngOnInit(): void {
+    this.improvObj = new Improvements(0,"","",0,"");
+  }
+
+  submitted = false;
+
+  onSubmit(){
+    this.submitted = true;
+    console.log(this.improvObj);
+  }
+
   allComplete: boolean = false;
 
   updateAllComplete() {
@@ -51,23 +68,7 @@ export class FormImprovementsComponent implements OnInit {
   }
   
 
-  improvObj: Improvements;
 
-
-
-  constructor() { }
-
-
-  ngOnInit(): void {
-    this.improvObj = new Improvements(0,"","",0,"");
-  }
-
-  submitted = false;
-
-  onSubmit(){
-    this.submitted = true;
-    console.log(this.improvObj);
-  }
 
   status:boolean;
 
