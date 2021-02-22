@@ -66,7 +66,6 @@ export class FormImprovementsComponent implements OnInit {
 
   onSubmit(){
     this.submitted = true;
-    
     console.log(this.improvObj);
   }
 

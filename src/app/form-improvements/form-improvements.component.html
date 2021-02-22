@@ -39,12 +39,16 @@
 
             <div>
                 <label>Recomended this page?</label>
-                <div>
+                <div class="radiob">
+                    <div >
                     <input type="radio" name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="Yes"
                         (change)="onItemChange($event)"><label>Yes</label>
+                    </div>
+                    <div >
                     <input type="radio" name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="No"
                         (change)="onItemChange($event)"><label>No</label>
-                </div><br>
+                    </div>
+                </div>
             </div><br>
 
             <div>
