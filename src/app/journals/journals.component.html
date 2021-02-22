@@ -25,6 +25,9 @@
                 [ngClass]="{ 'correct' :journalName.dirty && statusName == true,
                             'wrong' :journalName.dirty && statusName == false }"
                 />
+                <p *ngIf="journalName.dirty && !statusName">
+                    Cant find that journal!
+                </p>
             </div>
 
             
@@ -60,9 +63,9 @@
             <div *ngIf="status">
                 <label class="notice"> To which language?</label>
                 <select required name="translation" #translation = "ngModel" [(ngModel)]="objJournal.$translation"
+                (change)="changeInputLanguage($event)"
                 [ngClass]="{'correct' : translation.dirty && objJournal.$translation != objJournal.$language,
-                            'wrong' :  translation.dirty && objJournal.$translation == objJournal.$language }" 
-                >
+                            'wrong' :  translation.dirty && objJournal.$translation == objJournal.$language }" >
                     <option *ngFor="let language of Languages" [value]="language.name"> 
                         {{ language.name }}
                     </option>
@@ -77,8 +80,7 @@
                 <input required placeholder="Name or Surname..."  
                 name="field" #field = "ngModel" [(ngModel)]="objJournal.$field" type="text" appCheckInputArray 
                 [ngClass]="{'correct' : field.dirty && !field.errors?.isNotCorrect,
-                            'wrong' :  field.dirty &&  field.errors?.isNotCorrect}" 
-                />
+                            'wrong' :  field.dirty &&  field.errors?.isNotCorrect}" />
 
                 <p *ngIf="field.errors?.isNotCorrect">
                     Investigation field too long
@@ -88,7 +90,7 @@
                 <p>(*)Mandatory</p>
             </div>
             <div>
-                <button type="submit" [disabled] = "!loginForm.valid" >Submit</button>
+                <button type="submit" [disabled] = "!loginForm.valid || !globalStatus">Submit</button>
             </div>
             
         </form>

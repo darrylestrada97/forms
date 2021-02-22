@@ -38,6 +38,7 @@
             </div>
 
             <div>
+<<<<<<< HEAD
                 <label>Recomended this page?</label>
                 <div class="radiob">
                     <div >
@@ -51,6 +52,14 @@
                 </div>
             </div><br>
 
+=======
+                <label>Recomended this page?</label><br>
+                <div>
+                    <input type="radio" name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="Yes" (change)="onItemChange($event)"><label>Yes</label>
+                    <input type="radio"name="val" #val="ngModel" [(ngModel)]="improvObj.evaluation" value="No" (change)="onItemChange($event)"><label>No</label>
+                </div><br>
+            </div>
+>>>>>>> 6d714f99a06ca41338eca61f253356d7c2a1674e
             <div>
                 <label> Evaluation of the page </label><br>
                 <mat-checkbox [checked]="allComplete" [color]="task.color" [indeterminate]="someComplete()"

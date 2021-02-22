@@ -15,7 +15,7 @@ export class JournalSearch{
         public nameJournal: String,
         public price: String,
         public language: String,
-        public translation: boolean,
+        public translation: string,
         public field: String
       ){}
 
@@ -39,7 +39,7 @@ export class JournalSearch{
       return this.language;
     }
 
-    public get $translation(){
+    public get $translation(): string{
         return this.translation;
     }
 
@@ -66,7 +66,7 @@ export class JournalSearch{
     public set $language(value: String) {
 		this.language = value;
     }
-    public set $translation(value: boolean) {
+    public set $translation(value: string) {
 		this.translation = value;
     }
     public set $field(value: String) {
