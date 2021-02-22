@@ -29,7 +29,7 @@
         <form #improvements="ngForm" (ngSubmit)="onSubmit()">
             <div>
                 <label>location that you think is necessary to include:</label>
-                <input placeholder="Location..." required name="location" #location="ngModel"
+                <input placeholder="Location..." name="location" #location="ngModel"
                     [(ngModel)]="improvObj.$location" type="text" />
             </div>
 
@@ -63,7 +63,7 @@
                 <label>additional comments:</label>
                 <textarea name="comments" #comments="ngModel" [(ngModel)]="improvObj.$comments" type="text" appImprovements>
                     </textarea>
-                    <div *ngIf="!comments.pristine && comments.errors && comments.errors.isNotCorrect">
+                    <div *ngIf="!comments.pristine && comments.errors?.isNotCorrect">
                         <span class="text-danger">Please, enter a valid text</span>
                       </div>
             </div>
