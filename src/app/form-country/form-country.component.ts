@@ -9,6 +9,7 @@ import { Country } from '../model/country';
 })
 export class FormCountryComponent implements OnInit {
 
+  date;
   
   cepas = [
     { id: 'L', name: 'L' },
