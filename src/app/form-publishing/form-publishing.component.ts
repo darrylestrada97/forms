@@ -1,16 +1,36 @@
 import { Component, OnInit } from '@angular/core';
 import { Search } from '../model/search';
 
+import { CookieService } from 'ngx-cookie-service';
+
 @Component({
   selector: 'app-form-publishing',
   templateUrl: './form-publishing.component.html',
   styleUrls: ['./form-publishing.component.css']
 })
 export class FormPublishingComponent implements OnInit {
+  cookieObj: any;
+  constructor( private cookieService: CookieService ) { }
 
   objSearch: Search;
+  publicationTitle: String;
+  sentence() {
+    var nouns,verbs,adjectives;
 
-  //Journals = ['Nature','Science','Astronomical Journal','Astrophysical Journal','Canadian Journal of Chemistry'];
+    nouns = ["thermodynamics", "genomic", "temperature", "plastic", "geology", "sea investigation", "tectonic plates", "professor", "stratosphere"];
+    verbs = ["kicked", "ran", "flew", "dodged", "sliced", "rolled", "died", "breathed", "slept"];
+    adjectives = ["beautiful", "lazy", "professional", "lovely", "dumb", "rough", "soft", "hot", "vibrating"];
+
+    var rand1 = Math.floor(Math.random() * 10);
+    var rand2 = Math.floor(Math.random() * 10);
+    var rand3 = Math.floor(Math.random() * 10);
+    //                var randCol = [rand1,rand2,rand3,rand4,rand5];
+    //                var i = randGen();
+    this.publicationTitle = "The " + verbs[rand1] + " " + adjectives[rand2] +  " " + nouns[rand3] + ".";
+    return this.publicationTitle
+  };
+
+    //sentence();
 
   Journals = [
     {id: 0, name: 'Nature', price: "12.50", distribution: "online"},
@@ -22,10 +42,12 @@ export class FormPublishingComponent implements OnInit {
 
   fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
 
-  JournalsObj = [];  
-
+  JournalsObj = [];
+  
   ngOnInit(): void {
-    this.objSearch = new Search(0,"","","","");
+    this.objSearch = new Search(0,"","","","","");
+    this.getCookie();
+    //this.cookieService.delete("Search");
   }
 
   submitted = false;
@@ -37,9 +59,10 @@ export class FormPublishingComponent implements OnInit {
         this.objSearch.$price=element.price;
         this.objSearch.$distribution=element.distribution;
       }
-    });
-  
-    console.log(this.objSearch);
+      this.objSearch.$publicationTitle=this.sentence();
+    });  
+    this.cookieService.set("Search", JSON.stringify(this.objSearch), 30);
+    console.log(this.cookieService.get("Search"));
   }
 
   textInput: String;
@@ -61,15 +84,26 @@ export class FormPublishingComponent implements OnInit {
 
       this.globalStatus = this.statusArray? false : true
 
-      console.log(this.globalStatus)
-
     return this.statusArray
 
   }
 
   changeInputInvestigation($event){
-    this.globalStatus = this.fields.indexOf($event.srcElement.value) != 0 ? false : true
-    console.log(this.globalStatus)
+    console.log(this.fields.indexOf($event.srcElement.value))
+    this.globalStatus = this.fields.indexOf($event.srcElement.value) == -1 ? false : true
+  }
+
+  getCookie(){
+    if(this.cookieService.check("Search")){
+      this.cookieObj = JSON.parse(this.cookieService.get("Search"));
+
+      Object.assign(this.objSearch, this.cookieObj);
+
+      console.log(this.objSearch)
+
+    }else{
+      console.log("no cookie")
+    }
   }
 
 

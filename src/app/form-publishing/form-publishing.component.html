@@ -41,8 +41,8 @@
                 required name="field" #field = "ngModel"  
                 [(ngModel)]="objSearch.$field"
                 (change)="changeInputInvestigation($event)"
-                [ngClass] = "{ 'wrong' : field.dirty && fields.indexOf(field.model) != 0,
-                               'correct' : field.dirty && fields.indexOf(field.model) !== -1 }"
+                [ngClass] = "{ 'wrong' : field.dirty && fields.indexOf(field.model) == -1,
+                               'correct' : field.dirty && fields.indexOf(field.model) != -1 }"
 
                 />
                 <div class="low-letter">

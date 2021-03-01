@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JournalSearch } from '../model/journal';
 
+import { CookieService } from 'ngx-cookie-service';
+
 
 @Component({
   selector: 'app-journals',
@@ -9,7 +11,9 @@ import { JournalSearch } from '../model/journal';
 })
 export class JournalsComponent implements OnInit {
 
-  constructor() { }
+  cookieObj: any;
+
+  constructor(private cookieService: CookieService) { }
   Countries = [
     { id: 'AF', name: 'Afganistán' },
     { id: 'AL', name: 'Albania' },
@@ -278,6 +282,8 @@ export class JournalsComponent implements OnInit {
   ngOnInit(): void {
 
     this.objJournal = new JournalSearch(0,"","","","","","");
+    this.getCookie();
+    //this.cookieService.delete("Search");
 
   }
 
@@ -311,8 +317,22 @@ export class JournalsComponent implements OnInit {
         this.objJournal.$price=element.price;
       }
     });
+    this.cookieService.set("Journal", JSON.stringify(this.objJournal), 30);
+    console.log(this.cookieService.get("Journal"));
+    //console.log(this.objJournal);
+  }
 
-    console.log(this.objJournal);
+  getCookie(){
+    if(this.cookieService.check("Journal")){
+      this.cookieObj = JSON.parse(this.cookieService.get("Journal"));
+
+      Object.assign(this.objJournal, this.cookieObj);
+
+      console.log(this.objJournal)
+
+    }else{
+      console.log("no cookie")
+    }
   }
 
 }

@@ -29,6 +29,7 @@ import { CheckInputArrayDirective } from './directives/check-input-array.directi
 import { CompareCountriesDirective } from './directives/compare-countries.directive';
 import { VaccinationProgressComponent } from './vaccination-progress/vaccination-progress.component';
 import { ImprovementsDirective } from './directives/improvements.directive';
+import { CookieService } from 'ngx-cookie-service';
 
 
 
@@ -85,7 +86,7 @@ import { ImprovementsDirective } from './directives/improvements.directive';
     ]),
     BrowserAnimationsModule,
   ],
-  providers: [],
+  providers: [ CookieService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
