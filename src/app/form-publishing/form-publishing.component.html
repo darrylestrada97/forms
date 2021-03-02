@@ -7,15 +7,15 @@
 </head>
 <app-menu></app-menu>
 <body>
-    <div class="publication">
+    <div class="content">
         <h2>Search for a publication</h2>
         <form #loginForm="ngForm" action="" (ngSubmit)="onSubmit()" >
             <div>
                 <label>Journal (*)</label>
-                <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$id"
-                [ngClass]="{'correct' : journal.dirty && (journal.model >= 0 && journal.model <= 4),
+                <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$journal"
+                [ngClass]="{'correct' : journal.dirty,
                             'wrong' :  journal.dirty && journal.errors?.required}" >
-                    <option *ngFor="let journal of Journals" [value]="journal.id"> 
+                    <option *ngFor="let journal of Journals" [value]="journal.name"> 
                         {{ journal.name }}
                     </option>
                 </select>
@@ -70,9 +70,52 @@
                 <p>(*)Mandatory</p>
             </div>
             <div>
-                <button type="submit" [disabled] = "!loginForm.valid || !globalStatus" >Submit</button>
+                <button type="submit" [disabled] = "!loginForm.valid || !globalStatus">Submit</button>
             </div>
         </form>
+        <div id="allPublication" *ngIf="submitted">
+            <button type="text" (click)=allPublication($event)>See all publications</button>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Journal name</th>
+                    <th>Search field</th>
+                    <th>Author</th>
+                    <th>Journal Price</th>
+                    <th>Distribution</th>
+                    <th>Publication Title</th>
+                    <th>asd</th>
+                    <th>Go to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rv of randomPublications">
+                    <td>{{ rv.$journal }}</td>
+                    <td>{{ rv.$field }}</td>
+                    <td>{{ rv.$author }}</td>
+                    <td>{{ rv.$price }}</td>
+                    <td>{{ rv.$distribution }}</td>
+                    <td>{{ rv.$publicationTitle }}</td>
+                    <td>
+                        <button class="btn btn-danger"
+                        (click)="removeRes(rv)">
+                            X</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary"
+                        (click)="onClick(rv)">
+                            Go to
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </div>
 
 </body>

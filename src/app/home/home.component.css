@@ -88,3 +88,19 @@
   right: 10px;
   left: auto;
 }
+
+#author{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  text-align: center;
+}
+
+#author > h1{
+  font-size: 40px;
+  color: black;
+}
+
+#author > div.flip-card{
+  height: 100px;
+}

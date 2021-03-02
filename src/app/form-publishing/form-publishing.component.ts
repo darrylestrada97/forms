@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Search } from '../model/search';
 
 import { CookieService } from 'ngx-cookie-service';
+import { RandomService } from '../services/random.service';
 
 @Component({
   selector: 'app-form-publishing',
@@ -10,10 +11,14 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class FormPublishingComponent implements OnInit {
   cookieObj: any;
-  constructor( private cookieService: CookieService ) { }
+  constructor( private cookieService: CookieService, private random: RandomService ) { }
 
   objSearch: Search;
   publicationTitle: String;
+  //Pagination properties
+  currentPage: number;
+  itemsPerPage: number;
+  /*
   sentence() {
     var nouns,verbs,adjectives;
 
@@ -24,20 +29,20 @@ export class FormPublishingComponent implements OnInit {
     var rand1 = Math.floor(Math.random() * 10);
     var rand2 = Math.floor(Math.random() * 10);
     var rand3 = Math.floor(Math.random() * 10);
-    //                var randCol = [rand1,rand2,rand3,rand4,rand5];
-    //                var i = randGen();
+
     this.publicationTitle = "The " + verbs[rand1] + " " + adjectives[rand2] +  " " + nouns[rand3] + ".";
     return this.publicationTitle
-  };
+  };*/
 
     //sentence();
+    
 
   Journals = [
-    {id: 0, name: 'Nature', price: "12.50", distribution: "online"},
-    {id: 1, name: 'Science', price: "13.25", distribution: "paper"},
-    {id: 2, name: 'Astronomical Journal', price: "29.99", distribution: "online"},
-    {id: 3, name: 'Astrophysical Journal', price: "24.20", distribution: "paper"},
-    {id: 4, name: 'Canadian Journal of Chemistry', price: "18.75", distribution: "online"}
+    {name: 'Nature', price: "12.50", distribution: "online"},
+    {name: 'Science', price: "13.25", distribution: "paper"},
+    {name: 'Astronomical Journal', price: "29.99", distribution: "online"},
+    {name: 'Astrophysical Journal', price: "24.20", distribution: "paper"},
+    {name: 'Canadian Journal of Chemistry', price: "18.75", distribution: "online"}
   ]
 
   fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
@@ -45,24 +50,27 @@ export class FormPublishingComponent implements OnInit {
   JournalsObj = [];
   
   ngOnInit(): void {
-    this.objSearch = new Search(0,"","","","","");
+    (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
+    this.objSearch = new Search(0,"","","","","","");
     this.getCookie();
     //this.cookieService.delete("Search");
   }
 
   submitted = false;
-  
+  randomPublications = []
   onSubmit(){
-
     this.Journals.forEach(element => {
-      if(element.id == this.objSearch.$id){
+      if(element.name == this.objSearch.$journal){
         this.objSearch.$price=element.price;
         this.objSearch.$distribution=element.distribution;
       }
-      this.objSearch.$publicationTitle=this.sentence();
-    });  
+      this.objSearch.$publicationTitle=this.random.sentence();
+    });
     this.cookieService.set("Search", JSON.stringify(this.objSearch), 30);
     console.log(this.cookieService.get("Search"));
+    this.randomPublications = this.random.generateRandomPublications()
+
+    this.submitted = true;
   }
 
   textInput: String;
@@ -99,11 +107,19 @@ export class FormPublishingComponent implements OnInit {
 
       Object.assign(this.objSearch, this.cookieObj);
 
-      console.log(this.objSearch)
+      //console.log(this.objSearch)
 
     }else{
       console.log("no cookie")
     }
+  }
+
+  allPublication($event){
+
+    (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'none';
+    (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'block';
+
+
   }
 
 
