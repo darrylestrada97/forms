@@ -18,6 +18,9 @@ export class FormPublishingComponent implements OnInit {
   //Pagination properties
   currentPage: number;
   itemsPerPage: number;
+
+
+
   /*
   sentence() {
     var nouns,verbs,adjectives;
@@ -48,12 +51,25 @@ export class FormPublishingComponent implements OnInit {
   fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
 
   JournalsObj = [];
+
+  public labels: any = {
+    previousLabel: '<--',
+    nextLabel: '-->',
+    screenReaderPaginationLabel: 'Pagination',
+    screenReaderPageLabel: 'page',
+    screenReaderCurrentLabel: `You're on page`
+  };
   
   ngOnInit(): void {
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
     this.objSearch = new Search(0,"","","","","","");
     this.getCookie();
-    //this.cookieService.delete("Search");
+    //this.priceFilter=500;
+    this.randomPublications = this.random.generateRandomPublications()
+    this.searchFiltered = this.randomPublications;
+    this.itemsPerPage=10;
+    this.currentPage=1;
+    
   }
 
   submitted = false;
@@ -68,8 +84,6 @@ export class FormPublishingComponent implements OnInit {
     });
     this.cookieService.set("Search", JSON.stringify(this.objSearch), 30);
     console.log(this.cookieService.get("Search"));
-    this.randomPublications = this.random.generateRandomPublications()
-
     this.submitted = true;
   }
 
@@ -115,9 +129,79 @@ export class FormPublishingComponent implements OnInit {
   }
 
   allPublication($event){
-
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'none';
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'block';
+  }
+
+  killCookie(){
+    this.cookieService.get("Search")? this.cookieService.delete("Search") : null
+  }
+
+/*
+  removeRes(rv: Reservation){
+    console.log(this.reservations.indexOf(rv));
+    console.log(this.reservationsFiltered.indexOf(rv));
+    
+    this.reservations.splice
+      (this.reservations.indexOf(rv),1);
+    this.reservationsFiltered.splice
+      (this.reservationsFiltered.indexOf(rv),1);
+  }*/
+
+  searchFiltered: Search[]
+  journalFilter: String;
+  fieldFilter: String;
+  authorFilter: String;
+  priceFilter = 90;
+  distributionFilter: String;
+
+  filter(){
+    this.searchFiltered = this.randomPublications.
+      filter(elem => {
+        let journalNameValid: boolean = false;
+        let fieldValid: boolean = false;
+        let authorValid: boolean = false;
+        let priceValid: boolean = false;
+        let distributionValid: boolean = false;
+
+        priceValid = elem.$price <= this.priceFilter ? true : false
+
+        if(this.authorFilter && this.authorFilter != ""){
+          if(elem.$author.toLowerCase().indexOf(this.authorFilter.toLowerCase()) != -1){
+            authorValid = true;
+          }
+        }else{
+          authorValid = true;
+        }
+
+        if(this.distributionFilter && this.distributionFilter != ""){
+          if(elem.$distribution.toLowerCase().indexOf(this.distributionFilter.toLowerCase()) != -1){
+            distributionValid = true;
+          }
+        }else{
+          distributionValid = true;
+        }
+
+        if(this.journalFilter && this.journalFilter != ''){
+          if(elem.$journal.toLowerCase().indexOf(this.journalFilter.toLowerCase()) != -1){
+            journalNameValid = true;
+          }
+        }else{
+          journalNameValid = true;
+        }
+
+        if(this.fieldFilter && this.fieldFilter != ''){
+          if(elem.$field.toLowerCase().indexOf(this.fieldFilter.toLowerCase()) != -1){
+            fieldValid = true;
+          }
+        }else{
+          fieldValid = true;
+        }
+
+
+        return journalNameValid && fieldValid && priceValid && authorValid && distributionValid;
+
+    })
 
 
   }

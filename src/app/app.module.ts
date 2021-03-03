@@ -31,6 +31,8 @@ import { VaccinationProgressComponent } from './vaccination-progress/vaccination
 import { ImprovementsDirective } from './directives/improvements.directive';
 import { CookieService } from 'ngx-cookie-service';
 
+import { NgxPaginationModule } from 'ngx-pagination';
+
 
 
 // const appRoutes: Routes = [
@@ -85,6 +87,7 @@ import { CookieService } from 'ngx-cookie-service';
          { path: '**' , component: PageNotFoundComponent}
     ]),
     BrowserAnimationsModule,
+    NgxPaginationModule
   ],
   providers: [ CookieService ],
   bootstrap: [AppComponent]

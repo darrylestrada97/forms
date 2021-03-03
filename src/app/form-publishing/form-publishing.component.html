@@ -13,7 +13,7 @@
             <div>
                 <label>Journal (*)</label>
                 <select required name="journal" #journal = "ngModel" [(ngModel)]="objSearch.$journal"
-                [ngClass]="{'correct' : journal.dirty,
+                [ngClass]="{'correct' : journal.dirty || cookieObj,
                             'wrong' :  journal.dirty && journal.errors?.required}" >
                     <option *ngFor="let journal of Journals" [value]="journal.name"> 
                         {{ journal.name }}
@@ -27,8 +27,9 @@
                 required name="keywords" #keywords = "ngModel" 
                 [(ngModel)]="objSearch.$keyWords" 
                 (change)="changeInput($event)"
-                [ngClass]="{'correct' : keywords.dirty && statusArray == false,
-                            'wrong' : keywords.dirty && statusArray == true }"
+                [ngClass]="{'correct' : (cookieObj && statusArray == false && keywords.value != '') || (statusArray == false && keywords.value ),
+                            'wrong' : (keywords.dirty && statusArray == true) || keywords.value == ''
+                         }"
                 />
                 <p *ngIf="keywords.dirty && statusArray == true">
                     Entry words separated by space
@@ -42,7 +43,7 @@
                 [(ngModel)]="objSearch.$field"
                 (change)="changeInputInvestigation($event)"
                 [ngClass] = "{ 'wrong' : field.dirty && fields.indexOf(field.model) == -1,
-                               'correct' : field.dirty && fields.indexOf(field.model) != -1 }"
+                               'correct' : (field.pristine && cookieObj) || field.dirty && fields.indexOf(field.model) != -1 }"
 
                 />
                 <div class="low-letter">
@@ -56,7 +57,7 @@
                 required name="author" #author = "ngModel" 
                 [(ngModel)]="objSearch.$author"
                 appCheckInputArray
-                [ngClass]="{ 'correct' : author.dirty && !author.errors?.isNotCorrect,
+                [ngClass]="{ 'correct' : (author.pristine && cookieObj) || author.dirty && !author.errors?.isNotCorrect,
                              'wrong' : author.dirty && author.errors?.isNotCorrect }"
 
                 type="text" />
@@ -73,12 +74,59 @@
                 <button type="submit" [disabled] = "!loginForm.valid || !globalStatus">Submit</button>
             </div>
         </form>
-        <div id="allPublication" *ngIf="submitted">
+        <div id="allPublication">
             <button type="text" (click)=allPublication($event)>See all publications</button>
+            <button type="text" (click)=killCookie()>Delete cookie</button>
         </div>
     </div>
 
     <div class="content">
+
+        <h2>Filter by the following fields</h2>
+
+        <div class="filter">
+            
+            <div>
+                <label>Journal Name</label>
+                <select name="journalF" #journal = "ngModel" [(ngModel)]="journalFilter" (ngModelChange)="filter()">
+                    <option *ngFor="let journal of Journals" [value]="journal.name"> 
+                        {{ journal.name }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Investigation Field</label>
+                <select name="fieldF" #field = "ngModel" [(ngModel)]="fieldFilter" (ngModelChange)="filter()">
+                    <option *ngFor="let field of fields" [value]="field"> 
+                        {{ field }}
+                    </option>
+                </select>
+            </div>
+
+            <div>
+                <label>Author</label>
+                <input type="text" placeholder="Author name here..."
+                name="authorF" #author = "ngModel" [(ngModel)]="authorFilter" (ngModelChange)="filter()"
+                >
+            </div>
+
+            <div>
+                <label>Journal Price</label>
+                <input type="range" min="0" 
+                    max="90" [(ngModel)]="priceFilter"
+                    name="priceF" (ngModelChange)="filter()"> 
+                    <b>{{ priceFilter|currency:'EUR' }}</b>
+            </div>
+
+            <div>
+                <label>Distribution</label>
+                <input type="text" placeholder="Type of distribution..."
+                name="distributionF" #distribution = "ngModel" [(ngModel)]="distributionFilter" (ngModelChange)="filter()"
+                >
+            </div>
+
+        </div>
 
         <table class="table table-striped">
             <thead>
@@ -89,12 +137,16 @@
                     <th>Journal Price</th>
                     <th>Distribution</th>
                     <th>Publication Title</th>
-                    <th>asd</th>
+                    <th>Delete</th>
                     <th>Go to</th>
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let rv of randomPublications">
+                <tr *ngFor="let rv of searchFiltered |
+                paginate: {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: currentPage
+                }">
                     <td>{{ rv.$journal }}</td>
                     <td>{{ rv.$field }}</td>
                     <td>{{ rv.$author }}</td>
@@ -113,8 +165,26 @@
                         </button>
                     </td>
                 </tr>
+
+                <tr>
+                    <td colspan="8">
+                        <pagination-controls 
+                            class="custom-pagination"
+                            (pageChange)="currentPage=$event"
+                            [maxSize]=8
+                            [directionLinks]="true"
+                            [autoHide]="true"
+                            [responsive]="true"
+                            previousLabel="Prev" 
+                            nextLabel="Next" 
+                            >
+                        </pagination-controls>
+                    </td>
+                </tr>
             </tbody>
+            
         </table>
+        
 
     </div>
 
