@@ -46,23 +46,23 @@ import { NgxPaginationModule } from 'ngx-pagination';
 //   { path: '**' , component: PageNotFoundComponent}
 // ];
 
+let arr = [    AppComponent,
+  FormCountryComponent,
+  CompareCountryComponent,
+  FormPublishingComponent,
+  FormImprovementsComponent,
+  PageNotFoundComponent,
+  HomeComponent,
+  MenuComponent,
+  JournalsComponent,
+  CheckInputArrayDirective,
+  CompareCountriesDirective,
+  VaccinationProgressComponent,
+  ImprovementsDirective]
 
 @NgModule({
   declarations: [
-    AppComponent,
-    FormCountryComponent,
-    CompareCountryComponent,
-    FormPublishingComponent,
-    FormImprovementsComponent,
-    PageNotFoundComponent,
-    HomeComponent,
-    MenuComponent,
-    JournalsComponent,
-    CheckInputArrayDirective,
-    CompareCountriesDirective,
-    VaccinationProgressComponent,
-    ImprovementsDirective,
-    
+    ...arr
   ],
   imports: [
     BrowserModule,
