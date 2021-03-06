@@ -86,45 +86,68 @@
         <h2>Filter by the following fields</h2>
 
         <div class="filter">
-            
-            <div>
-                <label>Journal Name</label>
-                <select name="journalF" #journal = "ngModel" [(ngModel)]="journalFilter" (ngModelChange)="filter()">
-                    <option *ngFor="let journal of Journals" [value]="journal.name"> 
-                        {{ journal.name }}
-                    </option>
-                </select>
+            <div class="filter-values">
+                <div>
+                    <label>Journal Name</label>
+                    <select name="journalF" #journal = "ngModel" [(ngModel)]="journalFilter" (ngModelChange)="filter()">
+                        <option *ngFor="let journal of Journals" [value]="journal.name"> 
+                            {{ journal.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Investigation Field</label>
+                    <select name="fieldF" #field = "ngModel" [(ngModel)]="fieldFilter" (ngModelChange)="filter()">
+                        <option *ngFor="let field of fields" [value]="field"> 
+                            {{ field }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Author</label>
+                    <input type="text" placeholder="Author name here..."
+                    name="authorF" #author = "ngModel" [(ngModel)]="authorFilter" (ngModelChange)="filter()"
+                    >
+                </div>
+
+                <div>
+                    <div class="price"><label>Journal Price</label><b>{{5 | currency:'EUR' }} - {{ priceFilter|currency:'EUR' }}</b></div>
+                    <input type="range" min="0" 
+                        max="90" [(ngModel)]="priceFilter"
+                        name="priceF" (ngModelChange)="filter()"> 
+                        
+                </div>
+
+                <div>
+                    <label>Distribution</label>
+                    <input type="text" placeholder="Type of distribution..."
+                    name="distributionF" #distribution = "ngModel" [(ngModel)]="distributionFilter" (ngModelChange)="filter()"
+                    >
+                </div>
             </div>
 
-            <div>
-                <label>Investigation Field</label>
-                <select name="fieldF" #field = "ngModel" [(ngModel)]="fieldFilter" (ngModelChange)="filter()">
-                    <option *ngFor="let field of fields" [value]="field"> 
-                        {{ field }}
-                    </option>
-                </select>
-            </div>
-
-            <div>
-                <label>Author</label>
-                <input type="text" placeholder="Author name here..."
-                name="authorF" #author = "ngModel" [(ngModel)]="authorFilter" (ngModelChange)="filter()"
-                >
-            </div>
-
-            <div>
-                <label>Journal Price</label>
-                <input type="range" min="0" 
-                    max="90" [(ngModel)]="priceFilter"
-                    name="priceF" (ngModelChange)="filter()"> 
-                    <b>{{ priceFilter|currency:'EUR' }}</b>
-            </div>
-
-            <div>
-                <label>Distribution</label>
-                <input type="text" placeholder="Type of distribution..."
-                name="distributionF" #distribution = "ngModel" [(ngModel)]="distributionFilter" (ngModelChange)="filter()"
-                >
+            <div class="filter-values">
+                <label>Current page -> {{ currentPage }}</label><br>
+                <label>Items per page -> {{ itemsPerPage }}</label><br>
+                <label>Change items per page:</label><br>
+                <!-- <input name="newitemsPerPage"  #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage"
+                (change)="changeItemsPerPage($event)" > -->
+                <div style="display: flex;flex-direction: row;">
+                    <input type="radio" name="newitemsPerPage" value="10" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
+                    (change)="changeItemsPerPage($event)" checked>
+                    <label for="huey">10</label>
+                    <input type="radio" name="newitemsPerPage" value="20" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
+                    (change)="changeItemsPerPage($event)">
+                    <label for="huey">20</label>
+                    <input type="radio" name="newitemsPerPage" value="30" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
+                    (change)="changeItemsPerPage($event)">
+                    <label>30</label>
+                    <input type="radio" name="newitemsPerPage" value="all" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
+                    (change)="changeItemsPerPage($event)">
+                    <label>All</label>
+                </div>
             </div>
 
         </div>
@@ -143,25 +166,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let rv of searchFiltered |
+                <tr *ngFor="let search of searchFiltered |
                 paginate: {
                     itemsPerPage: itemsPerPage,
                     currentPage: currentPage
                 }">
-                    <td>{{ rv.$journal }}</td>
-                    <td>{{ rv.$field }}</td>
-                    <td>{{ rv.$author }}</td>
-                    <td>{{ rv.$price }}</td>
-                    <td>{{ rv.$distribution }}</td>
-                    <td>{{ rv.$publicationTitle }}</td>
+                    <td>{{ search.$journal }}</td>
+                    <td>{{ search.$field }}</td>
+                    <td>{{ search.$author }}</td>
+                    <td>{{ search.$price }}</td>
+                    <td>{{ search.$distribution }}</td>
+                    <td>{{ search.$publicationTitle }}</td>
                     <td>
                         <button class="btn btn-danger"
-                        (click)="removeRes(rv)">
+                        (click)="removeRes(search)">
                             X</button>
                     </td>
                     <td>
                         <button class="btn btn-primary"
-                        (click)="onClick(rv)">
+                        (click)="onClick(search)">
                             Go to
                         </button>
                     </td>

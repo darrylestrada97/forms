@@ -10,12 +10,17 @@ export class RandomService {
 
   constructor() { }
 
+
+  randomPrice(){
+    return (Math.random() * (89-5+1)).toFixed(2)
+  }
+
   Journals = [
-    {name: 'Nature', price: "12.50", distribution: "online"},
-    {name: 'Science', price: "13.25", distribution: "paper"},
-    {name: 'Astronomical Journal', price: "29.99", distribution: "online"},
-    {name: 'Astrophysical Journal', price: "24.20", distribution: "paper"},
-    {name: 'Canadian Journal of Chemistry', price: "18.75", distribution: "online"}
+    {name: 'Nature', price: this.randomPrice(), distribution: "online"},
+    {name: 'Science', price: this.randomPrice(), distribution: "paper"},
+    {name: 'Astronomical Journal', price: this.randomPrice(), distribution: "online"},
+    {name: 'Astrophysical Journal', price: this.randomPrice(), distribution: "paper"},
+    {name: 'Canadian Journal of Chemistry', price: this.randomPrice(), distribution: "online"}
   ]
 
   fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]

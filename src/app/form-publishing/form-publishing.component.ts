@@ -18,8 +18,7 @@ export class FormPublishingComponent implements OnInit {
   //Pagination properties
   currentPage: number;
   itemsPerPage: number;
-
-
+  newItemsPerPage: number;
 
   /*
   sentence() {
@@ -203,7 +202,17 @@ export class FormPublishingComponent implements OnInit {
 
     })
 
+  }
 
+  changeItemsPerPage($event){
+
+    this.itemsPerPage = $event.srcElement.value != 'all' ? $event.srcElement.value : this.randomPublications.length;
+    
+    console.log()
+
+    return(console.log($event.srcElement.value))
+
+    
   }
 
 

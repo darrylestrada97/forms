@@ -1,25 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
+
 body{
+    background-color: #9cdbe4;
     /*display: flex;
-    min-height: 100%;
-    align-content: center;
-    align-items: center;
-    font-family: 'Roboto', sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #9cdbe4;*/
-    display: flex;
     justify-content:center;
-    align-items: center;
+    align-items: center;*/
 }
 
-html{
-    height: 100%;
-}
-
-body{
-    min-height: 100%;
-}
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

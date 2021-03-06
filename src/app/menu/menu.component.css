@@ -2,15 +2,19 @@ nav{
     padding: 10px 15px 10px 15px;
     text-align: center;
     padding-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-a{
+nav a{
     text-decoration: none;
     color: black;
-    transition: 2s ease all;
+    transition: 0.3s ease all;
+    font-size: 20px;
 }
 
-a:hover{
+nav a:hover{
     border-bottom: 1px solid black;
     color: #72cfdd;
 }
@@ -35,7 +39,7 @@ a:hover{
     border-top: 4px solid #9cdbe4;
     border-bottom: 4px solid #9cdbe4;
     padding: 20px 0;
-    margin: 0 20px;
+    margin: 4px 20px;
   }
   .link:hover {
     border-top: 4px solid #ffffff;
