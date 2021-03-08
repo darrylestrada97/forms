@@ -474,8 +474,6 @@ export class JournalsComponent implements OnInit {
       (this.journalFiltered.indexOf(journal),1);
   }
 
-  defaultChoice = true;
-
   goTo(search){
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
@@ -488,6 +486,8 @@ export class JournalsComponent implements OnInit {
 
 
   }
+
+  
 
   
 
