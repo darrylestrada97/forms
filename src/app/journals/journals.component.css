@@ -1,3 +1,4 @@
+
 body,html{
     height: 100%;
 }
@@ -5,16 +6,17 @@ body,html{
 body{
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
-.publication{
+.content{
     background-color: #FFFAF0;
     border-radius: 9px;
     box-shadow: 0px 5px 4px 2px rgba(0, 0, 0, 0.5);
-    margin: auto;
+    margin:auto;
 }
 
-.publication h2 {
+.content h2 {
     text-align: center;
     font-size: 50px;
     padding: 15px 25px 15px 25px;
@@ -22,23 +24,22 @@ body{
 
 form{
     margin: auto;
-   
 }
 
-form div > p, p {
+form div > p {
     color:red;
 }
 
 form > div{
-    height: 100px;
     margin: auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
     width: 80%;
+    height: 95px;
 }
 
-form > div input:not([type=radio]), select, label, p{
+.content > form > div input:not(type=[radio]), .content > select, .content > label, .content > p{
     width: 100%;
     padding: 0;
     outline: none;
@@ -54,17 +55,33 @@ form > div input:not([type=radio]), select, label, p{
     font-size: 10px;
 }
 
-form > div input[type=text], select{
+.content > form > div input, .content form select{
     border-bottom: 4px solid #989898;
     height: 40px;
-    background-color: #e6e2dc;
+    background-color: #e6e2dc;;
 }
 
 form > div input::placeholder{
     color: #989898;
 }
 
-button{
+#allJournals{
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+#allJournals > button{
+    width: 30%;
+    border: none;
+    margin: 20px;
+    padding:15px;
+    border-radius: 8px;
+    box-shadow: 2px 2px 5px 0 rgba(0, 0, 0, 0.5);
+}
+
+button[type=submit]{
     padding: 10px;
     border: none;
     outline: none;
@@ -91,11 +108,48 @@ button[type=submit]{
 
 .base{
     background-color: lightgrey !important;
+    border: none !important;
+    border-bottom: 4px solid #989898 !important;
+    
 }
 
-.radios{
+
+.content table tr td{
+    height: 50px;
+}
+
+.filter{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    
+}
+
+.filter-values{
+    padding:20px;
+    display:flex;
+    flex-direction: column;
+    justify-content:space-around;
+}
+
+.filter-values > div{
     display: flex;
-    justify-content: space-between;
-    align-content: center;
-    align-items: center;
+    flex-direction: column;
+    
+}
+
+.filter-values > div input:not(type=[radio]), .filter-values > div select{
+    width: 100%;
+    height: 40px;
+}
+
+.filter-values div.price{
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+}
+
+.custom-pagination ::ng-deep .ngx-pagination .current {
+    border-radius: 5px;
+    background-color: cadetblue;
+    font-size: 14px;
 }

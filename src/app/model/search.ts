@@ -14,7 +14,7 @@ export class Search{
         public journal: String,
         public field: String,
         public author: String,
-        public price: String,
+        public price: number,
         public distribution: String,
         public publicationTitle: String,
         public keyWords?: [],
@@ -41,7 +41,7 @@ export class Search{
         return this.keyWords;
     }
 
-    public get $price(): String{
+    public get $price(): number{
         return this.price;
     }
 
@@ -68,7 +68,7 @@ export class Search{
     public set $field(value: String) {
 		this.field = value;
     }
-    public set $price(value: String) {
+    public set $price(value: number) {
 		  this.price = value;
     }
     public set $distribution(value: String) {

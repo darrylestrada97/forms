@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { JournalSearch } from '../model/journal';
 
 import { CookieService } from 'ngx-cookie-service';
+import { RandomService } from '../services/random.service';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -13,7 +16,8 @@ export class JournalsComponent implements OnInit {
 
   cookieObj: any;
 
-  constructor(private cookieService: CookieService) { }
+  constructor(private cookieService: CookieService, private random: RandomService, private toastr: ToastrService) { }
+
   Countries = [
     { id: 'AF', name: 'Afganistán' },
     { id: 'AL', name: 'Albania' },
@@ -251,19 +255,25 @@ export class JournalsComponent implements OnInit {
     { id: 'ZW', name: 'Zimbabue' }
   ];
 
+
+  Journals = [
+    {name: 'Nature', price: 12.50, distribution: "online"},
+    {name: 'Science', price: 13.25, distribution: "paper"},
+    {name: 'Astronomical Journal', price: 29.99, distribution: "online"},
+    {name: 'Astrophysical Journal', price: 24.20, distribution: "paper"},
+    {name: 'Canadian Journal of Chemistry', price: 18.75, distribution: "online"}
+  ]
+
   Languages = [
     {id: 1, name: 'English'},
     {id: 2, name: 'Spanish'},
     {id: 3, name: 'German'},
-    {id: 4, name: 'French'}
-  ]
-
-  Journals = [
-    {id: 0, name: 'Nature', price: "12.50", distribution: "online"},
-    {id: 1, name: 'Science', price: "13.25", distribution: "paper"},
-    {id: 2, name: 'Astronomical Journal', price: "29.99", distribution: "online"},
-    {id: 3, name: 'Astrophysical Journal', price: "24.20", distribution: "paper"},
-    {id: 4, name: 'Canadian Journal of Chemistry', price: "18.75", distribution: "online"}
+    {id: 4, name: 'French'},
+    {id: 5, name: 'Stonian'},
+    {id: 6, name: 'Chinese'},
+    {id: 7, name: 'Japanese'},
+    {id: 8, name: 'Esperant'},
+    {id: 9, name: 'Kinglon'},
   ]
 
   journalName:String =""
@@ -278,12 +288,25 @@ export class JournalsComponent implements OnInit {
   }
 
   objJournal: JournalSearch;
+  //Pagination properties
+  currentPage: number;
+  itemsPerPage: number;
+  newItemsPerPage: number;
+  jouralSelected: JournalSearch;
+  journalFiltered: JournalSearch[];
+  randomJournals;
 
   ngOnInit(): void {
-
-    this.objJournal = new JournalSearch(0,"","","","","","");
+    (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
+    (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
+    this.objJournal = new JournalSearch(0, "", "", 0, "", false, "", "");
     this.getCookie();
     //this.cookieService.delete("Search");
+
+    this.randomJournals = this.random.generateRandomJournals()
+    this.journalFiltered = this.randomJournals;
+    this.itemsPerPage=10;
+    this.currentPage=1;
 
   }
 
@@ -313,7 +336,7 @@ export class JournalsComponent implements OnInit {
   onSubmit(){
 
     this.Journals.forEach(element => {
-      if(element.id == this.objJournal.$id){
+      if(element.name == this.objJournal.$nameJournal){
         this.objJournal.$price=element.price;
       }
     });
@@ -334,5 +357,138 @@ export class JournalsComponent implements OnInit {
       console.log("no cookie")
     }
   }
+
+  changeItemsPerPage($event){
+    this.itemsPerPage = $event.srcElement.value != 'all' ? $event.srcElement.value : this.randomJournals.length;
+  }
+
+  journalFilter: String;
+  countryFilter: String;
+  languageFilter: String;
+  fieldFilter: String;
+  translationFilter: String;
+  langTransY: String;
+  langTransN:String;
+  priceFilter = 90;
+
+  filter(){
+    this.journalFiltered = this.randomJournals.
+      filter(elem => {
+        let journalNameValid: boolean = false;
+        let countryValid: boolean = false;
+        let languageValid: boolean = false;
+        let fieldValid: boolean = false;
+        let langTransYValid: boolean = false;
+        let langTransNValid: boolean = false;
+        let translationValid: boolean = false;
+        let priceValid: boolean = false;
+
+        priceValid = elem.$price <= this.priceFilter ? true : false
+
+        if(this.langTransY && this.langTransY != '' ){
+
+          if(elem.$translated){
+            langTransYValid = true;
+          }
+        }else{
+          langTransYValid = true;
+        }
+
+        if(this.langTransN && this.langTransN != '' ){
+
+          if(!elem.$translated){
+            langTransNValid = true;
+          }
+        }else{
+          langTransNValid = true;
+        }
+
+        if(this.journalFilter && this.journalFilter != ''){
+          if(elem.$nameJournal.toLowerCase().indexOf(this.journalFilter.toLowerCase()) != -1){
+            journalNameValid = true;
+          }
+        }else{
+          journalNameValid = true;
+        }
+        
+        if(this.countryFilter && this.countryFilter != ''){
+          if(elem.$country.toLowerCase().indexOf(this.countryFilter.toLowerCase()) != -1){
+            countryValid = true;
+          }
+        }else{
+          countryValid = true;
+        }
+
+        if(this.languageFilter && this.languageFilter != ''){
+          if(elem.$language.toLowerCase().indexOf(this.languageFilter.toLowerCase()) != -1){
+            languageValid = true;
+          }
+        }else{
+          languageValid = true;
+        }
+
+        if(this.fieldFilter && this.fieldFilter != ''){
+          if(elem.$field.toLowerCase().indexOf(this.fieldFilter.toLowerCase()) != -1){
+            fieldValid = true;
+          }
+        }else{
+          fieldValid = true;
+        }
+
+        if(this.translationFilter && this.translationFilter != ''){
+          if(elem.$translation.toLowerCase().indexOf(this.translationFilter.toLowerCase()) != -1){
+            translationValid = true;
+          }
+        }else{
+          translationValid = true;
+        }
+
+
+        return journalNameValid && countryValid && languageValid && fieldValid && translationValid && priceValid && langTransYValid && langTransNValid;
+
+    })
+
+  }
+
+  statusFiltered: boolean;
+  onItemChangeFilter($event){
+    $event.srcElement.value == "Yes"? this.statusFiltered = true : this.statusFiltered = false;
+
+    this.toastr.error('Hello world!', 'Toastr fun!');
+
+  }
+
+  allJournals(){
+    (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'none';
+    (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'block';
+  }
+
+  killCookie(){
+    this.cookieService.get("Journal")? this.cookieService.delete("Journal") : null
+  }
+
+  removeJournal(journal){
+    this.randomJournals.splice
+      (this.randomJournals.indexOf(journal),1);
+    this.journalFiltered.splice
+      (this.journalFiltered.indexOf(journal),1);
+  }
+
+  defaultChoice = true;
+
+  goTo(search){
+    (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
+    (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
+    this.jouralSelected = search;
+
+    this.objJournal.$nameJournal = search.$nameJournal;
+    this.objJournal.$country = search.$country;
+    this.objJournal.$language = search.$language;
+    this.objJournal.$field = search.$field;
+
+
+  }
+
+  
 
 }

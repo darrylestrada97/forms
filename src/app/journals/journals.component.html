@@ -14,7 +14,7 @@
 </div> -->
 
 <body>
-    <div class="publication">
+    <div class="content">
         <app-menu></app-menu>
         <h2>Search for a journal</h2>
         <form #loginForm="ngForm" action="" (ngSubmit) = "onSubmit()">
@@ -57,7 +57,7 @@
             <div>
                 <label>Translated (*)</label><br>
                 <div class="radios">
-                    <input type="radio" name="trans" value="Yes" (change)="onItemChange($event)"><label>Yes</label>
+                    <input type="radio" name="trans"  value="Yes" (change)="onItemChange($event)"><label>Yes</label>
                     <input type="radio" name="trans" value="No" (change)="onItemChange($event)"><label>No</label>
                 </div><br>
             </div>
@@ -93,9 +93,175 @@
             <div>
                 <button type="submit" [disabled] = "!loginForm.valid || !globalStatus">Submit</button>
             </div>
+
+            <div id="allJournals">
+                <button (click)=allJournals()>See all publications</button>
+                <button (click)=killCookie()>Delete cookie</button>
+            </div>
             
         </form>
     </div>
+
+    <div class="content">
+
+        <h2>Filter by the following fields</h2>
+
+        <div class="filter">
+            <div class="filter-values">
+                <div>
+                    <label>Journal name</label>
+                    <select name="journalF" #journal = "ngModel" [(ngModel)]="journalFilter" (ngModelChange)="filter()">
+                        <option *ngFor="let journal of Journals" [value]="journal.name"> 
+                            {{ journal.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Country name</label>
+                    <select name="countryF" #country = "ngModel" [(ngModel)]="countryFilter" (ngModelChange)="filter()">
+                        <option *ngFor="let country of Countries" [value]="country.name"> 
+                            {{ country.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Language</label>
+                    <select required name="languageF" #language = "ngModel" [(ngModel)]="languageFilter"
+                    (ngModelChange)="filter()" >
+                        <option *ngFor="let language of Languages" [value]="language.name"> 
+                            {{ language.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <div>
+                    <label>Field</label>
+                    <input type="text"
+                    name="fieldF" #field = "ngModel" [(ngModel)]="fieldFilter" (ngModelChange)="filter()"
+                    >
+                </div>
+
+                <div>
+                    <label>Translation</label><br>
+                    <div class="radios">
+                        <input type="radio" name="trans" value="Yes" name="langTrans" #langTrans = "ngModel" [(ngModel)]="langTransY" 
+                            (ngModelChange)="filter()"><label>Yes</label>
+                        <input type="radio" name="trans" value="No" name="langTrans" #langTrans = "ngModel" [(ngModel)]="langTransN" 
+                            (ngModelChange)="filter()"><label>No</label>
+                    </div><br>
+                </div>
+
+                <div *ngIf="statusFiltered">
+                    <label class="notice"> To which language?</label>
+                    <select required name="translationF" #translation = "ngModel" [(ngModel)]="translationFilter"
+                    (ngModelChange)="filter()"
+                    >
+                        <option *ngFor="let language of Languages" [value]="language.name"> 
+                            {{ language.name }}
+                        </option>
+                    </select>
+                    <p *ngIf="translation.dirty && objJournal.$translation == objJournal.$language">
+                        Cannot translate to the same language!
+                    </p>
+                </div>
+
+                <div>
+                    <div class="price"><label>Journal Price</label><b>{{5 | currency:'EUR' }} - {{ priceFilter|currency:'EUR' }}</b></div>
+                    <input type="range" min="0" 
+                        max="90" [(ngModel)]="priceFilter"
+                        name="priceF" (ngModelChange)="filter()"> 
+                        
+                </div>
+            </div>
+
+            <div class="filter-values">
+                <label>Current page <br><input style="width: 50px;" type="text" #inputCurrentPage = "ngModel" 
+                    [(ngModel)]="currentPage" readonly /> </label><br>
+                <label>Items per page <br><input style="width: 50px;" type="text" #inputItemsPerPage = "ngModel" 
+                                        [(ngModel)]="itemsPerPage" readonly /> </label><br>
+                <label>Change items per page:</label><br>
+                <div style="display: flex;flex-direction: row;">
+                    <div style="display: flex;flex-direction: row;">
+                        <input type="radio" name="newitemsPerPage" value="10" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
+                        (change)="changeItemsPerPage($event)" checked>
+                        <label for="huey">10</label>
+                        <input type="radio" name="newitemsPerPage" value="20" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
+                        (change)="changeItemsPerPage($event)">
+                        <label for="huey">20</label>
+                        <input type="radio" name="newitemsPerPage" value="30" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
+                        (change)="changeItemsPerPage($event)">
+                        <label>30</label>
+                        <input type="radio" name="newitemsPerPage" value="all" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
+                        (change)="changeItemsPerPage($event)">
+                        <label>All</label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Country name</th>
+                    <th>Journal name</th>
+                    <th>Journal price</th>
+                    <th>Language</th>
+                    <th>Translated</th>
+                    <th>Translation language</th>
+                    <th>Field</th>
+                    <th>Delete</th>
+                    <th>Go to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let search of journalFiltered |
+                paginate: {
+                    itemsPerPage: itemsPerPage,
+                    currentPage: currentPage
+                }">
+                    <td>{{ search.$country }}</td>
+                    <td>{{ search.$nameJournal }}</td>
+                    <td>{{ search.$price }}</td>
+                    <td>{{ search.$language }}</td>
+                    <td>{{ search.$translated? "Yes" : "No" }}</td>
+                    <td>{{ search.$translation }}</td>
+                    <td>{{ search.$field }}</td>
+                    <td>
+                        <button class="btn btn-danger"
+                        (click)="removeJournal(search)">
+                            X</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary"
+                        (click)="goTo(search)">
+                            Go to
+                        </button>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td colspan="8">
+                        <pagination-controls 
+                            class="custom-pagination"
+                            (pageChange)="currentPage=$event"
+                            [maxSize]=8
+                            [directionLinks]="true"
+                            [autoHide]="true"
+                            [responsive]="true"
+                            previousLabel="Prev" 
+                            nextLabel="Next" 
+                            >
+                        </pagination-controls>
+                    </td>
+                </tr>
+            </tbody>
+            
+        </table>
+    </div>
+
 
 </body>
 </html>

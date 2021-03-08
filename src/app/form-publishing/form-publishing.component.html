@@ -76,7 +76,7 @@
             </div>
         </form>
         <div id="allPublication">
-            <button type="text" (click)=allPublication($event)>See all publications</button>
+            <button type="text" (click)=allPublication()>See all publications</button>
             <button type="text" (click)=killCookie()>Delete cookie</button>
         </div>
     </div>
@@ -129,11 +129,11 @@
             </div>
 
             <div class="filter-values">
-                <label>Current page -> {{ currentPage }}</label><br>
-                <label>Items per page -> {{ itemsPerPage }}</label><br>
+                <label>Current page <br><input style="width: 50px;" type="text" #inputCurrentPage = "ngModel" 
+                    [(ngModel)]="currentPage" readonly /> </label><br>
+                <label>Items per page <br><input style="width: 50px;" type="text" #inputItemsPerPage = "ngModel" 
+                                        [(ngModel)]="itemsPerPage" readonly /> </label><br>
                 <label>Change items per page:</label><br>
-                <!-- <input name="newitemsPerPage"  #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage"
-                (change)="changeItemsPerPage($event)" > -->
                 <div style="display: flex;flex-direction: row;">
                     <input type="radio" name="newitemsPerPage" value="10" #newitemsPerPage = "ngModel" [(ngModel)]="newItemsPerPage" 
                     (change)="changeItemsPerPage($event)" checked>
@@ -179,12 +179,12 @@
                     <td>{{ search.$publicationTitle }}</td>
                     <td>
                         <button class="btn btn-danger"
-                        (click)="removeRes(search)">
+                        (click)="removePub(search)">
                             X</button>
                     </td>
                     <td>
                         <button class="btn btn-primary"
-                        (click)="onClick(search)">
+                        (click)="goTo(search)">
                             Go to
                         </button>
                     </td>
@@ -208,8 +208,6 @@
             </tbody>
             
         </table>
-        
-
     </div>
 
 </body>

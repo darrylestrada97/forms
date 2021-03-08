@@ -33,6 +33,8 @@ import { CookieService } from 'ngx-cookie-service';
 
 import { NgxPaginationModule } from 'ngx-pagination';
 
+import { ToastrModule } from 'ngx-toastr';
+
 
 
 // const appRoutes: Routes = [
@@ -58,7 +60,7 @@ let arr = [    AppComponent,
   CheckInputArrayDirective,
   CompareCountriesDirective,
   VaccinationProgressComponent,
-  ImprovementsDirective]
+  ImprovementsDirective,]
 
 @NgModule({
   declarations: [
@@ -87,7 +89,8 @@ let arr = [    AppComponent,
          { path: '**' , component: PageNotFoundComponent}
     ]),
     BrowserAnimationsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    ToastrModule.forRoot()
   ],
   providers: [ CookieService ],
   bootstrap: [AppComponent]

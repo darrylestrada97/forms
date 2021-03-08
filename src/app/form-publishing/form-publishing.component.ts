@@ -3,6 +3,7 @@ import { Search } from '../model/search';
 
 import { CookieService } from 'ngx-cookie-service';
 import { RandomService } from '../services/random.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-form-publishing',
@@ -11,7 +12,7 @@ import { RandomService } from '../services/random.service';
 })
 export class FormPublishingComponent implements OnInit {
   cookieObj: any;
-  constructor( private cookieService: CookieService, private random: RandomService ) { }
+  constructor( private cookieService: CookieService, private random: RandomService, private toastr: ToastrService ) { }
 
   objSearch: Search;
   publicationTitle: String;
@@ -19,6 +20,8 @@ export class FormPublishingComponent implements OnInit {
   currentPage: number;
   itemsPerPage: number;
   newItemsPerPage: number;
+  publicationSelected: Search;
+  randomPublications = []
 
   /*
   sentence() {
@@ -40,11 +43,11 @@ export class FormPublishingComponent implements OnInit {
     
 
   Journals = [
-    {name: 'Nature', price: "12.50", distribution: "online"},
-    {name: 'Science', price: "13.25", distribution: "paper"},
-    {name: 'Astronomical Journal', price: "29.99", distribution: "online"},
-    {name: 'Astrophysical Journal', price: "24.20", distribution: "paper"},
-    {name: 'Canadian Journal of Chemistry', price: "18.75", distribution: "online"}
+    {name: 'Nature', price: 12.50, distribution: "online"},
+    {name: 'Science', price: 13.25, distribution: "paper"},
+    {name: 'Astronomical Journal', price: 29.99, distribution: "online"},
+    {name: 'Astrophysical Journal', price: 24.20, distribution: "paper"},
+    {name: 'Canadian Journal of Chemistry', price: 18.75, distribution: "online"}
   ]
 
   fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
@@ -60,8 +63,9 @@ export class FormPublishingComponent implements OnInit {
   };
   
   ngOnInit(): void {
+    (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
-    this.objSearch = new Search(0,"","","","","","");
+    this.objSearch = new Search(0,"","","",0,"","");
     this.getCookie();
     //this.priceFilter=500;
     this.randomPublications = this.random.generateRandomPublications()
@@ -72,7 +76,7 @@ export class FormPublishingComponent implements OnInit {
   }
 
   submitted = false;
-  randomPublications = []
+  
   onSubmit(){
     this.Journals.forEach(element => {
       if(element.name == this.objSearch.$journal){
@@ -81,8 +85,11 @@ export class FormPublishingComponent implements OnInit {
       }
       this.objSearch.$publicationTitle=this.random.sentence();
     });
+
     this.cookieService.set("Search", JSON.stringify(this.objSearch), 30);
-    console.log(this.cookieService.get("Search"));
+
+    console.log(this.cookieService.get("Search"))
+    //console.log(this.cookieService.get("Search"));
     this.submitted = true;
   }
 
@@ -110,7 +117,6 @@ export class FormPublishingComponent implements OnInit {
   }
 
   changeInputInvestigation($event){
-    console.log(this.fields.indexOf($event.srcElement.value))
     this.globalStatus = this.fields.indexOf($event.srcElement.value) == -1 ? false : true
   }
 
@@ -120,14 +126,13 @@ export class FormPublishingComponent implements OnInit {
 
       Object.assign(this.objSearch, this.cookieObj);
 
-      //console.log(this.objSearch)
 
     }else{
       console.log("no cookie")
     }
   }
 
-  allPublication($event){
+  allPublication(){
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'none';
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'block';
   }
@@ -135,17 +140,6 @@ export class FormPublishingComponent implements OnInit {
   killCookie(){
     this.cookieService.get("Search")? this.cookieService.delete("Search") : null
   }
-
-/*
-  removeRes(rv: Reservation){
-    console.log(this.reservations.indexOf(rv));
-    console.log(this.reservationsFiltered.indexOf(rv));
-    
-    this.reservations.splice
-      (this.reservations.indexOf(rv),1);
-    this.reservationsFiltered.splice
-      (this.reservationsFiltered.indexOf(rv),1);
-  }*/
 
   searchFiltered: Search[]
   journalFilter: String;
@@ -208,11 +202,28 @@ export class FormPublishingComponent implements OnInit {
 
     this.itemsPerPage = $event.srcElement.value != 'all' ? $event.srcElement.value : this.randomPublications.length;
     
-    console.log()
-
     return(console.log($event.srcElement.value))
 
     
+  }
+
+  removePub(search){
+    this.randomPublications.splice
+      (this.randomPublications.indexOf(search),1);
+    this.searchFiltered.splice
+      (this.searchFiltered.indexOf(search),1);
+  }
+
+  goTo(search){
+    (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
+    (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
+    this.publicationSelected = search;
+
+    this.objSearch.$journal = search.$journal;
+    this.objSearch.$keyWords = search.$publicationTitle;
+    this.objSearch.$field = search.$field;
+    this.objSearch.$author = search.$author;
+
   }
 
 
