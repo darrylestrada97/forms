@@ -18,9 +18,8 @@ export class CompareCountriesDirective {
     let validInput: boolean = false;
      
     if (formFieldToValidate && formFieldToValidate.value) {
-      if((formFieldToValidate.value.firstCountry != formFieldToValidate.value.secondCountry) && (formFieldToValidate.value.searchDate[0] !== formFieldToValidate.value.searchDate[1])){
+      if((formFieldToValidate.value.firstCountry != formFieldToValidate.value.secondCountry) ){
         validInput = true;
-
       }
       
     }

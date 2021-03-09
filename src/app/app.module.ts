@@ -34,6 +34,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ManageCompareComponent } from './manage-compare/manage-compare.component';
 
 
 
@@ -64,7 +65,8 @@ let arr = [    AppComponent,
 
 @NgModule({
   declarations: [
-    ...arr
+    ...arr,
+    ManageCompareComponent
   ],
   imports: [
     BrowserModule,
@@ -78,6 +80,7 @@ let arr = [    AppComponent,
     RouterModule.forRoot([
         { path: 'form-country' , component: FormCountryComponent},
         { path: 'form-compare-country' , component: CompareCountryComponent},
+        { path: 'manage-compare-country', component: ManageCompareComponent },
         { path: 'form-publishing' , component: FormPublishingComponent},
         { path: 'form-improvements' , component: FormImprovementsComponent},
         { path: 'journal-search', component: JournalsComponent},

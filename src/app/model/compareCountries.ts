@@ -2,11 +2,11 @@ export class compareCountries{
 
 
     constructor(
-        public firstCountry: String,
-        public secondCountry: String,
-        public searchType: String,
-        public strain: String,
-        public date: String,
+        public firstCountry?: String,
+        public secondCountry?: String,
+        public searchType?: String,
+        public strain?: String,
+        public date?: Date[],
       ){	}
     
     
@@ -24,7 +24,7 @@ export class compareCountries{
       return this.searchType;
     }
 
-    public get $date(): String{
+    public get $date(): Date[]{
         return this.date;
     }
     public get $strain(): String{
@@ -43,7 +43,7 @@ export class compareCountries{
     public set $searchType(value: String) {
 		  this.searchType = value;
     }
-    public set $date(value: String) {
+    public set $date(value: Date[]) {
 		this.date = value;
     }
     public set $strain(value: String) {

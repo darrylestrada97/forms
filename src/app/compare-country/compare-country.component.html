@@ -10,38 +10,29 @@
     <h2>Compare country by date and strain</h2>
    
     <form #compareCountryForm="ngForm" (ngSubmit)="sendForm()" appCompareCountries >
-        <div class="row">
-            <label class="notice" for="firstCountry">Select first country (*)</label>
-            <mat-select-country appearance="outline" 
-                    label="Country"
-                    name="firstCountry"
-                    #firstCountry ="ngModel" 
-                    [(ngModel)]= "country"
-                    (onCountrySelected)="onCountrySelected($event)"
-                    required
-                    >
-        </mat-select-country>
+        <div>
+            <label class="notice">Select first country (*) </label>
+            <select required name="firstCountry" #strain ="ngModel" [(ngModel)]="objCompareCountries.$firstCountry" >
+                <option *ngFor="let country of Countries" [value]="country.name"> 
+                    {{country.name}}
+                </option>
+            </select>
         </div>
         
-        <div class="row">
-            <label class="notice" fro="secondCountry" >Select second country (*)</label>
-        <mat-select-country appearance="outline" 
-                    label="Country"
-                    name="secondCountry"
-                    #firstCountry ="ngModel" 
-                    [(ngModel)]= "country2"
-                    (onCountrySelected)="onCountrySelected2($event)"
-                    required
-                    
-                    >
-        </mat-select-country>
+        <div>
+            <label class="notice">Select strain (*) </label>
+            <select required name="secondCountry" #strain ="ngModel" [(ngModel)]="objCompareCountries.$secondCountry" >
+                <option *ngFor="let country of Countries" [value]="country.name"> 
+                    {{country.name}}
+                </option>
+            </select>
         </div>
         
 
         <div>
             <label class="notice">Select strain (*) </label>
             <select required name="strain" #strain ="ngModel" [(ngModel)]="objCompareCountries.$strain" >
-                <option *ngFor="let strain of variants" [value]="strain.id"> 
+                <option *ngFor="let strain of variants" [value]="strain.name"> 
                     {{strain.name}}
                 </option>
             </select>
@@ -50,7 +41,7 @@
         <div>
             <label class="notice">Select type of cases (*) </label>
             <select required name="type" #searchType ="ngModel" [(ngModel)]="objCompareCountries.$searchType">
-                <option *ngFor="let type of typeOfCases" [value]="type.id"> 
+                <option *ngFor="let type of typeOfCases" [value]="type.type"> 
                     {{type.type }}
                 </option>
             </select>
@@ -68,7 +59,11 @@
         <div>
             <button type="submit" [disabled] = "!compareCountryForm.valid" >Submit</button>
         </div>
+        
     </form>
+
+    <input class="btn btn-primary" type="button" onclick="location.href='manage-compare-country';" value="View all entries"/>
+
 
 </div>
 </body>
