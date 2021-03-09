@@ -9,6 +9,10 @@ body{
     align-items: center;
 }
 
+.none{
+    display:none;
+}
+
 .content{
     background-color: #FFFAF0;
     border-radius: 9px;

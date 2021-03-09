@@ -283,7 +283,6 @@ export class JournalsComponent implements OnInit {
   globalStatus: boolean = false
 
   onItemChange($event){
-    console.log($event)
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
   }
 
@@ -341,11 +340,11 @@ export class JournalsComponent implements OnInit {
       }
     });
 
-    console.log(this.objJournal)
-    
+    this.status? this.objJournal.$translated = true : null
+  
     this.cookieService.set("Journal", JSON.stringify(this.objJournal), 30, '/journal-search');
 
-    console.log("Cookie: " + this.cookieService.get("Journal"))
+    console.log("Saving following Cookie: ", this.cookieService.get("Journal"))
   }
 
   getCookie(){
@@ -353,8 +352,10 @@ export class JournalsComponent implements OnInit {
       this.cookieObj = JSON.parse(this.cookieService.get("Journal"));
       Object.assign(this.objJournal, this.cookieObj);
 
+      console.log("Last cookie saved: ", this.cookieObj)
+
     }else{
-      console.log("no cookie")
+      console.log("No cookie saved")
     }
   }
 
@@ -385,7 +386,7 @@ export class JournalsComponent implements OnInit {
 
         priceValid = elem.$price <= this.priceFilter ? true : false
 
-        if(this.langTransY && this.langTransY != '' ){
+        if(this.langTransY && this.langTransY != ''){
 
           if(elem.$translated){
             langTransYValid = true;
@@ -394,10 +395,11 @@ export class JournalsComponent implements OnInit {
           langTransYValid = true;
         }
 
-        if(this.langTransN && this.langTransN != '' ){
+        if(this.langTransN && this.langTransN != ''){
 
           if(!elem.$translated){
             langTransNValid = true;
+            
           }
         }else{
           langTransNValid = true;
@@ -495,7 +497,7 @@ export class JournalsComponent implements OnInit {
 
     this.objJournal.$translation = this.radioInputState? this.langTranslation : null
 
-    console.log(this.objJournal)
+    console.log("Random journal passing to main: ", this.objJournal)
 
 
   }
