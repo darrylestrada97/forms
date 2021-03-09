@@ -49,7 +49,7 @@ import { ManageCompareComponent } from './manage-compare/manage-compare.componen
 //   { path: '**' , component: PageNotFoundComponent}
 // ];
 
-let arr = [    AppComponent,
+let arr = [AppComponent,
   FormCountryComponent,
   CompareCountryComponent,
   FormPublishingComponent,
@@ -61,7 +61,8 @@ let arr = [    AppComponent,
   CheckInputArrayDirective,
   CompareCountriesDirective,
   VaccinationProgressComponent,
-  ImprovementsDirective,]
+  ImprovementsDirective,
+]
 
 @NgModule({
   declarations: [

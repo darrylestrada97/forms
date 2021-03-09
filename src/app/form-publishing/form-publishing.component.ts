@@ -86,11 +86,11 @@ export class FormPublishingComponent implements OnInit {
       this.objSearch.$publicationTitle=this.random.sentence();
     });
 
-    this.cookieService.set("Search", JSON.stringify(this.objSearch), 30);
+    this.cookieService.set("Search", JSON.stringify(this.objSearch), 30, '/form-publishing');
 
-    console.log(this.cookieService.get("Search"))
-    //console.log(this.cookieService.get("Search"));
+    console.log("Saving following Cookie: ", this.cookieService.get("Search"))
     this.submitted = true;
+
   }
 
   textInput: String;
@@ -123,12 +123,10 @@ export class FormPublishingComponent implements OnInit {
   getCookie(){
     if(this.cookieService.check("Search")){
       this.cookieObj = JSON.parse(this.cookieService.get("Search"));
-
       Object.assign(this.objSearch, this.cookieObj);
-
-
+      console.log("Last Cookie saved: ", this.cookieObj)
     }else{
-      console.log("no cookie")
+      console.log("No Cookie saved")
     }
   }
 
@@ -138,7 +136,7 @@ export class FormPublishingComponent implements OnInit {
   }
 
   killCookie(){
-    this.cookieService.get("Search")? this.cookieService.delete("Search") : null
+    this.cookieService.get("Search")? this.cookieService.delete("Search", '/form-publishing') : null
   }
 
   searchFiltered: Search[]
@@ -199,12 +197,7 @@ export class FormPublishingComponent implements OnInit {
   }
 
   changeItemsPerPage($event){
-
     this.itemsPerPage = $event.srcElement.value != 'all' ? $event.srcElement.value : this.randomPublications.length;
-    
-    return(console.log($event.srcElement.value))
-
-    
   }
 
   removePub(search){

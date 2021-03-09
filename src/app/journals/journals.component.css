@@ -9,6 +9,10 @@ body{
     align-items: center;
 }
 
+.none{
+    display:none;
+}
+
 .content{
     background-color: #FFFAF0;
     border-radius: 9px;
@@ -70,6 +74,11 @@ form > div input::placeholder{
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+}
+
+.radios{
+    display: flex;
+    align-items: center;
 }
 
 #allJournals > button{
