@@ -72,6 +72,11 @@ form > div input::placeholder{
     justify-content: space-around;
 }
 
+.radios{
+    display: flex;
+    align-items: center;
+}
+
 #allJournals > button{
     width: 30%;
     border: none;

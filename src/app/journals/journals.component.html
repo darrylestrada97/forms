@@ -93,17 +93,17 @@
             <div>
                 <button type="submit" [disabled] = "!loginForm.valid || !globalStatus">Submit</button>
             </div>
-
-            <div id="allJournals">
-                <button (click)=allJournals()>See all publications</button>
-                <button (click)=killCookie()>Delete cookie</button>
-            </div>
-            
         </form>
+
+        <div id="allJournals">
+            <button (click)=allJournals()>See all publications</button>
+            <button (click)=killCookie()>Delete cookie</button>
+        </div>
+
     </div>
 
     <div class="content">
-
+        <app-menu></app-menu>
         <h2>Filter by the following fields</h2>
 
         <div class="filter">

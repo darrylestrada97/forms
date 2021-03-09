@@ -13,8 +13,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./journals.component.css']
 })
 export class JournalsComponent implements OnInit {
-
-  cookieObj: any;
+  cookieObj: any = "";
 
   constructor(private cookieService: CookieService, private random: RandomService, private toastr: ToastrService) { }
 
@@ -276,7 +275,7 @@ export class JournalsComponent implements OnInit {
     {id: 9, name: 'Kinglon'},
   ]
 
-  journalName:String =""
+  journalName:String = ""
   prop:string = ""
   country:String = ""
   status: boolean = false;
@@ -284,6 +283,7 @@ export class JournalsComponent implements OnInit {
   globalStatus: boolean = false
 
   onItemChange($event){
+    console.log($event)
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
   }
 
@@ -292,7 +292,7 @@ export class JournalsComponent implements OnInit {
   currentPage: number;
   itemsPerPage: number;
   newItemsPerPage: number;
-  jouralSelected: JournalSearch;
+  journalSelected: JournalSearch;
   journalFiltered: JournalSearch[];
   randomJournals;
 
@@ -301,7 +301,7 @@ export class JournalsComponent implements OnInit {
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
     this.objJournal = new JournalSearch(0, "", "", 0, "", false, "", "");
     this.getCookie();
-    //this.cookieService.delete("Search");
+    //this.cookieService.delete("Journal");
 
     this.randomJournals = this.random.generateRandomJournals()
     this.journalFiltered = this.randomJournals;
@@ -340,18 +340,18 @@ export class JournalsComponent implements OnInit {
         this.objJournal.$price=element.price;
       }
     });
-    this.cookieService.set("Journal", JSON.stringify(this.objJournal), 30);
-    console.log(this.cookieService.get("Journal"));
-    //console.log(this.objJournal);
+
+    console.log(this.objJournal)
+    
+    this.cookieService.set("Journal", JSON.stringify(this.objJournal), 30, '/journal-search');
+
+    console.log("Cookie: " + this.cookieService.get("Journal"))
   }
 
   getCookie(){
     if(this.cookieService.check("Journal")){
       this.cookieObj = JSON.parse(this.cookieService.get("Journal"));
-
       Object.assign(this.objJournal, this.cookieObj);
-
-      console.log(this.objJournal)
 
     }else{
       console.log("no cookie")
@@ -464,7 +464,7 @@ export class JournalsComponent implements OnInit {
   }
 
   killCookie(){
-    this.cookieService.get("Journal")? this.cookieService.delete("Journal") : null
+    this.cookieService.get("Journal")? this.cookieService.delete("Journal", '/journal-search') : null
   }
 
   removeJournal(journal){
@@ -474,15 +474,28 @@ export class JournalsComponent implements OnInit {
       (this.journalFiltered.indexOf(journal),1);
   }
 
+  langTranslation:any
+  radioInputState:boolean
+
   goTo(search){
+  
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'none';
-    this.jouralSelected = search;
+    this.journalSelected = search;
+
+    this.radioInputState = search.$translated? true : false
+    this.langTranslation = search.$translated? search.$translation : false
 
     this.objJournal.$nameJournal = search.$nameJournal;
     this.objJournal.$country = search.$country;
     this.objJournal.$language = search.$language;
     this.objJournal.$field = search.$field;
+
+    this.objJournal.translated = this.radioInputState
+
+    this.objJournal.$translation = this.radioInputState? this.langTranslation : null
+
+    console.log(this.objJournal)
 
 
   }
