@@ -67,7 +67,8 @@ let arr = [AppComponent,
 
 @NgModule({
   declarations: [
-    ...arr
+    ...arr,
+    ManageCompareComponent
   ],
   imports: [
     BrowserModule,
@@ -82,6 +83,7 @@ let arr = [AppComponent,
         { path: 'form-country' , component: FormCountryComponent},
         { path: 'form-country-paged' , component: FormCountryPagedComponent},
         { path: 'form-compare-country' , component: CompareCountryComponent},
+        { path: 'manage-compare-country', component: ManageCompareComponent },
         { path: 'form-publishing' , component: FormPublishingComponent},
         { path: 'form-improvements' , component: FormImprovementsComponent},
         { path: 'journal-search', component: JournalsComponent},
