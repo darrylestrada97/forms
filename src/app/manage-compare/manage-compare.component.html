@@ -1,0 +1,112 @@
+<div class="container well">
+    <!-- First div will contain filters and 
+        pagination params -->
+    <form #compareCountryFilterForm="ngForm" novalidate>
+        <table class="table table-striped">
+            <tr>
+                <td>Filter country name</td>
+                <td>
+                    <input type="text" [(ngModel)]="countryFilter"
+                    name="countryFilter" (ngModelChange)="filter()">
+                </td>
+            </tr>
+            <tr>
+                 
+                 <td>
+                 Select strain (*) 
+                 </td>
+                <td>
+                <select required name="strain" #strain ="ngModel" [(ngModel)]="strainFiltered" (ngModelChange)="filter()" >
+                <option *ngFor="let strain of variants" [value]="strain.name"> 
+                    {{strain.name}}
+                </option>
+            </select>
+                </td>
+                
+        
+            </tr>
+            <tr>
+                <td>
+                    Current Page
+                </td>
+                <td>
+                    {{currentPage}}
+                </td>
+            </tr>
+            <tr>
+                <td>Reservations per page</td>
+                <td>
+                    <input type="number" 
+                    [(ngModel)]="itemsPerPage"
+                    name="itemsPerPage">
+                </td>
+            </tr>
+            <tr>
+                <td>Reservations found</td>
+                <td>{{comparesFiltered.length}}</td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<div>
+    <!-- Second div will contain an error message
+    in case no records are found.
+    It will be shown according to a boolean
+    in a *ngIf clause -->
+</div>
+<div class="container well">
+    <!-- Div 3 will be shown in case there are records
+    to display -->
+    <form #reservationManagementForm="ngForm" novalidate>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>First Country</th>
+                    <th>Second Country</th>
+                    <th>Type of search</th>
+                    <th>Strain</th>
+                    <th>Start date</th>
+                    <th>End date</th>
+                    <th>Eliminate reservation</th>
+                    <th>Go to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let cc of
+                 comparesFiltered | 
+                 paginate: {
+                     itemsPerPage: itemsPerPage,
+                     currentPage: currentPage
+                 }"
+                 >
+                    <td>{{cc.firstCountry}}</td>
+                    <td>{{cc.secondCountry}}</td>
+                    <td>{{cc.searchType}}</td>
+                    <td>{{cc.strain}}</td>
+                    <td>{{cc.date[0]}}</td>
+                    <td>{{cc.date[1]}}</td>
+                    <td>
+                        <button class="btn btn-danger"
+                        (click)="removeRes(cc)">
+                            X</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary"
+                        (click)="onClick(cc)">
+                            Go to
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="currentPage=$event"
+            maxSize="5"
+            directionLinks="true"
+            autoHide="true">
+        </pagination-controls>
+    </form>
+</div>
+<app-compare-country *ngIf="compareSelected"
+    [objCompareCountries]="compareSelected">
+</app-compare-country>

@@ -1,34 +1,13 @@
-import { Component, OnInit,ViewChild, Input } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators, NgForm } from '@angular/forms';
-import { Country } from '@angular-material-extensions/select-country';
+import { stripSummaryForJitNameSuffix } from '@angular/compiler/src/aot/util';
+import { Injectable } from '@angular/core';
 import { compareCountries } from '../model/compareCountries';
-import { BsDatepickerConfig } from 'ngx-bootstrap/datepicker';
-import { CookieService } from 'ngx-cookie-service';
 
-
-@Component({
-  selector: 'app-compare-country',
-  templateUrl: './compare-country.component.html',
-  styleUrls: ['./compare-country.component.css']
+@Injectable({
+  providedIn: 'root'
 })
+export class CompareCountryService {
 
-
-export class CompareCountryComponent implements OnInit {
-  @Input() objCompareCountries: compareCountries;
-  
-  datePickerConfig: Partial<BsDatepickerConfig>;
-
-
-  cookieObj: any;
-
-  @ViewChild('compareCountryForm') 
-  compareCountryForm: HTMLFormElement;
-
-
-
-  
-  title = 'select-county';
- 
+  constructor() {}
 
 
   variants = [
@@ -43,6 +22,7 @@ export class CompareCountryComponent implements OnInit {
     {id:2, type: 'death'},
     {id:3, type: 'survive'}
   ]
+
 
   Countries = [
     { id: 'AF', name: 'Afganistán' },
@@ -281,78 +261,50 @@ export class CompareCountryComponent implements OnInit {
     { id: 'ZW', name: 'Zimbabue' }
   ];
 
-  firstCountry = "";
-  secondCountry = "";
-
-  countryFormControl = new FormControl();
-  countryFormGroup: FormGroup;
-  status: boolean;
-
-
-  onItemChange($event){
-    $event.srcElement.value == "Yes"? this.status = true : this.status = false
-  }
-  sendForm(){
-    this.cookieService.set("objCompareCountries", JSON.stringify(this.objCompareCountries));
-    console.log(this.objCompareCountries);
-
-  }
-
-  private buildForm() {
-  }
-  constructor(private formBuilder: FormBuilder, private cookieService: CookieService) {
-    this.datePickerConfig = Object.assign({
-      containerClass: 'theme-dark-blue',
-      showWeekNumbers: true,
-      minDate: new Date(2020,0,21),
-      maxDate: new Date()
-    });
-  }
-  ngOnInit(): void {
-    
-    this.countryFormGroup = this.formBuilder.group({
-      country: []
-    });
-    this.initializeForm();
-    this.getCookie();
-  }
-  onCountrySelected1($event: Country) {
-    
-  }
-  onCountrySelected2($event: Country) {
-  
-  }
-
-  initializeForm(){
-    if (this.compareCountryForm) {
-      this.compareCountryForm.reset();
-      this.compareCountryForm.form.markAsPristine();
-      this.compareCountryForm.form.markAsUntouched();
-    }
-    
-    //If this.reservation is null is because
-    //no input param has been received.
-    //Otherwise, we should be careful not to
-    //smash the parameter
-    if(!this.objCompareCountries){
-      this.objCompareCountries =  new compareCountries("","",null,null,null);;
-    }
-    
-  }
-
-  getCookie(){
-    if(this.cookieService.check("objCompareCountries")){
-      this.cookieObj = JSON.parse(this.cookieService.get("objCompareCountries"));
-       /**
-        * Copy the values of all of the enumerable own properties from one or more source objects to a
-        * target object. Returns the target object.
-        * @param target The target object to copy to.
-        * @param source The source object from which to copy properties.
-        */
-      Object.assign(this.objCompareCountries, this.cookieObj);
-
-    }
-  
-}
+   randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
+  
+  
+  generateCompareCountry(): compareCountries[]{
+    let Compares: compareCountries[] = [];
+    let randomFirstCountry: String;
+    let randomSecondCountry: String;
+    let randomStrain: String;
+    let randomSearchType: String;
+    let randomDates: Date[];
+    let date1: Date;
+    let date2: Date;
+    
+
+    let compare: compareCountries;
+    
+    for(let i=0; i<369; i++){
+      let dates=[];
+      randomFirstCountry = Object.entries(this.Countries)[Math.floor(Math.random()*(this.Countries.length))][1].name
+      randomSecondCountry = Object.entries(this.Countries)[Math.floor(Math.random()*(this.Countries.length))][1].name
+      do{
+        randomSecondCountry = Object.entries(this.Countries)[Math.floor(Math.random()*(this.Countries.length))][1].name
+     }while(randomFirstCountry === randomSecondCountry );
+      let num1 = Math.floor((Math.random() * 4) );
+      let num2 = Math.floor((Math.random() * 3) );
+      randomStrain = this.variants[num1].name;
+      randomSearchType = this.typeOfCases[num2].type;
+      date1 =  this.randomDate(new Date(2020, 0, 1), new Date())
+      date2 =  this.randomDate(new Date(2020, 0, 1), new Date())
+      dates.push(date1);
+      dates.push(date2);
+      randomDates = dates;
+      compare = new compareCountries(
+        randomFirstCountry,
+        randomSecondCountry,
+        randomSearchType,
+        randomStrain,
+        randomDates
+      );
+      Compares.push(compare);
+    }
+    return Compares;
+  }
+}
