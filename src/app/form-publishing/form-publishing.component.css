@@ -41,6 +41,10 @@ form > div{
     height: 100px;
 }
 
+.none{
+    display:none;
+}
+
 .content > form > div input, .content > select, .content > label, .content > p{
     width: 100%;
     padding: 0;

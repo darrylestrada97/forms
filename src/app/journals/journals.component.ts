@@ -399,7 +399,6 @@ export class JournalsComponent implements OnInit {
 
           if(!elem.$translated){
             langTransNValid = true;
-            
           }
         }else{
           langTransNValid = true;
