@@ -34,6 +34,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { ToastrModule } from 'ngx-toastr';
+import { FormCountryPagedComponent } from './form-country-paged/form-country-paged.component';
 
 
 
@@ -50,6 +51,7 @@ import { ToastrModule } from 'ngx-toastr';
 
 let arr = [AppComponent,
   FormCountryComponent,
+  FormCountryPagedComponent,
   CompareCountryComponent,
   FormPublishingComponent,
   FormImprovementsComponent,
@@ -78,6 +80,7 @@ let arr = [AppComponent,
              HttpClientModule,
     RouterModule.forRoot([
         { path: 'form-country' , component: FormCountryComponent},
+        { path: 'form-country-paged' , component: FormCountryPagedComponent},
         { path: 'form-compare-country' , component: CompareCountryComponent},
         { path: 'form-publishing' , component: FormPublishingComponent},
         { path: 'form-improvements' , component: FormImprovementsComponent},
