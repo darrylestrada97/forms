@@ -1,3 +1,12 @@
+ /**
+   * Date: 03/11/2021
+   * Version: 1.2
+   * Author: Darryl.
+   * 
+   * 
+   * this script controls random generation of objects.
+   */
+
 import { stripSummaryForJitNameSuffix } from '@angular/compiler/src/aot/util';
 import { Injectable } from '@angular/core';
 import { compareCountries } from '../model/compareCountries';
@@ -261,11 +270,26 @@ export class CompareCountryService {
     { id: 'ZW', name: 'Zimbabue' }
   ];
 
+   /**
+   * Date: 03/11/2021
+   * Version: 1.2
+   * Author: Darryl.
+   * 
+   * 
+   * This function creates a random date. 
+   */
    randomDate(start, end) {
     return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
 }
 
-  
+   /**
+   * Date: 03/11/2021
+   * Version: 1.2
+   * Author: Darryl.
+   * 
+   * 
+   * this function generates an array of compaCountries components. 
+   */
   
   generateCompareCountry(): compareCountries[]{
     let Compares: compareCountries[] = [];
@@ -287,12 +311,15 @@ export class CompareCountryService {
       do{
         randomSecondCountry = Object.entries(this.Countries)[Math.floor(Math.random()*(this.Countries.length))][1].name
      }while(randomFirstCountry === randomSecondCountry );
-      let num1 = Math.floor((Math.random() * 4) );
-      let num2 = Math.floor((Math.random() * 3) );
+      let num1 = Math.floor((Math.random() * 4));
+      let num2 = Math.floor((Math.random() * 3));
       randomStrain = this.variants[num1].name;
       randomSearchType = this.typeOfCases[num2].type;
       date1 =  this.randomDate(new Date(2020, 0, 1), new Date())
       date2 =  this.randomDate(new Date(2020, 0, 1), new Date())
+      do{
+        date2 =  this.randomDate(new Date(2020, 0, 1), new Date())
+      }while(date1 >= date2);
       dates.push(date1);
       dates.push(date2);
       randomDates = dates;

@@ -8,7 +8,7 @@
 <div class="publication">
   <app-menu></app-menu>
   <h2>Vaccine progress around the world</h2>
-  <form #compareCountryForm="ngForm" (ngSubmit)="sendForm()">
+  <form #compareVaccineForm="ngForm" (ngSubmit)="sendForm()">
     <div>
       <label>All countries or a specific country. (If not selected, all countries will be shown.)</label><br />
       <div class="radios">
@@ -28,17 +28,12 @@
       <br />
       <div *ngIf="!status">
         <div class="row">
-          <label class="notice" for="firstCountry">Select country (*)</label>
-          <mat-select-country
-            appearance="outline"
-            label="Country"
-            name="firstCountry"
-            #firstCountry="ngModel"
-            [(ngModel)] = "vacinnesProgress$country"
-            (onCountrySelected)="onCountrySelected($event)"
-            required
-          >
-          </mat-select-country>
+            <label class="notice">Select  country (*) </label>
+            <select required name="country" #strain ="ngModel" [(ngModel)]="vacinnesProgress.$country" >
+                <option *ngFor="let country of Countries" [value]="country.name"> 
+                    {{country.name}}
+                </option>
+            </select>
         </div>
       </div>
     </div>
@@ -55,7 +50,6 @@
                             (change)="setAll($event.checked)"
                             >
                 {{task.name}}
-                
               </mat-checkbox>
             </span>
             <span class="example-list-section">
@@ -76,11 +70,12 @@
     </div>
    <br>
     <div>
-        <button type="submit" [disabled]="!compareCountryForm.valid">
+        <button type="submit" [disabled]="!compareVaccineForm.valid">
           Submit
         </button>
       </div>
     
   </form>
+  <input class="btn btn-primary" type="button" onclick="location.href='vaccination';" value="View all entries"/>
 </div>
 </body>

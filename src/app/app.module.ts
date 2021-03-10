@@ -34,6 +34,8 @@ import { CookieService } from 'ngx-cookie-service';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 import { ToastrModule } from 'ngx-toastr';
+import { ManageCompareComponent } from './manage-compare/manage-compare.component';
+import { ManageVaccinationComponent } from './manage-vaccination/manage-vaccination.component';
 import { FormCountryPagedComponent } from './form-country-paged/form-country-paged.component';
 import { ManageCompareComponent } from './manage-compare/manage-compare.component';
 
@@ -69,7 +71,8 @@ let arr = [AppComponent,
 @NgModule({
   declarations: [
     ...arr,
-    ManageCompareComponent
+    ManageCompareComponent,
+    ManageVaccinationComponent
   ],
   imports: [
     BrowserModule,
@@ -89,6 +92,7 @@ let arr = [AppComponent,
         { path: 'form-improvements' , component: FormImprovementsComponent},
         { path: 'journal-search', component: JournalsComponent},
         { path: 'vaccination-progress', component: VaccinationProgressComponent },
+        { path: 'vaccination', component: ManageVaccinationComponent },
         { path: '', component: HomeComponent},
         //The next path is equivalent to http://localhost:4200
         

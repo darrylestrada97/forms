@@ -1,3 +1,12 @@
+  /**
+* Date: 03/11/2021
+* Version: 1.2
+* Author: Darryl.
+* 
+* 
+* This script controls the compare country form.
+*/
+
 import { Component, OnInit,ViewChild, Input } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators, NgForm } from '@angular/forms';
 import { Country } from '@angular-material-extensions/select-country';
@@ -292,6 +301,15 @@ export class CompareCountryComponent implements OnInit {
   onItemChange($event){
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
   }
+    /**
+* Date: 03/11/2021
+* Version: 1.2
+* Author: Darryl.
+* 
+* 
+* This function sends the information the the console and alse stores a cookie object.
+*/
+
   sendForm(){
     this.cookieService.set("objCompareCountries", JSON.stringify(this.objCompareCountries));
     console.log(this.objCompareCountries);
@@ -316,12 +334,7 @@ export class CompareCountryComponent implements OnInit {
     this.initializeForm();
     this.getCookie();
   }
-  onCountrySelected1($event: Country) {
-    
-  }
-  onCountrySelected2($event: Country) {
   
-  }
 
   initializeForm(){
     if (this.compareCountryForm) {
@@ -335,10 +348,19 @@ export class CompareCountryComponent implements OnInit {
     //Otherwise, we should be careful not to
     //smash the parameter
     if(!this.objCompareCountries){
-      this.objCompareCountries =  new compareCountries("","",null,null,null);;
+      this.objCompareCountries =  new compareCountries("","",null,null,null);
     }
     
   }
+
+    /**
+* Date: 03/11/2021
+* Version: 1.2
+* Author: Darryl.
+* 
+* 
+* This function gets tje cookies and assing it to the main object. 
+*/
 
   getCookie(){
     if(this.cookieService.check("objCompareCountries")){
