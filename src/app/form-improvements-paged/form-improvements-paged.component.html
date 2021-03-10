@@ -1,0 +1,103 @@
+<div class="container well">
+    <!-- First div will contain filters and 
+        pagination params -->
+    <form #formImprovementsFilter="ngForm" novalidate>
+        <table class="table table-striped">
+            <tr>
+                <td>Filter by Coments </td>
+                <td>
+                        <input type="text" name="Coments" #Coments = "ngModel" [(ngModel)]="commentsFilter" (ngModelChange)="filter()">
+
+                </td>
+            </tr>
+            <tr>
+                <td>Filter by Evaluation</td>
+                <td>
+                    <input type="text" name="Evaluation" #Evaluation = "ngModel" [(ngModel)]="evaluationFilter" (ngModelChange)="filter()">
+                </td>
+            </tr>
+            <tr>
+                <td>Filter by recomendation</td>
+                <td>
+                    <input type="radio" name="val" #val="ngModel" [(ngModel)]="recomendationFilter" value="Yes"><label>Yes</label>
+                    <input type="radio" name="val" #val="ngModel" [(ngModel)]="recomendationFilter" value="No"><label>No</label>
+                </td>
+            </tr>
+
+            <tr>
+                <td>
+                    Current Page
+                </td>
+                <td>
+                    {{currentPage}}
+                </td>
+            </tr>
+            <tr>
+                <td>Improvements per page</td>
+                <td>
+                    <input type="number" 
+                    [(ngModel)]="itemsPerPage"
+                    name="itemsPerPage">
+                </td>
+            </tr>
+            <tr>
+                <td>Improvements found</td>
+                <td>{{improvementsFiltered.length}}</td>
+            </tr>
+
+        </table>
+        
+    </form>
+</div>
+<div>
+    <!-- Second div will contain an error message
+    in case no records are found.
+    It will be shown according to a boolean
+    in a *ngIf clause -->
+</div>
+<div class="container well">
+    <!-- Div 3 will be shown in case there are records
+    to display -->
+    <form #formCountryForm="ngForm" novalidate>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Coments</th>
+                    <th>Evaluation</th>
+                    <th>recomendation</th>
+                    <th>Eliminate reservation</th>
+                    <th>Go to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rv of
+                improvementsFiltered | 
+                 paginate: {
+                     itemsPerPage: itemsPerPage,
+                     currentPage: currentPage
+                 }"
+                 >
+                 <td>{{rv.$comments}}</td>
+                 <td>{{rv.$evaluation}}</td>
+                 <td>{{rv.$recomendation}}</td>
+                    <td>
+                        <button class="btn btn-danger"
+                        (click)="removeRes(rv)">
+                            X</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary"
+                        (click)="onClick(rv)">
+                            Go to
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="currentPage=$event"
+            maxSize="5"
+            directionLinks="true"
+            autoHide="true">
+        </pagination-controls>
+    </form>
+</div>

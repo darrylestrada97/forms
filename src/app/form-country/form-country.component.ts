@@ -272,7 +272,7 @@ export class FormCountryComponent implements OnInit {
   submitted = false;
 
   onSubmit(){
-    this.cookieService.set("Country", JSON.stringify(this.CountryObj), 30, '/form-country');
+    this.cookieService.set("Country", JSON.stringify(this.CountryObj));
 
     console.log("Saving following Cookie: ", this.cookieService.get("Country"))
     this.submitted = true;
@@ -290,6 +290,6 @@ export class FormCountryComponent implements OnInit {
 
 
   killCookie(){
-    this.cookieService.get("Search")? this.cookieService.delete("Search", '/form-publishing') : null
+    this.cookieService.delete("Country");
   }
 }

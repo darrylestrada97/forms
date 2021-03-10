@@ -4,7 +4,7 @@ export class Improvements{
       public id: number, 
       public comments: String, 
       public location: String, 
-      public evaluation: number,
+      public evaluation: String,
       public recomendation: String
   ) {}
   
@@ -32,11 +32,11 @@ export class Improvements{
       this.location = value;
   }
   
-  public get $evaluation(): number {
+  public get $evaluation(): String {
       return this.evaluation;
   }
   
-  public set $evaluation(value: number) {
+  public set $evaluation(value: String) {
       this.evaluation = value;
   }
   public get $recomendation(): String {

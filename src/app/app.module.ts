@@ -37,7 +37,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ManageCompareComponent } from './manage-compare/manage-compare.component';
 import { ManageVaccinationComponent } from './manage-vaccination/manage-vaccination.component';
 import { FormCountryPagedComponent } from './form-country-paged/form-country-paged.component';
-import { ManageCompareComponent } from './manage-compare/manage-compare.component';
+import { FormImprovementsPagedComponent } from './form-improvements-paged/form-improvements-paged.component';
 
 
 
@@ -72,7 +72,8 @@ let arr = [AppComponent,
   declarations: [
     ...arr,
     ManageCompareComponent,
-    ManageVaccinationComponent
+    ManageVaccinationComponent,
+    FormImprovementsPagedComponent
   ],
   imports: [
     BrowserModule,
@@ -90,6 +91,8 @@ let arr = [AppComponent,
         { path: 'manage-compare-country', component: ManageCompareComponent },
         { path: 'form-publishing' , component: FormPublishingComponent},
         { path: 'form-improvements' , component: FormImprovementsComponent},
+        { path: 'form-improvements-paged' , component: FormImprovementsPagedComponent},
+        
         { path: 'journal-search', component: JournalsComponent},
         { path: 'vaccination-progress', component: VaccinationProgressComponent },
         { path: 'vaccination', component: ManageVaccinationComponent },

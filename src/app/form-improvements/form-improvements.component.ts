@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Improvements } from '../model/improvements';
 import {ThemePalette} from '@angular/material/core';
+import { CookieService } from 'ngx-cookie-service';
 export interface Task {
   name: string;
   completed: boolean;
@@ -30,17 +31,21 @@ export class FormImprovementsComponent implements OnInit {
 
 
   improvObj: Improvements;
-
-  constructor() { }
+  cookieObj: any;
+  constructor( private cookieService: CookieService) { }
 
 
   ngOnInit(): void {
-    this.improvObj = new Improvements(0,"","",0,"");
+    this.improvObj = new Improvements(0,"","","","");
+    this.getCookie();
   }
 
   submitted = false;
 
   onSubmit(){
+    this.cookieService.set("improve", JSON.stringify(this.improvObj));
+    console.log("Saving following Cookie: ", this.cookieService.get("improve"))
+
     this.submitted = true;
     console.log(this.improvObj);
   }
@@ -67,13 +72,25 @@ export class FormImprovementsComponent implements OnInit {
     this.task.subtasks.forEach(t => t.completed = completed);
   }
   
-
-
-
   status:boolean;
 
   onItemChange($event){
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
+  }
+
+  getCookie(){
+    if(this.cookieService.check("improve")){
+      this.cookieObj = JSON.parse(this.cookieService.get("improve"));
+      Object.assign(this.improvObj, this.cookieObj);
+      console.log("Last Cookie saved: ", this.cookieObj)
+    }else{
+      console.log("No Cookie saved")
+    }
+  }
+
+
+  killCookie(){
+    this.cookieService.delete("improve");
   }
 }
 
