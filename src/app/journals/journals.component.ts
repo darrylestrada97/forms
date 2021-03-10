@@ -17,6 +17,12 @@ export class JournalsComponent implements OnInit {
 
   constructor(private cookieService: CookieService, private random: RandomService, private toastr: ToastrService) { }
 
+  /**
+   * Found this object in internet (i think luis did)
+   * We are not crazy
+   * 
+   */
+
   Countries = [
     { id: 'AF', name: 'Afganistán' },
     { id: 'AL', name: 'Albania' },
@@ -254,6 +260,13 @@ export class JournalsComponent implements OnInit {
     { id: 'ZW', name: 'Zimbabue' }
   ];
 
+   /**
+   * {Journals} = Object
+   * Need this object to assign values to each journal. 
+   * This is information i will need in the filter page
+   * 
+   */
+
 
   Journals = [
     {name: 'Nature', price: 12.50, distribution: "online"},
@@ -262,6 +275,11 @@ export class JournalsComponent implements OnInit {
     {name: 'Astrophysical Journal', price: 24.20, distribution: "paper"},
     {name: 'Canadian Journal of Chemistry', price: 18.75, distribution: "online"}
   ]
+
+  /**
+   * Object to check the requested lenguages
+   * 
+   */
 
   Languages = [
     {id: 1, name: 'English'},
@@ -282,6 +300,11 @@ export class JournalsComponent implements OnInit {
   statusName: boolean = false
   globalStatus: boolean = false
 
+  /**
+   * Event checking my input radio value
+   * 
+   */
+
   onItemChange($event){
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
   }
@@ -294,6 +317,14 @@ export class JournalsComponent implements OnInit {
   journalSelected: JournalSearch;
   journalFiltered: JournalSearch[];
   randomJournals;
+
+   /**
+   * Function called on the initialization of the component.
+   * I am hiding the second div.content, as its the paginator one.
+   * I am algo creating an empty search object and calling to getCookie function.
+   * I am initializing the random values i will use in the filter page. Also setting the current page and number of items per page.
+   * 
+   */
 
   ngOnInit(): void {
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
@@ -308,6 +339,13 @@ export class JournalsComponent implements OnInit {
     this.currentPage=1;
 
   }
+
+  /**
+   * 
+   * event checking the text of the journal input
+   * When the input text its equal to some journal name in my objects, returning true.
+   * 
+   */
 
   changeJournal($event){
     let text = $event.srcElement.value
@@ -328,9 +366,21 @@ export class JournalsComponent implements OnInit {
     return this.statusName
   }
 
+  /**
+   * Function that its only checking the global status to validate submit
+   * 
+   */
+
   changeInputLanguage($event){
     this.globalStatus = this.objJournal.$translation == this.objJournal.$language ? false : true
   }
+
+  /**
+   * Called on form submit.
+   * Run through Journals object to get the values corresponding to the name asked on the form
+   * One of the object fields is a title publication. Im using a random function to generate it.
+   * 
+   */
 
   onSubmit(){
 
@@ -346,6 +396,12 @@ export class JournalsComponent implements OnInit {
 
     console.log("Saving following Cookie: ", this.cookieService.get("Journal"))
   }
+  
+  /**
+   * Function checking if there is a "Search" cookie. If thats true, i assing the same object in the cookie to 
+   * the object binded in the ngmodel of my inputs form.
+   * 
+   */
 
   getCookie(){
     if(this.cookieService.check("Journal")){
@@ -359,6 +415,12 @@ export class JournalsComponent implements OnInit {
     }
   }
 
+  /**
+   * When clicking on new value for items per page, if that radio value is not "all", ill get the new value as 
+   * the radio value. Otherwise, ill get the lenght of my random values.
+   * 
+   */
+
   changeItemsPerPage($event){
     this.itemsPerPage = $event.srcElement.value != 'all' ? $event.srcElement.value : this.randomJournals.length;
   }
@@ -371,6 +433,7 @@ export class JournalsComponent implements OnInit {
   langTransY: String;
   langTransN:String;
   priceFilter = 90;
+  statusFiltered: boolean = false;
 
   filter(){
     this.journalFiltered = this.randomJournals.
@@ -390,6 +453,8 @@ export class JournalsComponent implements OnInit {
 
           if(elem.$translated){
             langTransYValid = true;
+            this.statusFiltered = true
+
           }
         }else{
           langTransYValid = true;
@@ -399,7 +464,6 @@ export class JournalsComponent implements OnInit {
 
           if(!elem.$translated){
             langTransNValid = true;
-            
           }
         }else{
           langTransNValid = true;
@@ -452,22 +516,31 @@ export class JournalsComponent implements OnInit {
 
   }
 
-  statusFiltered: boolean;
-  onItemChangeFilter($event){
-    $event.srcElement.value == "Yes"? this.statusFiltered = true : this.statusFiltered = false;
+  
 
-    this.toastr.error('Hello world!', 'Toastr fun!');
-
-  }
+  /**
+   * To show my filter page
+   * 
+   */
 
   allJournals(){
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'none';
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'block';
   }
 
+  /**
+   * Cookie delete.
+   * 
+   */
+
   killCookie(){
     this.cookieService.get("Journal")? this.cookieService.delete("Journal", '/journal-search') : null
   }
+
+  /**
+   * Deleting from both arrays.
+   * 
+   */
 
   removeJournal(journal){
     this.randomJournals.splice
@@ -478,6 +551,11 @@ export class JournalsComponent implements OnInit {
 
   langTranslation:any
   radioInputState:boolean
+
+  /**
+   * Go to the form with values selected
+   * 
+   */
 
   goTo(search){
   
