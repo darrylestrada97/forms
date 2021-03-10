@@ -1,6 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Country } from '../model/country';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-form-country',
@@ -260,16 +261,35 @@ export class FormCountryComponent implements OnInit {
   ];
 
   CountryObj: Country;
-  constructor() { }
+  cookieObj: any;
+  constructor( private cookieService: CookieService) { }
 
   ngOnInit(): void {
 
     this.CountryObj = new Country(0,"","","");
+    this.getCookie();
   }
   submitted = false;
 
   onSubmit(){
+    this.cookieService.set("Country", JSON.stringify(this.CountryObj), 30, '/form-country');
+
+    console.log("Saving following Cookie: ", this.cookieService.get("Country"))
     this.submitted = true;
     console.log(this.CountryObj);
+  }
+  getCookie(){
+    if(this.cookieService.check("Country")){
+      this.cookieObj = JSON.parse(this.cookieService.get("Country"));
+      Object.assign(this.CountryObj, this.cookieObj);
+      console.log("Last Cookie saved: ", this.cookieObj)
+    }else{
+      console.log("No Cookie saved")
+    }
+  }
+
+
+  killCookie(){
+    this.cookieService.get("Search")? this.cookieService.delete("Search", '/form-publishing') : null
   }
 }

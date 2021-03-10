@@ -35,6 +35,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 
 import { ToastrModule } from 'ngx-toastr';
 import { FormCountryPagedComponent } from './form-country-paged/form-country-paged.component';
+import { ManageCompareComponent } from './manage-compare/manage-compare.component';
 
 
 
