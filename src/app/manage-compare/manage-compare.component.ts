@@ -1,6 +1,18 @@
+ /**
+   * Date: 03/11/2021
+   * Version: 1.2
+   * Author: Darryl.
+   * 
+   * 
+   * this script controls the paging and the filter of the list. 
+   */
+
+
 import { Component, OnInit,ViewChild, Input } from '@angular/core';
 import { compareCountries } from '../model/compareCountries';
 import { CompareCountryService } from '../services/compare-country.service';
+
+
 
 @Component({
   selector: 'app-manage-compare',
@@ -34,10 +46,8 @@ export class ManageCompareComponent implements OnInit {
   //Pagination properties
   currentPage: number;
   itemsPerPage: number;
-
   compares: compareCountries[]=[];
   comparesFiltered: compareCountries[]=[];
-
   compareSelected: compareCountries;
 
   constructor(private compareCountryService: CompareCountryService) { }
@@ -48,14 +58,19 @@ export class ManageCompareComponent implements OnInit {
 
     this.strainFilter=1;
     this.itemsPerPage=10;
-    this.currentPage=1;
-
-    
-
-    
+    this.currentPage=1; 
   }
 
+   /**
+   * Date: 03/11/2021
+   * Version: 1.2
+   * Author: Darryl.
+   * 
+   * This function filters the incoming data with the stored data and returns the a list of objects that match the given values.
+   */
+
   filter(){
+    console.log("entro en el filter");
     this.comparesFiltered = this.compares.
       filter(compare => {
         let strainValid: boolean = false;
@@ -68,7 +83,8 @@ export class ManageCompareComponent implements OnInit {
         // Otherwise returns -1
         if(this.countryFilter && this.countryFilter!=""){
           if(compare.firstCountry.toLowerCase().indexOf
-          (this.countryFilter.toLowerCase())!=-1){
+          (this.countryFilter.toLowerCase())!=-1 || compare.secondCountry.toLowerCase().indexOf
+          (this.countryFilter.toLowerCase())!=-1 ){
             countryValid=true;
           }
         }else{
@@ -80,9 +96,26 @@ export class ManageCompareComponent implements OnInit {
       })
   }
 
+  /**
+   * Date: 03/11/2021
+   * Version: 1.2
+   * Author: Darryl.
+   * 
+   * the the function is called, it assigns the incoming variable to the main variable of the form. 
+   */
+
   onClick(cc: compareCountries){
     this.compareSelected = cc;
   }
+
+   /**
+   * Date: 03/11/2021
+   * Version: 1.2
+   * Author: Darryl.
+   * 
+   * Deletes a row of the list.
+   */
+
 
   removeRes(cc: compareCountries){
     this.compares.splice

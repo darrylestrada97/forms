@@ -5,7 +5,7 @@
    * Author: Darryl.
    * 
    * 
-   * This is the HTML form for the Compare contries management system.
+   * This is the HTML form for the vaccination management system.
    */
 
 -->
@@ -33,7 +33,7 @@
                 <option *ngFor="let strain of variants" [value]="strain.name"> 
                     {{strain.name}}
                 </option>
-            </select>
+                </select>
                 </td>
                 
         
@@ -47,7 +47,7 @@
                 </td>
             </tr>
             <tr>
-                <td>Reservations per page</td>
+                <td>Results per page</td>
                 <td>
                     <input type="number" 
                     [(ngModel)]="itemsPerPage"
@@ -56,7 +56,7 @@
             </tr>
             <tr>
                 <td>Reservations found</td>
-                <td>{{comparesFiltered.length}}</td>
+                <td>{{searchVaccinesFiltered.length}}</td>
             </tr>
 
         </table>
@@ -71,34 +71,40 @@
 <div class="container well">
     <!-- Div 3 will be shown in case there are records
     to display -->
-    <form #reservationManagementForm="ngForm" novalidate>
+    <form #vaccinationManagementForm="ngForm" novalidate>
         <table class="table table-striped">
             <thead>
                 <tr>
-                    <th>First Country</th>
-                    <th>Second Country</th>
-                    <th>Type of search</th>
-                    <th>Strain</th>
-                    <th>Start date</th>
-                    <th>End date</th>
+                    <th>Country</th>
+                    <th>AstraZeneca</th>
+                    <th>SpunkV</th>
+                    <th>Pfizer</th>
+                    <th>Moderna</th>
+                    <th>Sinovac</th>
                     <th>Eliminate reservation</th>
                     <th>Go to</th>
                 </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let cc of
-                 comparesFiltered | 
+                 searchVaccinesFiltered | 
                  paginate: {
                      itemsPerPage: itemsPerPage,
                      currentPage: currentPage
                  }"
                  >
-                    <td>{{cc.firstCountry}}</td>
-                    <td>{{cc.secondCountry}}</td>
-                    <td>{{cc.searchType}}</td>
-                    <td>{{cc.strain}}</td>
-                    <td>{{cc.date[0]}}</td>
-                    <td>{{cc.date[1]}}</td>
+                    <td>{{cc.country}}</td>
+                    <td><input type="checkbox" [checked] = "cc.vaccine.subtasks[0].completed"   ></td>
+                    <td>
+                    <input type="checkbox" [checked] = "cc.vaccine.subtasks[1].completed"   >
+                    </td>
+                    <td><input type="checkbox" [checked] = "cc.vaccine.subtasks[2].completed"  ></td>
+                    <td>
+                    <input type="checkbox" [checked] = "cc.vaccine.subtasks[3].completed"   >
+                    </td>
+                    <td><input type="checkbox" [checked] = "cc.vaccine.subtasks[4].completed"  ></td>
+                    
+  
                     <td>
                         <button class="btn btn-danger"
                         (click)="removeRes(cc)">
@@ -120,6 +126,8 @@
         </pagination-controls>
     </form>
 </div>
-<app-compare-country *ngIf="compareSelected"
-    [objCompareCountries]="compareSelected">
-</app-compare-country>
+
+<app-vaccination-progress *ngIf="searchVaccinesSelected"
+
+[vacinnesProgress]="searchVaccinesSelected">
+</app-vaccination-progress>
