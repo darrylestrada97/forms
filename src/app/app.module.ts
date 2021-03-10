@@ -37,7 +37,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { ManageCompareComponent } from './manage-compare/manage-compare.component';
 import { ManageVaccinationComponent } from './manage-vaccination/manage-vaccination.component';
 import { FormCountryPagedComponent } from './form-country-paged/form-country-paged.component';
-import { ManageCompareComponent } from './manage-compare/manage-compare.component';
 
 
 
