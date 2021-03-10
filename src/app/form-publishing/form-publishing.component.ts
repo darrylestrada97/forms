@@ -41,6 +41,12 @@ export class FormPublishingComponent implements OnInit {
 
     //sentence();
     
+  /**
+   * {Journals} = Object
+   * Need this object to assign values to each journal. 
+   * This is information i will need in the filter page
+   * 
+   */
 
   Journals = [
     {name: 'Nature', price: 12.50, distribution: "online"},
@@ -50,9 +56,27 @@ export class FormPublishingComponent implements OnInit {
     {name: 'Canadian Journal of Chemistry', price: 18.75, distribution: "online"}
   ]
 
+  /**
+   * [fields] = Array()
+   * This are the available fields for my searchs
+   * 
+   */
+
   fields = ['Biology', 'Physics', 'Biotechnology', 'Genomics', 'Pharmaceutical', "Life"]
 
+  /**
+   * [JournalsObj] = Array()
+   * Initialize this empty array.
+   * It is where i will set my information
+   * 
+   */
+
   JournalsObj = [];
+
+  /**
+   * Using this labels for the paginator component
+   * 
+   */
 
   public labels: any = {
     previousLabel: '<--',
@@ -61,6 +85,14 @@ export class FormPublishingComponent implements OnInit {
     screenReaderPageLabel: 'page',
     screenReaderCurrentLabel: `You're on page`
   };
+
+  /**
+   * Function called on the initialization of the component.
+   * I am hiding the second div.content, as its the paginator one.
+   * I am algo creating an empty search object and calling to getCookie function.
+   * I am initializing the random values i will use in the filter page. Also setting the current page and number of items per page.
+   * 
+   */
   
   ngOnInit(): void {
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
@@ -75,7 +107,12 @@ export class FormPublishingComponent implements OnInit {
     
   }
 
-  submitted = false;
+  /**
+   * Called on form submit.
+   * Run through Journals object to get the values corresponding to the name asked on the form
+   * One of the object fields is a title publication. Im using a random function to generate it.
+   * 
+   */
   
   onSubmit(){
     this.Journals.forEach(element => {
@@ -89,9 +126,17 @@ export class FormPublishingComponent implements OnInit {
     this.cookieService.set("Search", JSON.stringify(this.objSearch), 30, '/form-publishing');
 
     console.log("Saving following Cookie: ", this.cookieService.get("Search"))
-    this.submitted = true;
 
   }
+
+  /**
+   * Checking the state of an input. first of all i get the value and split it by spaces (words) filtering by empty.
+   * Then i map that output and split by empty, so i get all the letters of each word.
+   * If one char is not a letter or a number, im returning false.
+   * As im mapping, that's returning an array of trues and falses. Ill split it by coma and if that new array contains a false,
+   * means the mapping has failed and there is a special char not allowed.
+   * 
+   */
 
   textInput: String;
   statusArray: boolean = false;
@@ -116,9 +161,20 @@ export class FormPublishingComponent implements OnInit {
 
   }
 
+  /**
+   * Global variable to check status in the html
+   * 
+   */
+
   changeInputInvestigation($event){
     this.globalStatus = this.fields.indexOf($event.srcElement.value) == -1 ? false : true
   }
+
+  /**
+   * Function checking if there is a "Search" cookie. If thats true, i assing the same object in the cookie to 
+   * the object binded in the ngmodel of my inputs form.
+   * 
+   */
 
   getCookie(){
     if(this.cookieService.check("Search")){
@@ -129,11 +185,21 @@ export class FormPublishingComponent implements OnInit {
       console.log("No Cookie saved")
     }
   }
+  
+  /**
+   * To show my filter page
+   * 
+   */
 
   allPublication(){
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'none';
     (document.getElementsByClassName('content')[1] as HTMLElement).style.display = 'block';
   }
+
+  /**
+   * Cookie delete.
+   * 
+   */
 
   killCookie(){
     this.cookieService.get("Search")? this.cookieService.delete("Search", '/form-publishing') : null
@@ -196,9 +262,20 @@ export class FormPublishingComponent implements OnInit {
 
   }
 
+  /**
+   * When clicking on new value for items per page, if that radio value is not "all", ill get the new value as 
+   * the radio value. Otherwise, ill get the lenght of my random values.
+   * 
+   */
+
   changeItemsPerPage($event){
     this.itemsPerPage = $event.srcElement.value != 'all' ? $event.srcElement.value : this.randomPublications.length;
   }
+
+  /**
+   * Deleting from both arrays.
+   * 
+   */
 
   removePub(search){
     this.randomPublications.splice
@@ -206,6 +283,11 @@ export class FormPublishingComponent implements OnInit {
     this.searchFiltered.splice
       (this.searchFiltered.indexOf(search),1);
   }
+
+  /**
+   * Go to the form with values selected
+   * 
+   */
 
   goTo(search){
     (document.getElementsByClassName('content')[0] as HTMLElement).style.display = 'block';
