@@ -36,6 +36,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ToastrModule } from 'ngx-toastr';
 import { ManageCompareComponent } from './manage-compare/manage-compare.component';
 import { ManageVaccinationComponent } from './manage-vaccination/manage-vaccination.component';
+import { FormCountryPagedComponent } from './form-country-paged/form-country-paged.component';
 
 
 
@@ -52,6 +53,7 @@ import { ManageVaccinationComponent } from './manage-vaccination/manage-vaccinat
 
 let arr = [AppComponent,
   FormCountryComponent,
+  FormCountryPagedComponent,
   CompareCountryComponent,
   FormPublishingComponent,
   FormImprovementsComponent,
@@ -82,6 +84,7 @@ let arr = [AppComponent,
              HttpClientModule,
     RouterModule.forRoot([
         { path: 'form-country' , component: FormCountryComponent},
+        { path: 'form-country-paged' , component: FormCountryPagedComponent},
         { path: 'form-compare-country' , component: CompareCountryComponent},
         { path: 'manage-compare-country', component: ManageCompareComponent },
         { path: 'form-publishing' , component: FormPublishingComponent},

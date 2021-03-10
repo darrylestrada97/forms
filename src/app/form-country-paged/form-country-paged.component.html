@@ -1,0 +1,101 @@
+<div class="container well">
+    <!-- First div will contain filters and 
+        pagination params -->
+    <form #formCountryFilter="ngForm" novalidate>
+        <table class="table table-striped">
+            <tr>
+                <td>Filter by Country </td>
+                <td>
+                    <select name="paisF" #country = "ngModel" [(ngModel)]="countryFilter" (ngModelChange)="filter()">
+                        <option *ngFor="let pais of paises" [value]="pais.name"> 
+                            {{ pais.name }}
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>Filter by cepa</td>
+                <td>
+                    <select name="cepaF" #cepa = "ngModel" [(ngModel)]="cepaFilter" (ngModelChange)="filter()">
+                        <option *ngFor="let cepa of cepas" [value]="cepa.name"> 
+                            {{ cepa.name }}
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Current Page
+                </td>
+                <td>
+                    {{currentPage}}
+                </td>
+            </tr>
+            <tr>
+                <td>Countrys per page</td>
+                <td>
+                    <input type="number" 
+                    [(ngModel)]="itemsPerPage"
+                    name="itemsPerPage">
+                </td>
+            </tr>
+            <tr>
+                <td>countrys found</td>
+                <td>{{countrysFiltered.length}}</td>
+            </tr>
+
+        </table>
+    </form>
+</div>
+<div>
+    <!-- Second div will contain an error message
+    in case no records are found.
+    It will be shown according to a boolean
+    in a *ngIf clause -->
+</div>
+<div class="container well">
+    <!-- Div 3 will be shown in case there are records
+    to display -->
+    <form #formCountryForm="ngForm" novalidate>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Country name</th>
+                    <th>date</th>
+                    <th>Cepa</th>
+                    <th>Eliminate reservation</th>
+                    <th>Go to</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let rv of
+                countrysFiltered | 
+                 paginate: {
+                     itemsPerPage: itemsPerPage,
+                     currentPage: currentPage
+                 }"
+                 >
+                 <td>{{rv.$contry}}</td>
+                 <td>{{rv.$date}}</td>
+                 <td>{{rv.$cepa}}</td>
+                    <td>
+                        <button class="btn btn-danger"
+                        (click)="removeRes(rv)">
+                            X</button>
+                    </td>
+                    <td>
+                        <button class="btn btn-primary"
+                        (click)="onClick(rv)">
+                            Go to
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <pagination-controls (pageChange)="currentPage=$event"
+            maxSize="5"
+            directionLinks="true"
+            autoHide="true">
+        </pagination-controls>
+    </form>
+</div>
