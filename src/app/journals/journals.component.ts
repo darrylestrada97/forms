@@ -433,6 +433,7 @@ export class JournalsComponent implements OnInit {
   langTransY: String;
   langTransN:String;
   priceFilter = 90;
+  statusFiltered: boolean = false;
 
   filter(){
     this.journalFiltered = this.randomJournals.
@@ -452,6 +453,8 @@ export class JournalsComponent implements OnInit {
 
           if(elem.$translated){
             langTransYValid = true;
+            this.statusFiltered = true
+
           }
         }else{
           langTransYValid = true;
