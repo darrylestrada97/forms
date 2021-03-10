@@ -31,7 +31,7 @@ export class FormImprovementsPagedComponent implements OnInit {
 
   ngOnInit() {
     this.improvement = this.formimprovementsService.
-    generateCountryRandom();
+    generateImprovementsRandom();
     //The array is cloned by means of the Object.assign method
     //because if we do it by the "=" operator, the copy is made by reference.
     Object.assign(this.improvementsFiltered, this.improvement);
@@ -46,7 +46,13 @@ export class FormImprovementsPagedComponent implements OnInit {
   recomendationFilter: String;
  
 
-
+     /**
+   * Date: 03/11/2021
+   * Author: Luis.
+   * 
+   * 
+   * this function filters data that the user gives
+   */  
   filter(){
     this.improvementsFiltered = this.improvement.
       filter(fil => {
@@ -97,7 +103,13 @@ export class FormImprovementsPagedComponent implements OnInit {
   onClick(rv: Improvements){
     this.improvementSelected = rv;
   }
-
+     /**
+   * Date: 03/11/2021
+   * Author: Luis.
+   * 
+   * 
+   * this function removes a data from the page
+   */  
   removeRes(rv: Improvements){
     this.improvement.splice
       (this.improvement.indexOf(rv),1);

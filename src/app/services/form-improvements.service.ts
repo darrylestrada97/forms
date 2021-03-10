@@ -17,7 +17,14 @@ export class FormImprovementsService {
 
   constructor() { }
 
-  generateCountryRandom(): Improvements[]{
+     /**
+   * Date: 03/11/2021
+   * Author: Luis.
+   * 
+   * 
+   * this function generates an random array of Improvements components. 
+   */  
+  generateImprovementsRandom(): Improvements[]{
     let improvements: Improvements[]=[];
 
     let randoncomments: string;

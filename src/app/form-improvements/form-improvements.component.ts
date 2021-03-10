@@ -78,6 +78,13 @@ export class FormImprovementsComponent implements OnInit {
     $event.srcElement.value == "Yes"? this.status = true : this.status = false
   }
 
+       /**
+   * Date: 03/11/2021
+   * Author: Luis.
+   * 
+   * 
+   * This function gets the cookies and assigns them to the main object.
+   */  
   getCookie(){
     if(this.cookieService.check("improve")){
       this.cookieObj = JSON.parse(this.cookieService.get("improve"));
@@ -88,7 +95,13 @@ export class FormImprovementsComponent implements OnInit {
     }
   }
 
-
+      /**
+   * Date: 03/11/2021
+   * Author: Luis.
+   * 
+   * 
+   * This function delete the cookie.
+   */  
   killCookie(){
     this.cookieService.delete("improve");
   }

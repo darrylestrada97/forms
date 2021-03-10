@@ -253,17 +253,24 @@ export class FormRandomService {
 
   constructor() { }
 
+   /**
+   * Date: 03/11/2021
+   * Author: Luis.
+   * 
+   * 
+   * this function generates an random array of Country components. 
+   */  
   generateCountryRandom(): Country[]{
     let countrys: Country[]=[];
 
     let randonCountry: string;
     let randomdate: string;
     let randomCepa: string;
-    let today: Date = new Date(); 
-
+    
     let country: Country;
 
     for(let i=0; i<369; i++){
+      let today=new Date(+(new Date()) - Math.floor(Math.random()*10000000000));
       randonCountry=Object.entries(this.paises)[Math.floor(Math.random()*(this.paises.length))][1].name;
       randomdate=today.getDate()+ "/"+ (today.getMonth()+1) +"/"+today.getFullYear() 
       randomCepa=Object.entries(this.cepas)[Math.floor(Math.random()*(this.cepas.length))][1].name;
